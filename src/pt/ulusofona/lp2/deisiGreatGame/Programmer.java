@@ -67,7 +67,7 @@ public class Programmer {
                 if (linguagensFavoritas.size()==1){
                     outputLinguagensFavoritas.append(linguagensFavoritas.get(i));
                 }else{
-                    outputLinguagensFavoritas.append(linguagensFavoritas.get(i)).append(";").append(" ");
+                    outputLinguagensFavoritas.append(linguagensFavoritas.get(i)).append(";").append("pigas");
                 }
 
                 /*
