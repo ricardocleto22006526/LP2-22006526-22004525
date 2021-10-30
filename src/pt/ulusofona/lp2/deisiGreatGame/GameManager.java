@@ -16,7 +16,7 @@ public class GameManager {
     }
 
     public boolean createInitialBoard(String[][] playerInfo, int boardSize){
-
+        players.clear();
         ArrayList<Integer> idsRepetidos = new ArrayList<>();
         ArrayList<String> coresRepetidas = new ArrayList<>();
 

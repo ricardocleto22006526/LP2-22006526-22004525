@@ -7,7 +7,7 @@ public class Programmer {
     String nome;
     ArrayList<String> linguagensFavoritas;
     ProgrammerColor cor;
-    String estado = "Em jogo";
+    String estado = "Em Jogo";
     int posPlayer = 1;
 
     public Programmer(String nome, int id, ProgrammerColor cor, ArrayList<String> linguagensFavoritas,int posPlayer) {
