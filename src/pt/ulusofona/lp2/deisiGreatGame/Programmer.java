@@ -78,7 +78,7 @@ public class Programmer {
                 }
             }
         }
-
+        //teste
         String stringNormal = outputLinguagensFavoritas.toString().replace(";","; ");
 
         return id + " | " + nome + " | " + posPlayer + " | " + stringNormal + " | " + estado;
