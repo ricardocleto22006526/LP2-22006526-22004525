@@ -7,13 +7,10 @@ import java.util.Comparator;
 public class GameManager {
     String winner;
     ArrayList<Programmer> players = new ArrayList<>();
-    //int turnoCounter=0;
     int tamanhoDoTabuleiro;
     int posPlayerInfoBefore;
     int playerAJogar=0;
     int nrDeTurnos=0;
-    int a=0;
-
 
     public GameManager() {
     }
