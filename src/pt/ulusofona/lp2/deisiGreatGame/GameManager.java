@@ -12,7 +12,7 @@ public class GameManager {
     int posPlayerInfoBefore;
     int playerAJogar=0;
     int nrDeTurnos=0;
-
+    int a=0;
 
 
     public GameManager() {
