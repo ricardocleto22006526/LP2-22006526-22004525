@@ -88,7 +88,7 @@ public class Programmer {
 
 
 
-        String stringNormal = outputLinguagensFavoritas.toString().replace(";"," ;");
+        String stringNormal = outputLinguagensFavoritas.toString().replace(";","; ");
 
 
 
