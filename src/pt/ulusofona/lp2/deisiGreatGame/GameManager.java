@@ -46,7 +46,6 @@ public class GameManager {
 
                 ArrayList<String> linguagensFavoritas = new ArrayList<>();
                 linguagensFavoritas.add(playerInfo[i][2]);
-                linguagensFavoritas.add("TESTE");
 
 
                 ProgrammerColor corDoPlayer = ProgrammerColor.valueOf(playerInfo[i][3].toUpperCase());
