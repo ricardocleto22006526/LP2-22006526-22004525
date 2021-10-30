@@ -58,9 +58,20 @@ public class Programmer {
 
         StringBuilder outputLinguagensFavoritas = new StringBuilder();
 
+        /*
+        for (int i = 0; i < linguagensFavoritas.size() ; i++) {
+            if (i==0){
+                outputLinguagensFavoritas.append(linguagensFavoritas.get(i));
+            }else {
+                outputLinguagensFavoritas.append("; ").append(linguagensFavoritas.get(i));
+            }
+        }
+
+         */
+
         if(linguagensFavoritas==null || linguagensFavoritas.size()==0){
             //OU CRIAR -> Programmer a = new Programmer();
-            outputLinguagensFavoritas.append("Não tem");
+            outputLinguagensFavoritas.append("NÃ£o tem");
         }else{
 
             for (int i = 0; i < linguagensFavoritas.size() ; i++) {
@@ -69,12 +80,19 @@ public class Programmer {
                 }else{
                     outputLinguagensFavoritas.append("; ").append(linguagensFavoritas.get(i));
                 }
-
-
             }
         }
 
-        return id + " | " + nome + " | " + posPlayer + " | " + outputLinguagensFavoritas + " | " + estado;
+        //expected:<...o | 6 | Common Lisp;[ ]PHP | Em Jogo>
+        //but was:<...o | 6 | Common Lisp;[]PHP | Em Jogo>
+
+
+
+        String stringNormal = outputLinguagensFavoritas.toString().replace(";"," ;");
+
+
+
+        return id + " | " + nome + " | " + posPlayer + " | " + stringNormal + " | " + estado;
     }
 
 }

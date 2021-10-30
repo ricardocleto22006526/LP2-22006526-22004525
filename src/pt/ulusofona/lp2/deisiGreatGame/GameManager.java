@@ -20,7 +20,9 @@ public class GameManager {
         ArrayList<Integer> idsRepetidos = new ArrayList<>();
         ArrayList<String> coresRepetidas = new ArrayList<>();
 
-        if ( playerInfo.length < 2 || playerInfo.length > 4  || tamanhoDoTabuleiro < players.size()*2 ){
+
+
+        if ( playerInfo.length < 2 || playerInfo.length > 4  || boardSize < playerInfo.length*2 ){
             return false;
         }else{
             tamanhoDoTabuleiro=boardSize;
