@@ -67,8 +67,17 @@ public class Programmer {
                 if (linguagensFavoritas.size()==1){
                     outputLinguagensFavoritas.append(linguagensFavoritas.get(i));
                 }else{
-                    outputLinguagensFavoritas.append(linguagensFavoritas.get(i)).append(";  ");
+                    outputLinguagensFavoritas.append(linguagensFavoritas.get(i)).append(";").append(" ");
                 }
+
+                /*
+                if (linguagensFavoritas.size()==1){
+                    outputLinguagensFavoritas.append(linguagensFavoritas.get(i));
+                }else{
+                    outputLinguagensFavoritas.append(linguagensFavoritas.get(i)).append(";");
+                }
+
+                 */
             }
         }
 
