@@ -64,10 +64,10 @@ public class Programmer {
         }else{
 
             for (int i = 0; i < linguagensFavoritas.size() ; i++) {
-                if (linguagensFavoritas.size()==1){
+                if (i==0){
                     outputLinguagensFavoritas.append(linguagensFavoritas.get(i));
                 }else{
-                    outputLinguagensFavoritas.append(linguagensFavoritas.get(i)).append(";").append("pigas");
+                    outputLinguagensFavoritas.append("; ").append(linguagensFavoritas.get(i));
                 }
 
                 /*
