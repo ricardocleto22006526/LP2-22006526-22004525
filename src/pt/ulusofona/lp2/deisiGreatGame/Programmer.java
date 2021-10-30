@@ -1,6 +1,8 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Programmer {
     int id;
@@ -78,7 +80,7 @@ public class Programmer {
                 if (i==0){
                     outputLinguagensFavoritas.append(linguagensFavoritas.get(i));
                 }else{
-                    outputLinguagensFavoritas.append("; ").append(linguagensFavoritas.get(i));
+                    outputLinguagensFavoritas.append(";").append(linguagensFavoritas.get(i));
                 }
             }
         }
@@ -88,11 +90,25 @@ public class Programmer {
 
 
 
-        String stringNormal = outputLinguagensFavoritas.toString().replace(";","; ");
+        String[] stringNormal = outputLinguagensFavoritas.toString().split(";");
+        Arrays.sort(stringNormal);
+        StringBuilder output = new StringBuilder();
+
+
+        for (int i = 0; i < stringNormal.length; i++) {
+            if(i==0){
+                output.append(stringNormal[i]);
+            } else {
+                output.append(";").append(stringNormal[i]);
+            }
+        }
+
+        String result = output.toString().trim().replace(";", "; ");
 
 
 
-        return id + " | " + nome + " | " + posPlayer + " | " + stringNormal + " | " + estado;
+
+        return id + " | " + nome + " | " + posPlayer + " | " +  result +  " | " + estado;
     }
 
 }
