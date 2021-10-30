@@ -1,8 +1,6 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
 public class Programmer {
     int id;
@@ -51,8 +49,15 @@ public class Programmer {
     }
 
     void andaParaTras(int tamanhoDoTabuleiro,int posicoesAAlterar){
+
         int posicaoInicial = this.posPlayer + posicoesAAlterar;
         this.posPlayer = tamanhoDoTabuleiro - (posicaoInicial-tamanhoDoTabuleiro);
+        /*
+        int posicao = this.posPlayer + posicoesAAlterar;
+        int posicao2 = posicao - tamanhoDoTabuleiro;
+        this.posPlayer = tamanhoDoTabuleiro - posicao2;
+
+         */
     }
 
     @Override
@@ -60,55 +65,23 @@ public class Programmer {
 
         StringBuilder outputLinguagensFavoritas = new StringBuilder();
 
-        /*
-        for (int i = 0; i < linguagensFavoritas.size() ; i++) {
-            if (i==0){
-                outputLinguagensFavoritas.append(linguagensFavoritas.get(i));
-            }else {
-                outputLinguagensFavoritas.append("; ").append(linguagensFavoritas.get(i));
-            }
-        }
-
-         */
-
         if(linguagensFavoritas==null || linguagensFavoritas.size()==0){
             //OU CRIAR -> Programmer a = new Programmer();
-            outputLinguagensFavoritas.append("NÃ£o tem");
+            outputLinguagensFavoritas.append("Nao tem");
         }else{
 
             for (int i = 0; i < linguagensFavoritas.size() ; i++) {
                 if (i==0){
                     outputLinguagensFavoritas.append(linguagensFavoritas.get(i));
                 }else{
-                    outputLinguagensFavoritas.append(";").append(linguagensFavoritas.get(i));
+                    outputLinguagensFavoritas.append("; ").append(linguagensFavoritas.get(i));
                 }
             }
         }
 
-        //expected:<...o | 6 | Common Lisp;[ ]PHP | Em Jogo>
-        //but was:<...o | 6 | Common Lisp;[]PHP | Em Jogo>
+        String stringNormal = outputLinguagensFavoritas.toString().replace(";","; ");
 
-
-
-        String[] stringNormal = outputLinguagensFavoritas.toString().split(";");
-        Arrays.sort(stringNormal);
-        StringBuilder output = new StringBuilder();
-
-
-        for (int i = 0; i < stringNormal.length; i++) {
-            if(i==0){
-                output.append(stringNormal[i]);
-            } else {
-                output.append(";").append(stringNormal[i]);
-            }
-        }
-
-        String result = output.toString().trim().replace(";", "; ");
-
-
-
-
-        return id + " | " + nome + " | " + posPlayer + " | " +  result +  " | " + estado;
+        return id + " | " + nome + " | " + posPlayer + " | " + stringNormal + " | " + estado;
     }
 
 }

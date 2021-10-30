@@ -109,6 +109,9 @@ public class GameManager {
     }
 
     public String getImagePng(int position){
+        if (position == tamanhoDoTabuleiro){
+            return "glory.png";
+        }
         return "";
     }
 
