@@ -70,6 +70,7 @@ public class Programmer {
                     outputLinguagensFavoritas.append("; ").append(linguagensFavoritas.get(i));
                 }
 
+                //TESTE
             }
         }
 
