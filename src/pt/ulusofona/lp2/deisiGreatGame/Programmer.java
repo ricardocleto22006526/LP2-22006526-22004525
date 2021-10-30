@@ -9,7 +9,6 @@ public class Programmer {
     ProgrammerColor cor;
     String estado = "Em Jogo";
     int posPlayer = 1;
-    int a=0;
 
     public Programmer(String nome, int id, ProgrammerColor cor, ArrayList<String> linguagensFavoritas,int posPlayer) {
         this.id = id;
