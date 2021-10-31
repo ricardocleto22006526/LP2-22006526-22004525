@@ -40,8 +40,12 @@ public class Programmer {
         return this.cor;
     }
 
-    int getPosPlayer(){
+    public int getPosPlayer(){
         return this.posPlayer;
+    }
+
+    public String getEstado(){
+        return this.estado;
     }
 
     void andaParaAFrente(int posicoesAAlterar){
@@ -49,15 +53,8 @@ public class Programmer {
     }
 
     void andaParaTras(int tamanhoDoTabuleiro,int posicoesAAlterar){
-
         int posicaoInicial = this.posPlayer + posicoesAAlterar;
         this.posPlayer = tamanhoDoTabuleiro - (posicaoInicial-tamanhoDoTabuleiro);
-        /*
-        int posicao = this.posPlayer + posicoesAAlterar;
-        int posicao2 = posicao - tamanhoDoTabuleiro;
-        this.posPlayer = tamanhoDoTabuleiro - posicao2;
-
-         */
     }
 
     @Override
@@ -66,7 +63,7 @@ public class Programmer {
         StringBuilder outputLinguagensFavoritas = new StringBuilder();
 
         if(linguagensFavoritas==null || linguagensFavoritas.size()==0){
-            //OU CRIAR -> Programmer a = new Programmer();
+            //Para alertar os autores que algo nao correu como planeado
             outputLinguagensFavoritas.append("Nao tem");
         }else{
 
@@ -81,7 +78,7 @@ public class Programmer {
         //teste
         String stringNormal = outputLinguagensFavoritas.toString().replace(";","; ");
 
-        return id + " | " + nome + " | " + posPlayer + " | " + stringNormal + " | " + estado;
+        return getId() + " | " + getName() + " | " + getPosPlayer() + " | " + stringNormal + " | " + getEstado();
     }
 
 }
