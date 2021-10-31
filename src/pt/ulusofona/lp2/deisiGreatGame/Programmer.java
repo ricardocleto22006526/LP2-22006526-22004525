@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Programmer {
     int id;
@@ -63,22 +64,43 @@ public class Programmer {
         StringBuilder outputLinguagensFavoritas = new StringBuilder();
 
         if(linguagensFavoritas==null || linguagensFavoritas.size()==0){
-            //Para alertar os autores que algo nao correu como planeado
-            outputLinguagensFavoritas.append("Nao tem");
+            //OU CRIAR -> Programmer a = new Programmer();
+            outputLinguagensFavoritas.append("NÃ£o tem");
         }else{
 
             for (int i = 0; i < linguagensFavoritas.size() ; i++) {
                 if (i==0){
                     outputLinguagensFavoritas.append(linguagensFavoritas.get(i));
                 }else{
-                    outputLinguagensFavoritas.append("; ").append(linguagensFavoritas.get(i));
+                    outputLinguagensFavoritas.append(";").append(linguagensFavoritas.get(i));
                 }
             }
         }
-        //teste
-        String stringNormal = outputLinguagensFavoritas.toString().replace(";","; ");
 
-        return getId() + " | " + getName() + " | " + getPosPlayer() + " | " + stringNormal + " | " + getEstado();
+        //expected:<...o | 6 | Common Lisp;[ ]PHP | Em Jogo>
+        //but was:<...o | 6 | Common Lisp;[]PHP | Em Jogo>
+
+
+
+        String[] stringNormal = outputLinguagensFavoritas.toString().split(";");
+        Arrays.sort(stringNormal);
+
+
+        StringBuilder output = new StringBuilder();
+
+
+        for (int i = 0; i < stringNormal.length; i++) {
+            if(i==0){
+                output.append(stringNormal[i]);
+            } else {
+                output.append(";").append(stringNormal[i]);
+            }
+        }
+
+
+        String resultado = output.toString().replace(";","; ");
+
+        return getId() + " | " + getName() + " | " + getPosPlayer() + " | " + resultado + " | " + getEstado();
     }
 
 }
