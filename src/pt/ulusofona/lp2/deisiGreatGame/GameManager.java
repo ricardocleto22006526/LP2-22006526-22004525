@@ -155,7 +155,6 @@ public class GameManager {
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
         }
 
-
         if (playerAJogar == players.size()-1){
             playerAJogar=0;
         }else{
