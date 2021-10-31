@@ -144,6 +144,8 @@ public class GameManager {
             return false;
         }
 
+
+        /*
         if (playerAJogar == 0){
             playerAJogar+= 1;
             posPlayerInfoBefore=players.size()-1;
@@ -161,12 +163,45 @@ public class GameManager {
                 playerAJogar+= 1;
             }else {
                 posPlayerInfoBefore=2;
+                playerAJogar+=1;
+            }
+
+        }else if(playerAJogar == 4){
+            posPlayerInfoBefore=players.size()-1;
+            playerAJogar=0;
+        }else{
+            posPlayerInfoBefore=players.size()-1;
+            playerAJogar=0;
+        }
+
+         */
+
+
+        if (playerAJogar == 0){
+            playerAJogar+= 1;
+            posPlayerInfoBefore=players.size()-1;
+        }else if (playerAJogar == 1){
+            if(players.size() != 2){
+                playerAJogar+= 1;
+                posPlayerInfoBefore=players.size()-1;
+            }else {
+                playerAJogar=0;
+                posPlayerInfoBefore=1;
+            }
+        }else if (playerAJogar == 2){
+            if (players.size() != 3 ){
+                playerAJogar+= 1;
+                posPlayerInfoBefore=players.size()-1;
+            }else {
+                posPlayerInfoBefore=2;
                 playerAJogar=0;
             }
         }else{
             posPlayerInfoBefore=players.size()-1;
             playerAJogar=0;
         }
+
+
 
         if (players.get(playerAJogar).getPosPlayer() + nrPositions <= tamanhoDoTabuleiro){
             players.get(playerAJogar).andaParaAFrente(nrPositions);
