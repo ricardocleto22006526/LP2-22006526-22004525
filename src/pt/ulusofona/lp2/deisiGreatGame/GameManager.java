@@ -16,11 +16,9 @@ public class GameManager {
     }
 
     public boolean createInitialBoard(String[][] playerInfo, int boardSize){
-        players.clear();
+        players.clear(); // Serve para Limpar os players
         ArrayList<Integer> idsRepetidos = new ArrayList<>();
         ArrayList<String> coresRepetidas = new ArrayList<>();
-
-
 
         if ( playerInfo.length < 2 || playerInfo.length > 4  || boardSize < playerInfo.length*2 ){
             return false;
@@ -60,12 +58,12 @@ public class GameManager {
                 //Adiciona o novo Player ao arraylist de Players
                 players.add( new Programmer(id, nome, linguagensFavoritas, corDoPlayer) );
 
+            }
 
-                for (int j = 0; j < players.size() ; j++) {
-                    for (int k = j+1; k < coresRepetidas.size() ; k++) {
-                        if (players.get(j).cor.toString().equals(coresRepetidas.get(k))){
-                            return false;
-                        }
+            for (int j = 0; j < players.size() ; j++) {
+                for (int k = j+1; k < coresRepetidas.size() ; k++) {
+                    if (players.get(j).cor.toString().equals(coresRepetidas.get(k))){
+                        return false;
                     }
                 }
             }
@@ -78,13 +76,6 @@ public class GameManager {
                 }
             }
 
-            /*
-            for (int i = 0; i < players.size() ; i++) {
-                if ( players.get(i).nome == null || players.get(i).nome.equals("") ){
-                    return false;
-                }
-            }
-             */
 
 
         }catch (Exception e){
@@ -93,7 +84,6 @@ public class GameManager {
 
         players.sort(Comparator.comparingInt((Programmer)-> Programmer.id));
         return true;
-
     }
 
     //FUNCAO CRIADA PARA VERIFICAR SE TEM COR VALIDA

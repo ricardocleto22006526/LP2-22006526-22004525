@@ -77,17 +77,10 @@ public class Programmer {
             }
         }
 
-        //expected:<...o | 6 | Common Lisp;[ ]PHP | Em Jogo>
-        //but was:<...o | 6 | Common Lisp;[]PHP | Em Jogo>
-
-
-
         String[] stringNormal = outputLinguagensFavoritas.toString().split(";");
         Arrays.sort(stringNormal);
 
-
         StringBuilder output = new StringBuilder();
-
 
         for (int i = 0; i < stringNormal.length; i++) {
             if(i==0){
@@ -97,11 +90,9 @@ public class Programmer {
             }
         }
 
-
         String resultado = output.toString().replace(";","; ");
 
         return getId() + " | " + getName() + " | " + getPosPlayer() + " | " + resultado + " | " + getEstado();
     }
-    //teste
 
 }
