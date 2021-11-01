@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -178,6 +179,9 @@ public class GameManager {
 
         results.add("O GRANDE JOGO DO DEISI");
         results.add("");
+        results.add("NR. DE TURNOS");
+        results.add(String.valueOf(nrDeTurnos));
+        results.add("");
         results.add("VENCEDOR");
         results.add(winner);
         results.add("");
@@ -191,9 +195,15 @@ public class GameManager {
 
     public JPanel getAuthorsPanel(){
         JPanel creditos = new JPanel();
-        JLabel output = new JLabel("");
 
-        creditos.add(output);
+        TextArea message = new TextArea(("Game Director: Pedro Alves\n\n" +
+                "Programmers: Ricardo Cleto\n" +
+                "                            Rodrigo Amaro\n\n\n\n\n" +
+                "TheDeisiGreatGame © 2021-2022 ULHT-LP2 ").indent(25));
+
+        message.setSize(300,300);
+
+        creditos.add(message).setEnabled(false);
         return creditos;
     }
 
