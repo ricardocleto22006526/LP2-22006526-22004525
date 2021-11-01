@@ -107,7 +107,7 @@ public class GameManager {
         }
 
         if (position == tamanhoDoTabuleiro){
-            return "glory.png";
+            return "Winner.png";
         }
         return "";
     }
