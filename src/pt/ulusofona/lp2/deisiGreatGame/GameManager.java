@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -9,7 +8,6 @@ public class GameManager {
     String winner;
     ArrayList<Programmer> players = new ArrayList<>();
     int tamanhoDoTabuleiro;
-    //int posPlayerInfoBefore;
     int playerAJogar=0;
     int nrDeTurnos=0;
 
@@ -18,6 +16,9 @@ public class GameManager {
 
     public boolean createInitialBoard(String[][] playerInfo, int boardSize){
         players.clear(); // Serve para Limpar os players
+        nrDeTurnos=0;
+        playerAJogar=0;
+        winner="";
         ArrayList<Integer> idsRepetidos = new ArrayList<>();
         ArrayList<String> coresRepetidas = new ArrayList<>();
 
