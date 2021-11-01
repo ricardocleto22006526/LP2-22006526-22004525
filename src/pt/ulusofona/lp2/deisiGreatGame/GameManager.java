@@ -201,9 +201,9 @@ public class GameManager {
                 "                            Rodrigo Amaro\n\n\n\n\n" +
                 "TheDeisiGreatGame © 2021-2022 ULHT-LP2 ").indent(25));
 
-        message.setSize(300,300);
+        //message.setSize(300,300);
 
-        creditos.add(message).setEnabled(false);
+        creditos.add(message);
         return creditos;
     }
 
