@@ -148,6 +148,7 @@ public class GameManager {
         nrDeTurnos++;
 
         if ( gameIsOver() ){
+            nrDeTurnos++;
             return true;
         }
 
