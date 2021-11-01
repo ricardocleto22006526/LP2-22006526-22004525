@@ -196,12 +196,29 @@ public class GameManager {
     public JPanel getAuthorsPanel(){
         JPanel creditos = new JPanel();
 
-        TextArea message = new TextArea(("                          Game Director: Pedro Alves\n\n" +
-                "                          Programmers: Ricardo Cleto\n" +
-                "                                                      Rodrigo Amaro\n\n\n\n\n" +
-                "                          TheDeisiGreatGame © 2021-2022 ULHT-LP2 "));
+        JLabel label1 = new JLabel();
+        label1.setText("THE DEISI GREATE GAME");
 
-        creditos.add(message).setEnabled(false);
+        JLabel label2 = new JLabel();
+        label2.setText("Game Director: Pedro Alves");
+
+        JLabel label3 = new JLabel();
+        label3.setText(" Programmers: Ricardo Cleto");
+
+        JLabel label4 = new JLabel();
+        label4.setText("                                Rodrigo Amaro");
+
+        JLabel label5 = new JLabel();
+        label5.setText("TheDeisiGreatGame © 2021-2022 ULHT-LP2");
+
+        creditos.setSize(300,300);
+
+        creditos.add(label1);
+        creditos.add(label2);
+        creditos.add(label3);
+        creditos.add(label4);
+        creditos.add(label5);
+
         return creditos;
     }
 
