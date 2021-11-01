@@ -139,10 +139,15 @@ public class GameManager {
             return false;
         }
 
+
         if (players.get(playerAJogar).getPosPlayer() + nrPositions <= tamanhoDoTabuleiro){
             players.get(playerAJogar).andaParaAFrente(nrPositions);
         }else{
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
+        }
+
+        if ( gameIsOver() ){
+            return true;
         }
 
         if (playerAJogar == players.size()-1){
