@@ -140,12 +140,12 @@ public class GameManager {
             return false;
         }
 
-
         if (players.get(playerAJogar).getPosPlayer() + nrPositions <= tamanhoDoTabuleiro){
             players.get(playerAJogar).andaParaAFrente(nrPositions);
         }else{
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
         }
+        nrDeTurnos++;
 
         if ( gameIsOver() ){
             return true;
@@ -157,7 +157,6 @@ public class GameManager {
             playerAJogar++;
         }
 
-        nrDeTurnos++;
         return true;
     }
 
