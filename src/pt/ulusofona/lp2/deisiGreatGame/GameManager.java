@@ -16,9 +16,9 @@ public class GameManager {
 
     public boolean createInitialBoard(String[][] playerInfo, int boardSize){
         players.clear(); // Serve para Limpar os players
-        nrDeTurnos=0;
-        playerAJogar=0;
-        winner="";
+        nrDeTurnos=0; // Serve para Limpar os turnos
+        playerAJogar=0; // Serve para dar Reset do player a jogar
+        winner=""; // Serve para Limpar o nome do vencedor
         ArrayList<Integer> idsRepetidos = new ArrayList<>();
         ArrayList<String> coresRepetidas = new ArrayList<>();
 
@@ -83,7 +83,7 @@ public class GameManager {
         }catch (Exception e){
             return false;
         }
-
+        // Organiza os players por ID
         players.sort(Comparator.comparingInt((Programmer)-> Programmer.id));
         return true;
     }
@@ -175,7 +175,7 @@ public class GameManager {
 
         ArrayList<String> results = new ArrayList<>();
 
-        //Vai ordenar as posicoes dos jogadores restantes do maior para o menor
+        //Vai ordenar as posicoes dos jogadores restantes do maior para o menor (em termos de posicao)
         players.sort(Comparator.comparingInt((Programmer posicao)-> posicao.posPlayer).reversed());
 
         results.add("O GRANDE JOGO DO DEISI");
