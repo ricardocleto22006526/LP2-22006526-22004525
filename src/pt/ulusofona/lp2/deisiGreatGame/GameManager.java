@@ -204,13 +204,19 @@ public class GameManager {
         label2.setText("Game Director: Pedro Alves");
 
         JLabel label3 = new JLabel();
-        label3.setText(" Programmers: Ricardo Cleto");
+        label3.setText("                                Lucio Studer");
 
         JLabel label4 = new JLabel();
-        label4.setText("                                Rodrigo Amaro");
+        label4.setText("                                    Bruno Cipriano");
 
         JLabel label5 = new JLabel();
-        label5.setText("TheDeisiGreatGame © 2021-2022 ULHT-LP2");
+        label5.setText(" Programmers: Ricardo Cleto");
+
+        JLabel label6 = new JLabel();
+        label6.setText("                                Rodrigo Amaro");
+
+        JLabel label7 = new JLabel();
+        label7.setText("TheDeisiGreatGame © 2021-2022 ULHT-LP2");
 
         creditos.setSize(300,300);
 
@@ -219,6 +225,8 @@ public class GameManager {
         creditos.add(label3);
         creditos.add(label4);
         creditos.add(label5);
+        creditos.add(label6);
+        creditos.add(label7);
 
         return creditos;
     }
