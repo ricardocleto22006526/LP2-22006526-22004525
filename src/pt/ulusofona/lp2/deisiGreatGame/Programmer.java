@@ -65,7 +65,7 @@ public class Programmer {
 
         if(linguagensFavoritas==null || linguagensFavoritas.size()==0){
             //OU CRIAR -> Programmer a = new Programmer();
-            outputLinguagensFavoritas.append("NÃ£o tem");
+            outputLinguagensFavoritas.append("Não tem");
         }else{
 
             for (int i = 0; i < linguagensFavoritas.size() ; i++) {
@@ -92,7 +92,7 @@ public class Programmer {
 
         String resultado = output.toString().replace(";","; ");
 
-        return getId() + " | " + getName() + " | " + getPosPlayer() + " | " + resultado + " | " + getEstado();
+        return id + " | " + nome + " | " + posPlayer + " | " + resultado + " | " + estado;
     }
 
 }
