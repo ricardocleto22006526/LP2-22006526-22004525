@@ -2,6 +2,6 @@
 
 ➤ Não foram utilizados Setters, devido a este não ser um bom método de programação.
 
-➤ A implementação dos Getters, facilitaram a programação por objetos (OO) na resolução dos problemas. 
+➤ A implementação dos Getters, facilitaram a resolução dos problemas, utilizando os paradigmas da  programação por objetos (OO).
 
 ![](https://github.com/ricardocleto22006526/LP2-22006526-22004525/blob/master/UML%20-%20Projeto%20(LP2-Parte1).jpg)
