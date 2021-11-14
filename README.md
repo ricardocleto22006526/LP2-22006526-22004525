@@ -1,4 +1,4 @@
-➤ O grupo decidiu acrescentar mais Getters para facilitar a modelação do projeto.
+➤ O grupo decidiu acrescentar mais Getters, pralém do enunciado base entregue pelos professores, de forma a facilitar a modelação do projeto.
 
 ➤ Não foram utilizados Setters, devido a este não ser um bom método de programação.
 
