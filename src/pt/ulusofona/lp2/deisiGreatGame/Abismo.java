@@ -5,4 +5,6 @@ public class Abismo extends AbismoEFerramentas {
     public Abismo(int id, String titulo) {
         super(id, titulo);
     }
+
+
 }
