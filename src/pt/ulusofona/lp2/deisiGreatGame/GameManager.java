@@ -3,10 +3,12 @@ package pt.ulusofona.lp2.deisiGreatGame;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class GameManager {
     String winner;
     ArrayList<Programmer> players = new ArrayList<>();
+    ArrayList<Programmer> playersAbyssesAndTools = new ArrayList<>();
     int tamanhoDoTabuleiro;
     int playerAJogar=0;
     int nrDeTurnos=0;
@@ -14,7 +16,8 @@ public class GameManager {
     public GameManager() {
     }
 
-    public boolean createInitialBoard(String[][] playerInfo, int boardSize){
+
+    public boolean createInitialBoard(String[][] playerInfo, int worldSize){
         players.clear(); // Serve para Limpar os players
         nrDeTurnos=0; // Serve para Limpar os turnos
         playerAJogar=0; // Serve para dar Reset do player a jogar
@@ -22,10 +25,10 @@ public class GameManager {
         ArrayList<Integer> idsRepetidos = new ArrayList<>();
         ArrayList<String> coresRepetidas = new ArrayList<>();
 
-        if ( playerInfo.length < 2 || playerInfo.length > 4  || boardSize < playerInfo.length*2 ){
+        if ( playerInfo.length < 2 || playerInfo.length > 4  || worldSize < playerInfo.length*2 ){
             return false;
         }else{
-            tamanhoDoTabuleiro=boardSize;
+            tamanhoDoTabuleiro=worldSize;
         }
 
         try{
@@ -88,6 +91,46 @@ public class GameManager {
         return true;
     }
 
+
+    public boolean createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools){
+        createInitialBoard(playerInfo,worldSize);
+
+        try{
+
+            for (int i = 0; i < abyssesAndTools.length ; i++) {
+                //Caracteristicas de cada Player
+                int id = Integer.parseInt(playerInfo[i][0]);
+
+
+                for (int j = 0; j < players.size() ; j++) {
+                    if (players.get(j).getName() == null || players.get(j).getName().equals("")) {
+                        return false;
+                    }
+                }
+                String nome = playerInfo[i][1];
+
+
+                ArrayList<String> linguagensFavoritas = new ArrayList<>();
+                linguagensFavoritas.add(playerInfo[i][2]);
+
+
+                ProgrammerColor corDoPlayer = ProgrammerColor.valueOf(playerInfo[i][3].toUpperCase());
+                //Funcao que valida se e uma das 4 cores validas
+                corValida(corDoPlayer.toString());
+
+
+
+                //Adiciona o novo Player ao arraylist de Players
+                players.add( new Programmer(id, nome, linguagensFavoritas, corDoPlayer) );
+            }
+
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+
     //FUNCAO CRIADA PARA VERIFICAR SE TEM COR VALIDA
     public boolean corValida(String corDoPlayer){
         switch (corDoPlayer) {
@@ -98,6 +141,10 @@ public class GameManager {
                 return false;
             }
         }
+    }
+
+    public String getTitle(int position){
+        return "";
     }
 
     public String getImagePng(int position){
@@ -112,12 +159,12 @@ public class GameManager {
         return "";
     }
 
-    public ArrayList<Programmer> getProgrammers(){
+    public List<Programmer> getProgrammers(boolean includeDefeated){
         return players;
     }
 
-    public ArrayList<Programmer> getProgrammers(int position){
-        ArrayList<Programmer> programmersInThatPosition = new ArrayList<>();
+    public List<Programmer> getProgrammers(int position){
+        List<Programmer> programmersInThatPosition = new ArrayList<>();
 
         for (int i = 0; i < players.size() ; i++) {
             if (players.get(i).getPosPlayer()==position){
@@ -130,6 +177,14 @@ public class GameManager {
         }else {
             return programmersInThatPosition;
         }
+    }
+
+    public String getProgrammersInfo(){
+        return "";
+    }
+
+    public String reactToAbyssOrTool(){
+        return "";
     }
 
     public int getCurrentPlayerID(){
@@ -171,9 +226,9 @@ public class GameManager {
         return false;
     }
 
-    public ArrayList<String> getGameResults(){
+    public List<String> getGameResults(){
 
-        ArrayList<String> results = new ArrayList<>();
+        List<String> results = new ArrayList<>();
 
         //Vai ordenar as posicoes dos jogadores restantes do maior para o menor (em termos de posicao)
         players.sort(Comparator.comparingInt((Programmer posicao)-> posicao.posPlayer).reversed());
