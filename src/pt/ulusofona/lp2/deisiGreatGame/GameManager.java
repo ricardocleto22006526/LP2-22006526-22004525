@@ -6,7 +6,7 @@ import java.util.*;
 public class GameManager {
     String winner;
     ArrayList<Programmer> players = new ArrayList<>();
-    HashMap<Integer,AbismoEFerramentas> playersAbyssesAndTools = new HashMap<>();
+    HashMap<Integer, AbismoEFerramenta> playersAbyssesAndTools = new HashMap<>();
     int tamanhoDoTabuleiro;
     int playerAJogar=0;
     int nrDeTurnos=0;
@@ -93,20 +93,59 @@ public class GameManager {
     public boolean createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools){
         createInitialBoard(playerInfo,worldSize);
 
+        boolean eAbismoOuFerramenta=false;
+        boolean tamanhoTabuleiroValido=false;
         try{
 
             for (int i = 0; i < abyssesAndTools.length ; i++) {
 
-                //Caracteristicas de cada Player
-                int abismoOUTool = Integer.parseInt(abyssesAndTools[i][0]);
+                if ( abyssesAndTools[i][0].equals("0") ){
+                    eAbismoOuFerramenta = ( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 9 );
+                }else{
+                    //Valida os ids das ferramentas
+                    eAbismoOuFerramenta = ( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 5 );
+                }
 
-                //Caracteristicas de cada Player
-                int idDoAbismoOUTool = Integer.parseInt(abyssesAndTools[i][1]);
+                tamanhoTabuleiroValido = ( Integer.parseInt(abyssesAndTools[i][2]) > 0 && Integer.parseInt(abyssesAndTools[i][1]) < tamanhoDoTabuleiro );
 
-                //Caracteristicas de cada Player
-                worldSize = Integer.parseInt(abyssesAndTools[i][2]);
+                if ( !eAbismoOuFerramenta ){
+                    return false;
+                }
 
-                //playersAbyssesAndTools.put();
+                if ( !tamanhoTabuleiroValido ){
+                    return false;
+                }
+
+                if ( abyssesAndTools[i][0].equals("0") ){
+                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Abismo( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                }else {
+                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Ferramenta( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                }
+
+
+
+                /*
+                //Valida os ids dos abismos
+                if ( abyssesAndTools[i][0].equals("0") ){
+                    eAbismoOuFerramenta = ( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 9 );
+                }else{
+                    //Valida os ids das ferramentas
+                    eAbismoOuFerramenta = ( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 5 );
+                }
+
+                //Valida se as ferramentas ou abismos estao dentro do tabuleiro
+                tamanhoTabuleiroValido = ( Integer.parseInt(abyssesAndTools[i][2]) > 0 && Integer.parseInt(abyssesAndTools[i][1]) < tamanhoDoTabuleiro );
+
+                if ( ( !abyssesAndTools[i][0].equals("0") || !abyssesAndTools[i][0].equals("1") ) && eAbismoOuFerramenta && tamanhoTabuleiroValido ){
+                    return false;
+                }
+
+                if ( abyssesAndTools[i][0].equals("0") ){
+                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Abismo( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                }else {
+                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Ferramenta( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                }
+                */
             }
 
         }catch (Exception e){
