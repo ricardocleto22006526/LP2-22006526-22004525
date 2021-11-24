@@ -1,14 +1,12 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class GameManager {
     String winner;
     ArrayList<Programmer> players = new ArrayList<>();
-    ArrayList<Programmer> playersAbyssesAndTools = new ArrayList<>();
+    HashMap<Integer,AbismoEFerramentas> playersAbyssesAndTools = new HashMap<>();
     int tamanhoDoTabuleiro;
     int playerAJogar=0;
     int nrDeTurnos=0;
@@ -98,30 +96,17 @@ public class GameManager {
         try{
 
             for (int i = 0; i < abyssesAndTools.length ; i++) {
+
                 //Caracteristicas de cada Player
-                int id = Integer.parseInt(playerInfo[i][0]);
+                int abismoOUTool = Integer.parseInt(abyssesAndTools[i][0]);
 
+                //Caracteristicas de cada Player
+                int idDoAbismoOUTool = Integer.parseInt(abyssesAndTools[i][1]);
 
-                for (int j = 0; j < players.size() ; j++) {
-                    if (players.get(j).getName() == null || players.get(j).getName().equals("")) {
-                        return false;
-                    }
-                }
-                String nome = playerInfo[i][1];
+                //Caracteristicas de cada Player
+                worldSize = Integer.parseInt(abyssesAndTools[i][2]);
 
-
-                ArrayList<String> linguagensFavoritas = new ArrayList<>();
-                linguagensFavoritas.add(playerInfo[i][2]);
-
-
-                ProgrammerColor corDoPlayer = ProgrammerColor.valueOf(playerInfo[i][3].toUpperCase());
-                //Funcao que valida se e uma das 4 cores validas
-                corValida(corDoPlayer.toString());
-
-
-
-                //Adiciona o novo Player ao arraylist de Players
-                players.add( new Programmer(id, nome, linguagensFavoritas, corDoPlayer) );
+                //playersAbyssesAndTools.put();
             }
 
         }catch (Exception e){
