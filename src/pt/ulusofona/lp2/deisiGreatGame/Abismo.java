@@ -6,5 +6,4 @@ public class Abismo extends AbismoEFerramentas {
         super(id, titulo);
     }
 
-
 }
