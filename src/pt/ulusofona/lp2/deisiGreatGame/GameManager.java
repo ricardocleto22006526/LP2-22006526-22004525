@@ -249,12 +249,10 @@ public class GameManager {
         }
         nrDeTurnos++;
 
-        /*
         if ( gameIsOver() ){
             nrDeTurnos++;
             return true;
         }
-         */
 
         if (playerAJogar == players.size()-1){
             playerAJogar=0;
@@ -273,7 +271,6 @@ public class GameManager {
 
         if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro){
             winner=players.get(playerAJogar).getName();
-            nrDeTurnos++;
             return true;
         }
 
