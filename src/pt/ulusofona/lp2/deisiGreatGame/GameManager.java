@@ -274,7 +274,14 @@ public class GameManager {
             return true;
         }
 
+        if (players.size()==1){
+            return true;
+        }
+
+        return false;
+
         //Caso so haja 1 player em jogo (POSSIVELMENTE NECESSITA DE SER REFEITA)
+        /*
         ArrayList<Programmer> ultimoJogadorEmCampo = new ArrayList<>();
 
         for (int i = 0; i < players.size() ; i++) {
@@ -286,7 +293,9 @@ public class GameManager {
         if (ultimoJogadorEmCampo.size()==1){
             return true;
         }
-        return false;
+         */
+
+
     }
 
     public List<String> getGameResults(){
