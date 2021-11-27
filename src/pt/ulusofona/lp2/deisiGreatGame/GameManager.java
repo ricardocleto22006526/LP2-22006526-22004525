@@ -14,7 +14,6 @@ public class GameManager {
     public GameManager() {
     }
 
-
     public boolean createInitialBoard(String[][] playerInfo, int worldSize){
         players.clear(); // Serve para Limpar os players
         nrDeTurnos=0; // Serve para Limpar os turnos
