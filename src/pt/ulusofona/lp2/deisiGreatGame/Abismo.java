@@ -7,43 +7,43 @@ public class Abismo extends AbismoEFerramenta {
     public String imagemTabuleiro() {
 
         if (titulo.equals("Erro de sintaxe")){
-            return "syntax.png";
+            return "syntax";
         }
 
         if (titulo.equals("Erro de lógica")){
-            return "logic.png";
+            return "logic";
         }
 
         if (titulo.equals("Exception")){
-            return "exception.png";
+            return "exception";
         }
 
         if (titulo.equals("File Not Found Exception")){
-            return "file-not-found-exception.png";
+            return "file-not-found-exception";
         }
 
         if (titulo.equals("Crash (aka Rebentaço)")){
-            return "crash.png";
+            return "crash";
         }
 
         if (titulo.equals("Duplicated Code")){
-            return "duplicated-code.png";
+            return "duplicated-code";
         }
 
         if (titulo.equals("Efeitos secundários")){
-            return "secondary-effects.png";
+            return "secondary-effects";
         }
 
         if (titulo.equals("Blue Screen of Death")){
-            return "bsod.png";
+            return "bsod";
         }
 
         if (titulo.equals("Ciclo infinito")){
-            return "infinite-loop.png";
+            return "infinite-loop";
         }
 
         if (titulo.equals("Segmentation Fault")){
-            return "core-dumped.png";
+            return "core-dumped";
         }
 
         return null;

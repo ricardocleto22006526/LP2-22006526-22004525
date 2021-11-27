@@ -164,18 +164,43 @@ public class GameManager {
         }
 
         if ( playersAbyssesAndTools.containsKey(position) ) {
-            return playersAbyssesAndTools.get(position).imagemTabuleiro();
+            return playersAbyssesAndTools.get(position).imagemTabuleiro() + ".png";
         }
 
         return null;
     }
 
     public String getTitle(int position){
-        return "";
+
+        if (position > tamanhoDoTabuleiro){
+            return null;
+        }
+
+        if ( playersAbyssesAndTools.containsKey(position) ) {
+            return playersAbyssesAndTools.get(position).imagemTabuleiro();
+        }
+
+        return null;
     }
 
     public List<Programmer> getProgrammers(boolean includeDefeated){
-        return players;
+
+        List<Programmer> listaJogadores;
+        ArrayList<Programmer> programmersVivosEmjogo = new ArrayList<>();
+
+        if (!includeDefeated) {
+            for (Programmer player : players) {
+                if (player.getEstado().equals("Em Jogo")) {
+
+                    programmersVivosEmjogo.add(player);
+                }
+            }
+            listaJogadores=programmersVivosEmjogo;
+        } else {
+            listaJogadores = players;
+        }
+
+        return listaJogadores;
     }
 
     public List<Programmer> getProgrammers(int position){

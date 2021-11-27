@@ -6,27 +6,27 @@ public class Ferramenta extends AbismoEFerramenta {
     @Override
     String imagemTabuleiro() {
         if (titulo.equals("Herança")){
-            return "inheritance.png";
+            return "inheritance";
         }
 
         if (titulo.equals("Programação funcional")){
-            return "functional.png";
+            return "functional";
         }
 
         if (titulo.equals("Testes unitários")){
-            return "unit-tests.png";
+            return "unit-tests";
         }
 
         if (titulo.equals("Tratamento de Excepções")){
-            return "catch.png";
+            return "catch";
         }
 
         if (titulo.equals("IDE")){
-            return "IDE.png";
+            return "IDE";
         }
 
         if (titulo.equals("Ajuda Do Professor")){
-            return "ajuda-professor.png";
+            return "ajuda-professor";
         }
 
         return null;
