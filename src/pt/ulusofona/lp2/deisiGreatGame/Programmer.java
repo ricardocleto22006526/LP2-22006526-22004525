@@ -10,8 +10,8 @@ public class Programmer {
     ProgrammerColor cor;
     String estado = "Em Jogo";
     int posPlayer = 1;
-    ArrayList<Abismo> abismos;
-    ArrayList<Ferramenta> ferramentas;
+    ArrayList<Abismo> abismos = new ArrayList<>();
+    ArrayList<Ferramenta> ferramentas = new ArrayList<>();
 
     public Programmer(String nome, int id, ProgrammerColor cor, ArrayList<String> linguagensFavoritas,int posPlayer) {
         this.id = id;
@@ -106,7 +106,23 @@ public class Programmer {
 
         String resultado = output.toString().replace(";","; ");
 
-        return id + " | " + nome + " | " + posPlayer + " | " + resultado + " | " + estado;
+
+        //Stringbuilder das ferramentas
+        StringBuilder outputferramentas = new StringBuilder();
+
+        if (ferramentas.size()==0){
+            outputferramentas.append("No tools");
+        }else{
+            for (int i = 0; i < ferramentas.size() ; i++) {
+                if (i == 0){
+                    outputferramentas.append(ferramentas.get(i));
+                }else {
+                    outputferramentas.append("; ").append(ferramentas.get(i));
+                }
+            }
+        }
+
+        return id + " | " + nome + " | " + posPlayer + " | " + outputferramentas + " | " + resultado + " | " + estado;
     }
 
 }
