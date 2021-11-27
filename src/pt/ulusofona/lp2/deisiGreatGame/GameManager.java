@@ -90,9 +90,7 @@ public class GameManager {
     public boolean createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools){
         playersAbyssesAndTools.clear();
 
-        if (playerInfo == null) {
-            return false;
-        }
+        if (playerInfo == null) { return false; }
 
         boolean eAbismoOuFerramenta=false, tamanhoTabuleiroValido=false;
 
@@ -113,24 +111,11 @@ public class GameManager {
                     return false;
                 }
 
-                //ArrayList<Abismo> abismos = new ArrayList<>();
-                //ArrayList<Ferramenta> ferramentas = new ArrayList<>();
-
                 if ( abyssesAndTools[i][0].equals("0") ){
                     playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Abismo( Integer.parseInt(abyssesAndTools[i][1]) ) );
-                    //abismos.add( );
                 }else {
                     playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Ferramenta( Integer.parseInt(abyssesAndTools[i][1]) ) );
-                   // ferramentas.add( new Ferramenta(Integer.parseInt(abyssesAndTools[i][1])) );
                 }
-
-                /*
-                for (int j = 0; j <players.size() ; j++) {
-                    players.get(j).abismos.add( new Abismo(Integer.parseInt(abyssesAndTools[i][1])));
-                    players.get(j).ferramentas.add( new Ferramenta(Integer.parseInt(abyssesAndTools[i][1])));
-                }
-                //players.add(new Programmer(,ferramentas));
-                 */
 
             }
 
