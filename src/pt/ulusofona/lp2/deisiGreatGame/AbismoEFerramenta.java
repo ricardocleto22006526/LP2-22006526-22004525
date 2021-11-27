@@ -13,4 +13,6 @@ abstract public class AbismoEFerramenta {
     }
 
     abstract String imagemTabuleiro();
+
+
 }

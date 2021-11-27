@@ -80,7 +80,6 @@ public class GameManager {
             }
 
 
-
         }catch (Exception e){
             return false;
         }
@@ -89,12 +88,15 @@ public class GameManager {
         return true;
     }
 
-
     public boolean createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools){
-        createInitialBoard(playerInfo,worldSize);
+        playersAbyssesAndTools.clear();
 
-        boolean eAbismoOuFerramenta=false;
-        boolean tamanhoTabuleiroValido=false;
+        if (playerInfo == null) {
+            return false;
+        }
+
+        boolean eAbismoOuFerramenta=false, tamanhoTabuleiroValido=false;
+
         try{
 
             for (int i = 0; i < abyssesAndTools.length ; i++) {
@@ -106,54 +108,39 @@ public class GameManager {
                     eAbismoOuFerramenta = ( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 5 );
                 }
 
-                tamanhoTabuleiroValido = ( Integer.parseInt(abyssesAndTools[i][2]) > 0 && Integer.parseInt(abyssesAndTools[i][1]) < tamanhoDoTabuleiro );
+                tamanhoTabuleiroValido = ( Integer.parseInt(abyssesAndTools[i][2]) > 0 && Integer.parseInt(abyssesAndTools[i][2]) < tamanhoDoTabuleiro );
 
-                if ( !eAbismoOuFerramenta ){
+                if ( !abyssesAndTools[i][0].equals("0") && !abyssesAndTools[i][0].equals("1") && !eAbismoOuFerramenta && !tamanhoTabuleiroValido  ){
                     return false;
                 }
 
-                if ( !tamanhoTabuleiroValido ){
-                    return false;
-                }
+                //ArrayList<Abismo> abismos = new ArrayList<>();
+                //ArrayList<Ferramenta> ferramentas = new ArrayList<>();
 
                 if ( abyssesAndTools[i][0].equals("0") ){
                     playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Abismo( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                    //abismos.add( );
                 }else {
                     playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Ferramenta( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                   // ferramentas.add( new Ferramenta(Integer.parseInt(abyssesAndTools[i][1])) );
                 }
-
-
 
                 /*
-                //Valida os ids dos abismos
-                if ( abyssesAndTools[i][0].equals("0") ){
-                    eAbismoOuFerramenta = ( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 9 );
-                }else{
-                    //Valida os ids das ferramentas
-                    eAbismoOuFerramenta = ( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 5 );
+                for (int j = 0; j <players.size() ; j++) {
+                    players.get(j).abismos.add( new Abismo(Integer.parseInt(abyssesAndTools[i][1])));
+                    players.get(j).ferramentas.add( new Ferramenta(Integer.parseInt(abyssesAndTools[i][1])));
                 }
+                //players.add(new Programmer(,ferramentas));
+                 */
 
-                //Valida se as ferramentas ou abismos estao dentro do tabuleiro
-                tamanhoTabuleiroValido = ( Integer.parseInt(abyssesAndTools[i][2]) > 0 && Integer.parseInt(abyssesAndTools[i][1]) < tamanhoDoTabuleiro );
-
-                if ( ( !abyssesAndTools[i][0].equals("0") || !abyssesAndTools[i][0].equals("1") ) && eAbismoOuFerramenta && tamanhoTabuleiroValido ){
-                    return false;
-                }
-
-                if ( abyssesAndTools[i][0].equals("0") ){
-                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Abismo( Integer.parseInt(abyssesAndTools[i][1]) ) );
-                }else {
-                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Ferramenta( Integer.parseInt(abyssesAndTools[i][1]) ) );
-                }
-                */
             }
 
         }catch (Exception e){
             return false;
         }
-        return true;
-    }
 
+        return createInitialBoard(playerInfo,worldSize);
+    }
 
     //FUNCAO CRIADA PARA VERIFICAR SE TEM COR VALIDA
     public boolean corValida(String corDoPlayer){
@@ -167,10 +154,6 @@ public class GameManager {
         }
     }
 
-    public String getTitle(int position){
-        return "";
-    }
-
     public String getImagePng(int position){
 
         if (position > tamanhoDoTabuleiro){
@@ -180,6 +163,15 @@ public class GameManager {
         if (position == tamanhoDoTabuleiro){
             return "Winner.png";
         }
+
+        if ( playersAbyssesAndTools.containsKey(position) ) {
+            return playersAbyssesAndTools.get(position).imagemTabuleiro();
+        }
+
+        return null;
+    }
+
+    public String getTitle(int position){
         return "";
     }
 
@@ -204,11 +196,32 @@ public class GameManager {
     }
 
     public String getProgrammersInfo(){
-        return "";
-    }
 
-    public String reactToAbyssOrTool(){
-        return "";
+        StringBuilder output = new StringBuilder();
+        StringBuilder infoPlayers = new StringBuilder();
+        StringBuilder ferramentasdoPlayer = new StringBuilder();
+
+        for (int i = 0; i < players.size() ; i++) {
+
+            if(players.get(i).getFerramentas()==null || players.get(i).getFerramentas().size()==0){
+                 output.append(players.get(i).getName()).append(" : ").append("No tools");
+            }else{
+
+                for (int j = 0; j < players.get(i).getFerramentas().size(); j++) {
+                    ferramentasdoPlayer.append(players.get(i).getFerramentas(j));
+                }
+                infoPlayers.append(players.get(i).getName()).append(ferramentasdoPlayer);
+
+                for (int j = 0; j < players.size() ; j++) {
+                    output.append(players.get(i).getName()).append(" : ").append(infoPlayers).append(" | ");
+                    if (j == players.size()-1 ){
+                        output.append(players.get(i).getName()).append(" : ").append(infoPlayers);
+                    }
+                }
+            }
+        }
+
+        return output.toString();
     }
 
     public int getCurrentPlayerID(){
@@ -241,12 +254,22 @@ public class GameManager {
         return true;
     }
 
+    public String reactToAbyssOrTool(){
+        return "";
+    }
+
     public boolean gameIsOver(){
 
         if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro){
             winner=players.get(playerAJogar).getName();
             return true;
         }
+
+        //Caso so haja 1 player em jogo (POSSIVELMENTE NECESSITA DE SER REFEITA)
+        if (players.size()==1){
+            return true;
+        }
+
         return false;
     }
 

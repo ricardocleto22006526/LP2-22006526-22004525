@@ -10,6 +10,8 @@ public class Programmer {
     ProgrammerColor cor;
     String estado = "Em Jogo";
     int posPlayer = 1;
+    ArrayList<Abismo> abismos;
+    ArrayList<Ferramenta> ferramentas;
 
     public Programmer(String nome, int id, ProgrammerColor cor, ArrayList<String> linguagensFavoritas,int posPlayer) {
         this.id = id;
@@ -24,6 +26,18 @@ public class Programmer {
         this.nome = nome;
         this.linguagensFavoritas = linguagensFavoritas;
         this.cor = cor;
+    }
+
+    public Programmer(ArrayList<Abismo> abismos, ArrayList<Ferramenta> ferramentas) {
+        this.abismos = abismos;
+        this.ferramentas = ferramentas;
+    }
+
+    public ArrayList<Ferramenta> getFerramentas() {
+        return ferramentas;
+    }
+    public ArrayList<Ferramenta> getFerramentas(int posicao) {
+        return ferramentas;
     }
 
     public Programmer() {
