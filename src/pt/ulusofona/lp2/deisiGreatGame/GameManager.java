@@ -249,10 +249,12 @@ public class GameManager {
         }
         nrDeTurnos++;
 
+        /*
         if ( gameIsOver() ){
             nrDeTurnos++;
             return true;
         }
+         */
 
         if (playerAJogar == players.size()-1){
             playerAJogar=0;
@@ -271,14 +273,22 @@ public class GameManager {
 
         if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro){
             winner=players.get(playerAJogar).getName();
+            nrDeTurnos++;
             return true;
         }
 
         //Caso so haja 1 player em jogo (POSSIVELMENTE NECESSITA DE SER REFEITA)
-        if (players.size()==1){
-            return true;
+        ArrayList<Programmer> ultimoJogadorEmCampo = new ArrayList<>();
+
+        for (int i = 0; i < players.size() ; i++) {
+            if (players.get(i).getEstado().equals("Em Jogo")){
+                ultimoJogadorEmCampo.add(players.get(i));
+            }
         }
 
+        if (ultimoJogadorEmCampo.size()==1){
+            return true;
+        }
         return false;
     }
 
