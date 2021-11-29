@@ -71,4 +71,8 @@ public class Ferramenta extends AbismoEFerramenta {
         }
     }
 
+    @Override
+    public String toString() {
+        return titulo;
+    }
 }

@@ -393,28 +393,33 @@ public class GameManager {
             }
 
             //MOVIMENTOS QUANDO O PLAYER CAI EM FERRAMENTAS
-        /*
-        if (getImagePng(posPlayer).equals("inheritance.png")){
-            players.get(playerAJogar).adicionaFerramenta(new Ferramenta(0));
 
-        }
+            //O ADICIONAR ESTA A DAR EM MEMORIA, NAO EM STRING
+            if (getImagePng(posPlayer).equals("inheritance.png")){
+                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(0));
 
-        if (getImagePng(posPlayer).equals("functional.png")){
+            }
 
-        }
+            if (getImagePng(posPlayer).equals("functional.png")){
+                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(1));
+            }
 
-        if (getImagePng(posPlayer).equals("unit-tests.png")){
+            if (getImagePng(posPlayer).equals("unit-tests.png")){
+                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(2));
+            }
 
-        }
+            if (getImagePng(posPlayer).equals("catch.png")){
+                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(3));
+            }
 
-        if (getImagePng(posPlayer).equals("catch.png")){
+            if (getImagePng(posPlayer).equals("IDE.png")){
+                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(4));
+            }
 
-        }
+            if (getImagePng(posPlayer).equals("ajuda-professor.png")){
+                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(5));
+            }
 
-        if (getImagePng(posPlayer).equals("IDE.png")){
-
-        }
-         */
 
             textOutput = playersAbyssesAndTools.get(posPlayer).tituloDoAbismoOUFerramenta();
             mudancaDeTurno();
@@ -453,18 +458,19 @@ public class GameManager {
         if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro){
             winner=players.get(playerAJogar).getName();
             return true;
-        }else{
-            for (int i = 0; i < players.size() ; i++) {
-                if (players.get(i).getEstado().equals("Em Jogo")){
-                    playersEmJogo.add(players.get(i));
-                }
-            }
+        }
 
-            if (playersEmJogo.size()==1){
-                winner=playersEmJogo.get(0).getName();
-                return true;
+        for (int i = 0; i < players.size() ; i++) {
+            if (players.get(i).getEstado().equals("Em Jogo")){
+                playersEmJogo.add(players.get(i));
             }
         }
+
+        if (playersEmJogo.size()==1){
+            winner=playersEmJogo.get(0).getName();
+            return true;
+        }
+
 
         return false;
 
