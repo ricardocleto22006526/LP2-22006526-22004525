@@ -41,11 +41,23 @@ public class Programmer {
     }
     public boolean getFerramentas(int idAEntrar) {
         for (int i = 0; i < ferramentas.size() ; i++) {
-            if (ferramentas.get(i).id==idAEntrar){
+            if (ferramentas.get(i).id == idAEntrar){
                 return true;
             }
         }
         return false;
+    }
+
+    public void adicionaFerramenta(Ferramenta ferramenta){
+        this.ferramentas.add(ferramenta);
+    }
+
+    public void removeFerramenta(int idAEntrar){
+        for (int i = 0; i < ferramentas.size() ; i++) {
+            if (ferramentas.get(i).id == idAEntrar){
+                ferramentas.remove(ferramentas.get(i));
+            }
+        }
     }
 
     public Programmer() {
@@ -95,9 +107,7 @@ public class Programmer {
          */
     }
 
-    public void adicionaFerramenta(Ferramenta ferramenta){
-        this.ferramentas.add(ferramenta);
-    }
+
 
     @Override
     public String toString() {

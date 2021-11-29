@@ -368,19 +368,42 @@ public class GameManager {
         if (playersAbyssesAndTools.containsKey(posPlayer)) {
 
             if (getImagePng(posPlayer).equals("syntax.png")){ //FUNCIONA
-                players.get(playerAJogar).andaParaAFrente(-1);
+
+                if(players.get(playerAJogar).getFerramentas(5)){
+                    players.get(playerAJogar).removeFerramenta(5);
+                }else{
+                    players.get(playerAJogar).andaParaAFrente(-1);
+                }
+
             }
 
             if (getImagePng(posPlayer).equals("logic.png")){//FUNCIONA
-                players.get(playerAJogar).andaParaAFrente(-(nrPosicoesMovida/2));
+
+                if(players.get(playerAJogar).getFerramentas(5)){
+                    players.get(playerAJogar).removeFerramenta(5);
+                }else{
+                    players.get(playerAJogar).andaParaAFrente(-(nrPosicoesMovida/2));
+                }
+
             }
 
             if (getImagePng(posPlayer).equals("exception.png")) {//FUNCIONA
-                players.get(playerAJogar).andaParaAFrente(-2);
+
+                if(players.get(playerAJogar).getFerramentas(5)){
+                    players.get(playerAJogar).removeFerramenta(5);
+                }else{
+                    players.get(playerAJogar).andaParaAFrente(-2);
+                }
+
             }
 
             if (getImagePng(posPlayer).equals("file-not-found-exception.png")){//FUNCIONA
-                players.get(playerAJogar).andaParaAFrente(-3);
+
+                if(players.get(playerAJogar).getFerramentas(5)){
+                    players.get(playerAJogar).removeFerramenta(5);
+                }else{
+                    players.get(playerAJogar).andaParaAFrente(-3);
+                }
             }
 
             if (getImagePng(posPlayer).equals("crash.png")){//FUNCIONA
@@ -403,7 +426,6 @@ public class GameManager {
             if (getImagePng(posPlayer).equals("bsod.png")){
                 //players.get(playerAJogar).getPosPlayerReset(1);
                 players.get(playerAJogar).alteraEstado();
-
 
                 //playersDerrotados.add(players.get(playerAJogar));
                 //NAO POSSO REMOVER
@@ -448,6 +470,7 @@ public class GameManager {
                 if(!players.get(playerAJogar).getFerramentas(0)){
                     players.get(playerAJogar).adicionaFerramenta(new Ferramenta(0));
                 }
+
             }
 
             if (getImagePng(posPlayer).equals("functional.png")){
@@ -498,7 +521,7 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-        //System.out.println(getProgrammersInfo());
+        System.out.println(getProgrammersInfo());
         //System.out.println("Anterior "+posicaoAnterior);
         //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
@@ -519,11 +542,6 @@ public class GameManager {
         }else{
             return false;
         }
-
-
-
-
-
 
         //Caso so haja 1 player em jogo (POSSIVELMENTE NECESSITA DE SER REFEITA)
         /*
