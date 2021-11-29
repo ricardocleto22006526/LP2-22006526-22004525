@@ -258,7 +258,6 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrPositions){
 
-
         guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
 
         if (nrPositions < 1 || nrPositions > 6){
@@ -274,6 +273,7 @@ public class GameManager {
             }
             players.get(playerAJogar).andaParaAFrente(nrPositions);
         }else{
+
             /*
             //REFAZER PARTE DE GUARDAR a posicaoAntesDoAnterior
             guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
@@ -308,7 +308,6 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-
          */
 
         return true;
@@ -434,8 +433,9 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-        System.out.println("Anterior "+posicaoAnterior);
-        System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
+
+        //System.out.println("Anterior "+posicaoAnterior);
+        //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
 
     //FUNCOES PARA DIMINUIR A FUNCAO reactToAbyssOrTool()
