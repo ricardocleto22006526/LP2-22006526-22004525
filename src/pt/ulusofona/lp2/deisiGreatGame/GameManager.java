@@ -167,7 +167,7 @@ public class GameManager {
         }
 
         if ( playersAbyssesAndTools.containsKey(position) ) {
-            return playersAbyssesAndTools.get(position).imagemTabuleiro();
+            return playersAbyssesAndTools.get(position).getTitulo();
         }
 
         return null;

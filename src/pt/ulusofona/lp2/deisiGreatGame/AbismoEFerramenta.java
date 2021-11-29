@@ -12,6 +12,10 @@ abstract public class AbismoEFerramenta {
         this.titulo = titulo;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
     abstract String imagemTabuleiro();
     abstract String tituloDoAbismoOUFerramenta();
 
