@@ -39,8 +39,13 @@ public class Programmer {
     public ArrayList<Ferramenta> getFerramentas() {
         return ferramentas;
     }
-    public ArrayList<Ferramenta> getFerramentas(int posicao) {
-        return ferramentas;
+    public boolean getFerramentas(int idAEntrar) {
+        for (int i = 0; i < ferramentas.size() ; i++) {
+            if (ferramentas.get(i).id==idAEntrar){
+                return true;
+            }
+        }
+        return false;
     }
 
     public Programmer() {

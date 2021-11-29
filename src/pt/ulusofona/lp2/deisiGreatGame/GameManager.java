@@ -444,27 +444,40 @@ public class GameManager {
 
             //O ADICIONAR ESTA A DAR EM MEMORIA, NAO EM STRING
             if (getImagePng(posPlayer).equals("inheritance.png")){
-                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(0));
+
+                if(!players.get(playerAJogar).getFerramentas(0)){
+                    players.get(playerAJogar).adicionaFerramenta(new Ferramenta(0));
+                }
             }
 
             if (getImagePng(posPlayer).equals("functional.png")){
-                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(1));
+                if(!players.get(playerAJogar).getFerramentas(1)){
+                    players.get(playerAJogar).adicionaFerramenta(new Ferramenta(1));
+                }
             }
 
             if (getImagePng(posPlayer).equals("unit-tests.png")){
-                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(2));
+                if(!players.get(playerAJogar).getFerramentas(2)){
+                    players.get(playerAJogar).adicionaFerramenta(new Ferramenta(2));
+                }
             }
 
             if (getImagePng(posPlayer).equals("catch.png")){
-                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(3));
+                if(!players.get(playerAJogar).getFerramentas(3)){
+                    players.get(playerAJogar).adicionaFerramenta(new Ferramenta(3));
+                }
             }
 
             if (getImagePng(posPlayer).equals("IDE.png")){
-                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(4));
+                if(!players.get(playerAJogar).getFerramentas(4)){
+                    players.get(playerAJogar).adicionaFerramenta(new Ferramenta(4));
+                }
             }
 
             if (getImagePng(posPlayer).equals("ajuda-professor.png")){
-                players.get(playerAJogar).adicionaFerramenta(new Ferramenta(5));
+                if(!players.get(playerAJogar).getFerramentas(5)){
+                    players.get(playerAJogar).adicionaFerramenta(new Ferramenta(5));
+                }
             }
 
             textOutput = playersAbyssesAndTools.get(posPlayer).tituloDoAbismoOUFerramenta();
@@ -485,7 +498,7 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-        System.out.println(getProgrammersInfo());
+        //System.out.println(getProgrammersInfo());
         //System.out.println("Anterior "+posicaoAnterior);
         //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
