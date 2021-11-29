@@ -218,8 +218,6 @@ public class GameManager {
     public String getProgrammersInfo(){
 
         StringBuilder output = new StringBuilder();
-        StringBuilder infoPlayers = new StringBuilder();
-        StringBuilder ferramentasdoPlayer = new StringBuilder();
 
         for (int i = 0; i < players.size() ; i++) {
 
@@ -232,24 +230,17 @@ public class GameManager {
 
             }else{
 
-                for (int j = 0; j < players.get(i).getFerramentas().size(); j++) {
-                    ferramentasdoPlayer.append(players.get(i).getFerramentas(j));
+                if (i>0){
+                    output.append(" | ").append(players.get(i).getName());
+                }else{
+                    output.append(players.get(i).getName());
                 }
-                infoPlayers.append(players.get(i).getName()).append(ferramentasdoPlayer);
-
-                for (int j = 0; j < players.size() ; j++) {
-                    if (j==1){
-                        output.append(players.get(i).getName()).append(" : ").append(infoPlayers);
+                for (int j = 0; j < players.get(i).getFerramentas().size() ; j++) {
+                    if (j==0){
+                        output.append(" : ").append(players.get(i).ferramentas.get(j).titulo);
                     }else{
-                        output.append(" | ").append(players.get(i).getName()).append(" : ").append(infoPlayers);
+                        output.append(" ; ").append(players.get(i).ferramentas.get(j).titulo);
                     }
-
-                    /*
-                    output.append(players.get(i).getName()).append(" : ").append(infoPlayers).append(" | ");
-                    if (j == players.size()-1 ){
-                        output.append(players.get(i).getName()).append(" : ").append(infoPlayers);
-                    }
-                     */
                 }
             }
         }
@@ -365,6 +356,7 @@ public class GameManager {
                 //playersDerrotados.add(players.get(playerAJogar));
                 //NAO POSSO REMOVER
                 //players.remove(players.get(playerAJogar));
+                //getProgrammers(false);
             }
 
             //FALTA FAZER
@@ -441,26 +433,12 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-
+        System.out.println(getProgrammersInfo());
         //System.out.println("Anterior "+posicaoAnterior);
         //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
 
-    //FUNCOES PARA DIMINUIR A FUNCAO reactToAbyssOrTool()
-    public String ferramentaEmAcao(){
-        return null;
-    }
-    public String abismosEmAcao(){
-        return null;
-    }
-
     public boolean gameIsOver(){
-
-        if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro){
-            winner=players.get(playerAJogar).getName();
-            return true;
-        }
-
         ArrayList<Programmer> playersEmJogo = new ArrayList<>();
 
         for (int i = 0; i < players.size() ; i++) {
@@ -469,12 +447,15 @@ public class GameManager {
             }
         }
 
-        if (playersEmJogo.size()==1){
-            winner=playersEmJogo.get(0).getName();
+        if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro || playersEmJogo.size()==1){
+            winner = players.get(playerAJogar).getName();
+            nrDeTurnos++;
             return true;
+        }else{
+            return false;
         }
 
-        return false;
+
 
 
 
