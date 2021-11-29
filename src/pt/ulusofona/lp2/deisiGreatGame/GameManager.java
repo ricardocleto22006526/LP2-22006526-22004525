@@ -11,7 +11,7 @@ public class GameManager {
     int playerAJogar=0;
     int nrDeTurnos=0;
     int nrPosicoesMovida=0;
-
+    ArrayList<Integer> guardaPosicoes = new ArrayList<>();
     int posicaoAnterior=0;
     int posicaoAntesDaAnterior=0;
 
@@ -93,6 +93,7 @@ public class GameManager {
 
     public boolean createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools){
         playersAbyssesAndTools.clear();
+        guardaPosicoes.clear();
 
         if (playerInfo == null) { return false; }
 
@@ -256,9 +257,9 @@ public class GameManager {
     }
 
     public boolean moveCurrentPlayer(int nrPositions){
-        int posPlayer=players.get(playerAJogar).getPosPlayer();
 
-        ArrayList<Integer> guardaPosicaoAntesDaAnterior = new ArrayList<>();
+
+        guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
 
         if (nrPositions < 1 || nrPositions > 6){
             return false;
@@ -266,39 +267,33 @@ public class GameManager {
 
         if (players.get(playerAJogar).getPosPlayer() + nrPositions <= tamanhoDoTabuleiro){
 
-            //REFAZER PARTE DE GUARDAR a posicaoAntesDoAnterior
-            guardaPosicaoAntesDaAnterior.add(players.get(playerAJogar).getPosPlayer());
-
-            for (int i = 0; i < guardaPosicaoAntesDaAnterior.size() ; i++) {
-                if (i>2){
-                    posicaoAntesDaAnterior = guardaPosicaoAntesDaAnterior.get(i);
-                }
-            }
-
-            posicaoAnterior = players.get(playerAJogar).getPosPlayer();
             nrPosicoesMovida = nrPositions;
+            posicaoAnterior = guardaPosicoes.get(guardaPosicoes.size()-1);
+            if (guardaPosicoes.size()>2){
+                posicaoAntesDaAnterior = guardaPosicoes.get(guardaPosicoes.size()-2);
+            }
             players.get(playerAJogar).andaParaAFrente(nrPositions);
-
         }else{
-
+            /*
             //REFAZER PARTE DE GUARDAR a posicaoAntesDoAnterior
-            guardaPosicaoAntesDaAnterior.add(players.get(playerAJogar).getPosPlayer());
+            guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
 
-            for (int i = 0; i < guardaPosicaoAntesDaAnterior.size() ; i++) {
+            for (int i = 0; i < guardaPosicoes.size() ; i++) {
                 if (i>2){
-                    posicaoAntesDaAnterior = guardaPosicaoAntesDaAnterior.get(i);
+                    posicaoAntesDaAnterior = guardaPosicoes.get(i);
                 }
             }
 
             posicaoAnterior = players.get(playerAJogar).getPosPlayer();
             nrPosicoesMovida = nrPositions;
+             */
 
+            posicaoAnterior = guardaPosicoes.get(guardaPosicoes.size()-1);
+            if (guardaPosicoes.size()>2){
+                posicaoAntesDaAnterior = guardaPosicoes.get(guardaPosicoes.size()-2);
+            }
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
         }
-
-
-
-
 
         /*
         nrDeTurnos++;
@@ -351,7 +346,7 @@ public class GameManager {
 
             //FALTA FAZER ESTA
             if (getImagePng(posPlayer).equals("secondary-effects.png")){
-                players.get(playerAJogar).getPosPlayerReset(posicaoAntesDaAnterior+1);
+                players.get(playerAJogar).getPosPlayerReset(posicaoAntesDaAnterior);
             }
 
             //COMO TIRAR O PLAYER DO MAPA?
@@ -367,6 +362,7 @@ public class GameManager {
                 //NAO POSSO REMOVER
                 //players.remove(players.get(playerAJogar));
             }
+
 
             //FALTA FAZER
             //OBRIGATORIA
@@ -425,20 +421,22 @@ public class GameManager {
             mudancaDeTurno();
             return textOutput;
         }
-
         mudancaDeTurno();
         return null;
     }
 
     //FUNCAO QUE ALTERA O TURNO
     public void mudancaDeTurno(){
+        nrDeTurnos++;
+
         if (playerAJogar == players.size()-1){
             playerAJogar=0;
         }else{
             playerAJogar++;
         }
+        System.out.println("Anterior "+posicaoAnterior);
+        System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
-
 
     //FUNCOES PARA DIMINUIR A FUNCAO reactToAbyssOrTool()
     public String ferramentaEmAcao(){
@@ -452,20 +450,20 @@ public class GameManager {
 
         ArrayList<Programmer> playersEmJogo = new ArrayList<>();
 
-        for (int i = 0; i < players.size() ; i++) {
-            if (players.get(i).getEstado().equals("Em Jogo")){
-                playersEmJogo.add(players.get(i));
-            }
-        }
-
-        if (playersEmJogo.size()==1){
-            winner=playersEmJogo.get(0).getName();
-            return true;
-        }
-
         if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro){
             winner=players.get(playerAJogar).getName();
             return true;
+        }else{
+            for (int i = 0; i < players.size() ; i++) {
+                if (players.get(i).getEstado().equals("Em Jogo")){
+                    playersEmJogo.add(players.get(i));
+                }
+            }
+
+            if (playersEmJogo.size()==1){
+                winner=playersEmJogo.get(0).getName();
+                return true;
+            }
         }
 
         return false;
