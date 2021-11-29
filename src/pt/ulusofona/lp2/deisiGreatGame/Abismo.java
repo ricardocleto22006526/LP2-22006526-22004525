@@ -49,6 +49,24 @@ public class Abismo extends AbismoEFerramenta {
         return null;
     }
 
+    @Override
+    String tituloDoAbismoOUFerramenta() {
+
+        return switch (titulo) {
+            case "Erro de sintaxe" -> "Abismo: syntax";
+            case "Erro de lógica" ->"Abismo: logic";
+            case "Exception" ->"Abismo: exception";
+            case "File Not Found Exception" ->"Abismo: file-not-found-exception";
+            case "Crash (aka Rebentaço)" ->"Abismo: crash";
+            case "Duplicated Code" ->"Abismo: duplicated-code";
+            case "Efeitos secundários" ->"Abismo: secondary-effects";
+            case "Blue Screen of Death" ->"Abismo: bsod";
+            case "Ciclo infinito" ->"Abismo: infinite-loop";
+            case "Segmentation Fault" ->"Abismo: core-dumped";
+            default -> "";
+        };
+    }
+
     //Titulos dos abismos
     public Abismo(int id) {
         super(id);

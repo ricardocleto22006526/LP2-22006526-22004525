@@ -10,7 +10,7 @@ public class Programmer {
     ProgrammerColor cor;
     String estado = "Em Jogo";
     int posPlayer = 1;
-    ArrayList<Abismo> abismos = new ArrayList<>();
+    Abismo abismo;
     ArrayList<Ferramenta> ferramentas = new ArrayList<>();
 
     public Programmer(String nome, int id, ProgrammerColor cor, ArrayList<String> linguagensFavoritas,int posPlayer) {
@@ -28,9 +28,12 @@ public class Programmer {
         this.cor = cor;
     }
 
-    public Programmer(ArrayList<Abismo> abismos, ArrayList<Ferramenta> ferramentas) {
-        this.abismos = abismos;
+    public Programmer(ArrayList<Ferramenta> ferramentas) {
         this.ferramentas = ferramentas;
+    }
+
+    public Programmer(Abismo abismo) {
+        this.abismo = abismo;
     }
 
     public ArrayList<Ferramenta> getFerramentas() {
@@ -59,6 +62,10 @@ public class Programmer {
         return this.posPlayer;
     }
 
+    public int getPosPlayerReset(int posicao){
+        return this.posPlayer=posicao;
+    }
+
     public String getEstado(){
         return this.estado;
     }
@@ -70,6 +77,21 @@ public class Programmer {
     void andaParaTras(int tamanhoDoTabuleiro,int posicoesAAlterar){
         int posicaoInicial = this.posPlayer + posicoesAAlterar;
         this.posPlayer = tamanhoDoTabuleiro - (posicaoInicial-tamanhoDoTabuleiro);
+    }
+
+    public void alteraEstado() {
+        this.estado="Derrotado";
+        /*
+        if (this.estado.equals("Em Jogo")){
+            this.estado = "Derrotado";
+        }else {
+            this.estado = "Em Jogo";
+        }
+         */
+    }
+
+    public void adicionaFerramenta(Ferramenta ferramenta){
+        this.ferramentas.add(ferramenta);
     }
 
     @Override

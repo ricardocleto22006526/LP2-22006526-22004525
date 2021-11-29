@@ -32,6 +32,20 @@ public class Ferramenta extends AbismoEFerramenta {
         return null;
     }
 
+    //FALTA SABER OQ FAZ CADA FERRAMENTA
+    @Override
+    String tituloDoAbismoOUFerramenta() {
+        return switch (titulo) {
+            case "Herança" -> "Ferramenta: inheritance";
+            case "Programação funcional" ->"Ferramenta: functional";
+            case "Testes unitários" ->"Ferramenta: unit-tests";
+            case "Tratamento de Excepções" ->"Ferramenta: catch";
+            case "IDE" ->"Ferramenta: IDE";
+            case "Ajuda Do Professor" ->"Ferramenta: ajuda-professor";
+            default -> "";
+        };
+    }
+
     //Titulos das ferramentas
     public Ferramenta(int id) {
         super(id);

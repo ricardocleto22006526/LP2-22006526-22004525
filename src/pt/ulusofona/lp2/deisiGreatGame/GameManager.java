@@ -10,6 +10,10 @@ public class GameManager {
     int tamanhoDoTabuleiro;
     int playerAJogar=0;
     int nrDeTurnos=0;
+    int nrPosicoesMovida=0;
+
+    int posicaoAnterior=0;
+    int posicaoAntesDaAnterior=0;
 
     public GameManager() {
     }
@@ -170,8 +174,9 @@ public class GameManager {
 
     public List<Programmer> getProgrammers(boolean includeDefeated){
 
-        List<Programmer> listaJogadores;
+
         ArrayList<Programmer> programmersVivosEmjogo = new ArrayList<>();
+        List<Programmer> listaJogadores;
 
         if (!includeDefeated) {
             for (Programmer player : players) {
@@ -213,7 +218,12 @@ public class GameManager {
         for (int i = 0; i < players.size() ; i++) {
 
             if(players.get(i).getFerramentas()==null || players.get(i).getFerramentas().size()==0){
-                 output.append(players.get(i).getName()).append(" : ").append("No tools");
+                if (i==0){
+                    output.append(players.get(i).getName()).append(" : ").append("No tools");
+                }else{
+                    output.append(" | ").append(players.get(i).getName()).append(" : ").append("No tools");
+                }
+
             }else{
 
                 for (int j = 0; j < players.get(i).getFerramentas().size(); j++) {
@@ -222,10 +232,18 @@ public class GameManager {
                 infoPlayers.append(players.get(i).getName()).append(ferramentasdoPlayer);
 
                 for (int j = 0; j < players.size() ; j++) {
+                    if (j==1){
+                        output.append(players.get(i).getName()).append(" : ").append(infoPlayers);
+                    }else{
+                        output.append(" | ").append(players.get(i).getName()).append(" : ").append(infoPlayers);
+                    }
+
+                    /*
                     output.append(players.get(i).getName()).append(" : ").append(infoPlayers).append(" | ");
                     if (j == players.size()-1 ){
                         output.append(players.get(i).getName()).append(" : ").append(infoPlayers);
                     }
+                     */
                 }
             }
         }
@@ -234,19 +252,55 @@ public class GameManager {
     }
 
     public int getCurrentPlayerID(){
-        return players.get(playerAJogar).id;
+        return players.get(playerAJogar).getId();
     }
 
     public boolean moveCurrentPlayer(int nrPositions){
+        int posPlayer=players.get(playerAJogar).getPosPlayer();
+
+        ArrayList<Integer> guardaPosicaoAntesDaAnterior = new ArrayList<>();
+
         if (nrPositions < 1 || nrPositions > 6){
             return false;
         }
 
         if (players.get(playerAJogar).getPosPlayer() + nrPositions <= tamanhoDoTabuleiro){
+
+            //REFAZER PARTE DE GUARDAR a posicaoAntesDoAnterior
+            guardaPosicaoAntesDaAnterior.add(players.get(playerAJogar).getPosPlayer());
+
+            for (int i = 0; i < guardaPosicaoAntesDaAnterior.size() ; i++) {
+                if (i>2){
+                    posicaoAntesDaAnterior = guardaPosicaoAntesDaAnterior.get(i);
+                }
+            }
+
+            posicaoAnterior = players.get(playerAJogar).getPosPlayer();
+            nrPosicoesMovida = nrPositions;
             players.get(playerAJogar).andaParaAFrente(nrPositions);
+
         }else{
+
+            //REFAZER PARTE DE GUARDAR a posicaoAntesDoAnterior
+            guardaPosicaoAntesDaAnterior.add(players.get(playerAJogar).getPosPlayer());
+
+            for (int i = 0; i < guardaPosicaoAntesDaAnterior.size() ; i++) {
+                if (i>2){
+                    posicaoAntesDaAnterior = guardaPosicaoAntesDaAnterior.get(i);
+                }
+            }
+
+            posicaoAnterior = players.get(playerAJogar).getPosPlayer();
+            nrPosicoesMovida = nrPositions;
+
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
         }
+
+
+
+
+
+        /*
         nrDeTurnos++;
 
         if ( gameIsOver() ){
@@ -260,25 +314,164 @@ public class GameManager {
             playerAJogar++;
         }
 
+         */
+
         return true;
     }
 
     public String reactToAbyssOrTool(){
-        return "";
+        int posPlayer=players.get(playerAJogar).getPosPlayer();
+        String textOutput="";
+
+        if (playersAbyssesAndTools.containsKey(posPlayer)) {
+
+            if (getImagePng(posPlayer).equals("syntax.png")){ //FUNCIONA
+                players.get(playerAJogar).andaParaAFrente(-1);
+            }
+
+            if (getImagePng(posPlayer).equals("logic.png")){//FUNCIONA
+                players.get(playerAJogar).andaParaAFrente(-(nrPosicoesMovida/2));
+            }
+
+            if (getImagePng(posPlayer).equals("exception.png")) {//FUNCIONA
+                players.get(playerAJogar).andaParaAFrente(-2);
+            }
+
+            if (getImagePng(posPlayer).equals("file-not-found-exception.png")){//FUNCIONA
+                players.get(playerAJogar).andaParaAFrente(-3);
+            }
+
+            if (getImagePng(posPlayer).equals("crash.png")){//FUNCIONA
+                players.get(playerAJogar).getPosPlayerReset(1);
+            }
+
+            if (getImagePng(posPlayer).equals("duplicated-code.png")){//FUNCIONA
+                players.get(playerAJogar).getPosPlayerReset(posicaoAnterior);
+            }
+
+            //FALTA FAZER ESTA
+            if (getImagePng(posPlayer).equals("secondary-effects.png")){
+                players.get(playerAJogar).getPosPlayerReset(posicaoAntesDaAnterior+1);
+            }
+
+            //COMO TIRAR O PLAYER DO MAPA?
+            //ERRO NO alteraEstado()
+            //OBRIGATORIA
+
+            if (getImagePng(posPlayer).equals("bsod.png")){
+                //players.get(playerAJogar).getPosPlayerReset(1);
+                players.get(playerAJogar).alteraEstado();
+
+
+                //playersDerrotados.add(players.get(playerAJogar));
+                //NAO POSSO REMOVER
+                //players.remove(players.get(playerAJogar));
+            }
+
+            //FALTA FAZER
+            //OBRIGATORIA
+            if (getImagePng(posPlayer).equals("infinite-loop.png")){
+
+            }
+
+            if (getImagePng(posPlayer).equals("core-dumped.png")){ //NAO FUNCIONA CERTO
+
+                ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
+
+                for (int i = 0; i < players.size(); i++) {
+                    for (int j = 1; j < players.size() ; j++) {
+                        if (players.get(i).getPosPlayer() == players.get(j).getPosPlayer()){
+                            jogadoresNestaCasa.add(players.get(i));
+                        }
+                    }
+                }
+
+                if ( jogadoresNestaCasa.size() >= 2){
+                    for (int i = 0; i < players.size() ; i++) {
+                        for (int j = 0; j < jogadoresNestaCasa.size() ; j++) {
+                            if ( players.get(i).getName().equals(jogadoresNestaCasa.get(j).getName()) ){
+                                players.get(i).andaParaAFrente(-3);
+                            }
+                        }
+                    }
+                }
+            }
+
+            //MOVIMENTOS QUANDO O PLAYER CAI EM FERRAMENTAS
+        /*
+        if (getImagePng(posPlayer).equals("inheritance.png")){
+            players.get(playerAJogar).adicionaFerramenta(new Ferramenta(0));
+
+        }
+
+        if (getImagePng(posPlayer).equals("functional.png")){
+
+        }
+
+        if (getImagePng(posPlayer).equals("unit-tests.png")){
+
+        }
+
+        if (getImagePng(posPlayer).equals("catch.png")){
+
+        }
+
+        if (getImagePng(posPlayer).equals("IDE.png")){
+
+        }
+         */
+
+            textOutput = playersAbyssesAndTools.get(posPlayer).tituloDoAbismoOUFerramenta();
+            mudancaDeTurno();
+            return textOutput;
+        }
+
+        mudancaDeTurno();
+        return null;
+    }
+
+    //FUNCAO QUE ALTERA O TURNO
+    public void mudancaDeTurno(){
+        if (playerAJogar == players.size()-1){
+            playerAJogar=0;
+        }else{
+            playerAJogar++;
+        }
+    }
+
+
+    //FUNCOES PARA DIMINUIR A FUNCAO reactToAbyssOrTool()
+    public String ferramentaEmAcao(){
+        return null;
+    }
+    public String abismosEmAcao(){
+        return null;
     }
 
     public boolean gameIsOver(){
+
+        ArrayList<Programmer> playersEmJogo = new ArrayList<>();
+
+        for (int i = 0; i < players.size() ; i++) {
+            if (players.get(i).getEstado().equals("Em Jogo")){
+                playersEmJogo.add(players.get(i));
+            }
+        }
+
+        if (playersEmJogo.size()==1){
+            winner=playersEmJogo.get(0).getName();
+            return true;
+        }
 
         if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro){
             winner=players.get(playerAJogar).getName();
             return true;
         }
 
-        if (players.size()==1){
-            return true;
-        }
-
         return false;
+
+
+
 
         //Caso so haja 1 player em jogo (POSSIVELMENTE NECESSITA DE SER REFEITA)
         /*
@@ -294,8 +487,6 @@ public class GameManager {
             return true;
         }
          */
-
-
     }
 
     public List<String> getGameResults(){
