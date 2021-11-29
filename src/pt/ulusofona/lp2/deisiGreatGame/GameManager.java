@@ -140,52 +140,6 @@ public class GameManager {
         }
 
         return createInitialBoard(playerInfo,worldSize);
-
-
-        /*
-               playersAbyssesAndTools.clear();
-        guardaPosicoes.clear();
-
-        if (playerInfo == null) { return false; }
-
-        boolean eAbismoOuFerramenta=false, tamanhoTabuleiroValido=false;
-
-        try{
-
-            for (int i = 0; i < abyssesAndTools.length ; i++) {
-
-
-                if ( !(abyssesAndTools[i][0].equals("0") || (abyssesAndTools[i][0].equals("1"))) ){
-                    return false;
-                }
-
-                if ( abyssesAndTools[i][0].equals("0") ){
-                    eAbismoOuFerramenta = ( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 9 );
-                }else{
-                    //Valida os ids das ferramentas
-                    eAbismoOuFerramenta = ( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 5 );
-                }
-
-                tamanhoTabuleiroValido = ( Integer.parseInt(abyssesAndTools[i][2]) > 0 && Integer.parseInt(abyssesAndTools[i][2]) < tamanhoDoTabuleiro );
-
-                if ( !abyssesAndTools[i][0].equals("0") && !abyssesAndTools[i][0].equals("1") && !eAbismoOuFerramenta && !tamanhoTabuleiroValido  ){
-                    return false;
-                }
-
-                if ( abyssesAndTools[i][0].equals("0") ){
-                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Abismo( Integer.parseInt(abyssesAndTools[i][1]) ) );
-                }else {
-                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Ferramenta( Integer.parseInt(abyssesAndTools[i][1]) ) );
-                }
-
-            }
-
-        }catch (Exception e){
-            return false;
-        }
-
-        return createInitialBoard(playerInfo,worldSize);
-         */
     }
 
     //FUNCAO CRIADA PARA VERIFICAR SE TEM COR VALIDA
@@ -322,41 +276,12 @@ public class GameManager {
             players.get(playerAJogar).andaParaAFrente(nrPositions);
         }else{
 
-            /*
-            //REFAZER PARTE DE GUARDAR a posicaoAntesDoAnterior
-            guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
-
-            for (int i = 0; i < guardaPosicoes.size() ; i++) {
-                if (i>2){
-                    posicaoAntesDaAnterior = guardaPosicoes.get(i);
-                }
-            }
-
-            posicaoAnterior = players.get(playerAJogar).getPosPlayer();
-            nrPosicoesMovida = nrPositions;
-             */
-
             posicaoAnterior = guardaPosicoes.get(guardaPosicoes.size()-1);
             if (guardaPosicoes.size()>2){
                 posicaoAntesDaAnterior = guardaPosicoes.get(guardaPosicoes.size()-2);
             }
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
         }
-
-        /*
-        nrDeTurnos++;
-
-        if ( gameIsOver() ){
-            nrDeTurnos++;
-            return true;
-        }
-
-        if (playerAJogar == players.size()-1){
-            playerAJogar=0;
-        }else{
-            playerAJogar++;
-        }
-         */
 
         return true;
     }
@@ -391,6 +316,8 @@ public class GameManager {
 
                 if(players.get(playerAJogar).getFerramentas(5)){
                     players.get(playerAJogar).removeFerramenta(5);
+                }else if(players.get(playerAJogar).getFerramentas(3)){
+                    players.get(playerAJogar).removeFerramenta(3);
                 }else{
                     players.get(playerAJogar).andaParaAFrente(-2);
                 }
@@ -401,6 +328,8 @@ public class GameManager {
 
                 if(players.get(playerAJogar).getFerramentas(5)){
                     players.get(playerAJogar).removeFerramenta(5);
+                }else if(players.get(playerAJogar).getFerramentas(3)){
+                    players.get(playerAJogar).removeFerramenta(3);
                 }else{
                     players.get(playerAJogar).andaParaAFrente(-3);
                 }
@@ -527,7 +456,7 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-        System.out.println(getProgrammersInfo());
+        //System.out.println(getProgrammersInfo());
         //System.out.println("Anterior "+posicaoAnterior);
         //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
@@ -548,22 +477,6 @@ public class GameManager {
         }
         return false;
 
-
-
-        //Caso so haja 1 player em jogo (POSSIVELMENTE NECESSITA DE SER REFEITA)
-        /*
-        ArrayList<Programmer> ultimoJogadorEmCampo = new ArrayList<>();
-
-        for (int i = 0; i < players.size() ; i++) {
-            if (players.get(i).getEstado().equals("Em Jogo")){
-                ultimoJogadorEmCampo.add(players.get(i));
-            }
-        }
-
-        if (ultimoJogadorEmCampo.size()==1){
-            return true;
-        }
-         */
     }
 
     public List<String> getGameResults(){
