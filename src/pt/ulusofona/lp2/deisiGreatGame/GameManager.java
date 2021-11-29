@@ -505,10 +505,16 @@ public class GameManager {
 
             textOutput = playersAbyssesAndTools.get(posPlayer).tituloDoAbismoOUFerramenta();
 
-            mudancaDeTurno();
+            if (!gameIsOver()){
+                mudancaDeTurno();
+            }
+
             return textOutput;
         }
-        mudancaDeTurno();
+        if (!gameIsOver()){
+            mudancaDeTurno();
+        }
+
         return null;
     }
 
@@ -539,9 +545,10 @@ public class GameManager {
             winner = players.get(playerAJogar).getName();
             nrDeTurnos++;
             return true;
-        }else{
-            return false;
         }
+        return false;
+
+
 
         //Caso so haja 1 player em jogo (POSSIVELMENTE NECESSITA DE SER REFEITA)
         /*
