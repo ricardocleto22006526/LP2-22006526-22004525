@@ -92,7 +92,58 @@ public class GameManager {
     }
 
     public boolean createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools){
+
         playersAbyssesAndTools.clear();
+        guardaPosicoes.clear();
+
+        if (playerInfo == null) { return false; }
+
+        try{
+
+            for (int i = 0; i < abyssesAndTools.length ; i++) {
+
+
+                if ( !abyssesAndTools[i][0].equals("0") && !(abyssesAndTools[i][0].equals("1")) ){
+                    return false;
+                }
+
+
+                if ( abyssesAndTools[i][0].equals("0") ){
+                    //Valida os ids dos abismos
+                    if ( !( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 9 ) ){
+                        return false;
+                    }
+
+                }else{
+
+                    //Valida os ids das ferramentas
+                    if (  !( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 5)  ){
+                        return false;
+                    }
+
+                }
+
+                if ( ( Integer.parseInt(abyssesAndTools[i][2]) < 1 && Integer.parseInt(abyssesAndTools[i][2]) > tamanhoDoTabuleiro ) ){
+                    return false;
+                }
+
+                if ( abyssesAndTools[i][0].equals("0") ){
+                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Abismo( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                }else {
+                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Ferramenta( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                }
+
+            }
+
+        }catch (Exception e){
+            return false;
+        }
+
+        return createInitialBoard(playerInfo,worldSize);
+
+
+        /*
+               playersAbyssesAndTools.clear();
         guardaPosicoes.clear();
 
         if (playerInfo == null) { return false; }
@@ -134,6 +185,7 @@ public class GameManager {
         }
 
         return createInitialBoard(playerInfo,worldSize);
+         */
     }
 
     //FUNCAO CRIADA PARA VERIFICAR SE TEM COR VALIDA
@@ -415,8 +467,8 @@ public class GameManager {
                 players.get(playerAJogar).adicionaFerramenta(new Ferramenta(5));
             }
 
-
             textOutput = playersAbyssesAndTools.get(posPlayer).tituloDoAbismoOUFerramenta();
+
             mudancaDeTurno();
             return textOutput;
         }
