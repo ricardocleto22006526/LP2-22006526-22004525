@@ -103,6 +103,11 @@ public class GameManager {
 
             for (int i = 0; i < abyssesAndTools.length ; i++) {
 
+
+                if ( !(abyssesAndTools[i][0].equals("0") || (abyssesAndTools[i][0].equals("1"))) ){
+                    return false;
+                }
+
                 if ( abyssesAndTools[i][0].equals("0") ){
                     eAbismoOuFerramenta = ( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 9 );
                 }else{
@@ -362,7 +367,6 @@ public class GameManager {
                 //players.remove(players.get(playerAJogar));
             }
 
-
             //FALTA FAZER
             //OBRIGATORIA
             if (getImagePng(posPlayer).equals("infinite-loop.png")){
@@ -397,7 +401,6 @@ public class GameManager {
             //O ADICIONAR ESTA A DAR EM MEMORIA, NAO EM STRING
             if (getImagePng(posPlayer).equals("inheritance.png")){
                 players.get(playerAJogar).adicionaFerramenta(new Ferramenta(0));
-
             }
 
             if (getImagePng(posPlayer).equals("functional.png")){
@@ -453,12 +456,12 @@ public class GameManager {
 
     public boolean gameIsOver(){
 
-        ArrayList<Programmer> playersEmJogo = new ArrayList<>();
-
         if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro){
             winner=players.get(playerAJogar).getName();
             return true;
         }
+
+        ArrayList<Programmer> playersEmJogo = new ArrayList<>();
 
         for (int i = 0; i < players.size() ; i++) {
             if (players.get(i).getEstado().equals("Em Jogo")){
@@ -470,7 +473,6 @@ public class GameManager {
             winner=playersEmJogo.get(0).getName();
             return true;
         }
-
 
         return false;
 
@@ -509,6 +511,7 @@ public class GameManager {
         results.add(winner);
         results.add("");
         results.add("RESTANTES");
+
         for (int i = 1; i < players.size(); i++) {
             results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer());
         }

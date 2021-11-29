@@ -9,7 +9,7 @@ public class Ferramenta extends AbismoEFerramenta {
             return "inheritance";
         }
 
-        if (titulo.equals("Programação funcional")){
+        if (titulo.equals("Programação Funcional")){
             return "functional";
         }
 
@@ -55,7 +55,7 @@ public class Ferramenta extends AbismoEFerramenta {
             this.titulo = "Herança";
         }
         if (id==1){
-            this.titulo = "Programação funcional";
+            this.titulo = "Programação Funcional";
         }
         if (id==2){
             this.titulo = "Testes unitários";
