@@ -296,6 +296,8 @@ public class GameManager {
 
                 if(players.get(playerAJogar).getFerramentas(5)){
                     players.get(playerAJogar).removeFerramenta(5);
+                }else if(players.get(playerAJogar).getFerramentas(4)){
+                    players.get(playerAJogar).removeFerramenta(4);
                 }else{
                     players.get(playerAJogar).andaParaAFrente(-1);
                 }
@@ -306,6 +308,8 @@ public class GameManager {
 
                 if(players.get(playerAJogar).getFerramentas(5)){
                     players.get(playerAJogar).removeFerramenta(5);
+                }else if(players.get(playerAJogar).getFerramentas(2)){
+                    players.get(playerAJogar).removeFerramenta(2);
                 }else{
                     players.get(playerAJogar).andaParaAFrente(-(nrPosicoesMovida/2));
                 }
@@ -345,7 +349,12 @@ public class GameManager {
 
             //FALTA FAZER ESTA
             if (getImagePng(posPlayer).equals("secondary-effects.png")){
-                players.get(playerAJogar).getPosPlayerReset(posicaoAntesDaAnterior);
+                if(players.get(playerAJogar).getFerramentas(1)){
+                    players.get(playerAJogar).removeFerramenta(1);
+                }else{
+                    players.get(playerAJogar).getPosPlayerReset(posicaoAntesDaAnterior);
+                }
+
             }
 
             //COMO TIRAR O PLAYER DO MAPA?
@@ -365,7 +374,12 @@ public class GameManager {
             //FALTA FAZER
             //OBRIGATORIA
             if (getImagePng(posPlayer).equals("infinite-loop.png")){
-
+                if(players.get(playerAJogar).getFerramentas(1)){
+                    players.get(playerAJogar).removeFerramenta(1);
+                }else{
+                    //FALTA FAZER ESTA PARTE
+                    players.get(playerAJogar).getPosPlayerReset(1);
+                }
             }
 
             if (getImagePng(posPlayer).equals("core-dumped.png")){ //NAO FUNCIONA CERTO
