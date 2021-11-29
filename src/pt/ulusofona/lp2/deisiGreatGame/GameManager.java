@@ -262,7 +262,7 @@ public class GameManager {
 
         guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
 
-        if (nrPositions < 1 || nrPositions > 6){
+        if (nrPositions < 1 || nrPositions > 6 || players.get(playerAJogar).presoNoCicloInfinito){
             return false;
         }
 
@@ -374,11 +374,87 @@ public class GameManager {
             //FALTA FAZER
             //OBRIGATORIA
             if (getImagePng(posPlayer).equals("infinite-loop.png")){
+
                 if(players.get(playerAJogar).getFerramentas(1)){
                     players.get(playerAJogar).removeFerramenta(1);
                 }else{
                     //FALTA FAZER ESTA PARTE
-                    players.get(playerAJogar).getPosPlayerReset(1);
+                    players.get(playerAJogar).alteraPresoNoCicloInfinito();
+
+
+                    ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
+
+                    for (int i = 0; i < players.size(); i++) {
+                        for (int j = 1; j < players.size() ; j++) {
+                            if (players.get(i).getPosPlayer() == players.get(j).getPosPlayer() && !jogadoresNestaCasa.contains(players.get(i))){
+                                jogadoresNestaCasa.add(players.get(i));
+                            }
+                        }
+                    }
+
+                    if ( jogadoresNestaCasa.size() >= 2){
+                        for (int i = 0; i < players.size() ; i++) {
+                            for (int j = 0; j < jogadoresNestaCasa.size() ; j++) {
+                                if ( players.get(i).getName().equals(jogadoresNestaCasa.get(j).getName()) ){
+                                    players.get(i).alteraPresoNoCicloInfinito();
+                                }
+                            }
+                        }
+                    }
+
+                    /*
+                    int count=0;
+                    ArrayList<Programmer> jogadoresstuck = new ArrayList<>();
+                    for (int i = 0; i < players.size(); i++) {
+                        for (int j = 1; j < players.size() ; j++) {
+                            if (players.get(i).getPosPlayer() == players.get(j).getPosPlayer()){
+                                if (!jogadoresstuck.contains(players.get(i))){
+                                    jogadoresstuck.add(players.get(i));
+                                }
+
+                            }
+                        }
+                    }
+
+                    if (jogadoresstuck.size()>1){
+                        players.get(playerAJogar).alteraPresoNoCicloInfinito();
+                    }
+
+
+
+
+                    /*
+                    if (jogadoresstuck.size()>1){
+                        for (int i = 0; i < players.size() ; i++) {
+                            for (int j = 0; j < jogadoresstuck.size() ; j++) {
+                                if (players.get(playerAJogar).estaPresoNoCicloInfinito()){
+                                    jogadoresstuck.remove(count);
+                                }
+                                count++;
+                                if (players.get(playerAJogar).getId() == jogadoresstuck.get(j).getId()){
+                                    continue;
+                                }
+                                players.get(playerAJogar).alteraPresoNoCicloInfinito();
+                            }
+                        }
+                    }
+
+                    /*
+                    ArrayList<Programmer> stuck = new ArrayList<>();
+                    stuck.add(players.get(playerAJogar));
+
+                    while (players.get(playerAJogar).estaPresoNoCicloInfinito()){
+
+                        for (int i = 0; i < players.size() ; i++) {
+                            for (int j = 0; j < stuck.size() ; j++) {
+                                if (players.get(i).getId()==stuck.get(j).getId()){
+
+                                }
+                            }
+                        }
+                    }
+                      */
+
                 }
             }
 

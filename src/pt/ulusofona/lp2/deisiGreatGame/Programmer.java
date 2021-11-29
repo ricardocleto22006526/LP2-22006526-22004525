@@ -12,6 +12,7 @@ public class Programmer {
     int posPlayer = 1;
     Abismo abismo;
     ArrayList<Ferramenta> ferramentas = new ArrayList<>();
+    boolean presoNoCicloInfinito=false;
 
     public Programmer(String nome, int id, ProgrammerColor cor, ArrayList<String> linguagensFavoritas,int posPlayer) {
         this.id = id;
@@ -106,8 +107,18 @@ public class Programmer {
         }
          */
     }
+    public void alteraPresoNoCicloInfinito() {
+        if (this.presoNoCicloInfinito){
+            this.presoNoCicloInfinito=false;
+        }else {
+            this.presoNoCicloInfinito=true;
+        }
 
+    }
 
+    public boolean estaPresoNoCicloInfinito() {
+        return presoNoCicloInfinito;
+    }
 
     @Override
     public String toString() {
