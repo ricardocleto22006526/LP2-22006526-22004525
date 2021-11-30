@@ -263,9 +263,11 @@ public class GameManager {
         //guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
         players.get(playerAJogar).adicionaGuardaPosicao(players.get(playerAJogar).getPosPlayer());
 
-        if (nrPositions < 1 || nrPositions > 6 || players.get(playerAJogar).presoNoCicloInfinito){
+        if (nrPositions < 1 || nrPositions > 6){
             return false;
         }
+
+        if (players.get(playerAJogar).presoNoCicloInfinito){ return false; }
 
         if (players.get(playerAJogar).getPosPlayer() + nrPositions <= tamanhoDoTabuleiro){
 
