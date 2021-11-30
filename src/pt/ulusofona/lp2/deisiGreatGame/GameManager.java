@@ -388,7 +388,7 @@ public class GameManager {
             //COMO TIRAR O PLAYER DO MAPA?
             //ERRO NO alteraEstado()
             //OBRIGATORIA
-
+            /*
             if (getImagePng(posPlayer).equals("bsod.png")){
                 //players.get(playerAJogar).getPosPlayerReset(1);
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
@@ -401,6 +401,7 @@ public class GameManager {
                 //players.remove(players.get(playerAJogar));
                 //getProgrammers(false);
             }
+             */
 
             //FALTA FAZER
             //OBRIGATORIA
@@ -515,7 +516,6 @@ public class GameManager {
 
             //MOVIMENTOS QUANDO O PLAYER CAI EM FERRAMENTAS
 
-            //O ADICIONAR ESTA A DAR EM MEMORIA, NAO EM STRING
             if (getImagePng(posPlayer).equals("inheritance.png")){
 
                 if(!players.get(playerAJogar).getFerramentas(0)){
@@ -605,7 +605,7 @@ public class GameManager {
 
         List<String> results = new ArrayList<>();
 
-        players.sort(Comparator.comparingInt((Programmer posicao)-> posicao.posPlayer).reversed());
+
 
         Collections.sort(players, (p1, p2) -> {
                     if (p1.getPosPlayer() < p2.getPosPlayer()) {
@@ -616,6 +616,9 @@ public class GameManager {
                         return p1.getName().compareTo(p2.getName());
                     }
         });
+
+
+        players.sort(Comparator.comparingInt((Programmer posicao)-> posicao.posPlayer).reversed());
 
         results.add("O GRANDE JOGO DO DEISI");
         results.add("");
