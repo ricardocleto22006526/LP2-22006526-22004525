@@ -410,12 +410,48 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(1);
                 }else{
                     //FALTA FAZER ESTA PARTE
+
+                    int count=0;
+
                     if (!players.get(playerAJogar).estaPresoNoCicloInfinito()){
                         players.get(playerAJogar).alteraPresoNoCicloInfinito();
                     }
 
                     ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
 
+                    jogadoresNestaCasa.add(players.get(playerAJogar));
+
+
+                    if (jogadoresNestaCasa.size()>1){
+                        for (int i = 0; i < jogadoresNestaCasa.size() ; i++) {
+                            if (!players.get(playerAJogar).estaPresoNoCicloInfinito()){
+                                jogadoresNestaCasa.remove(count);
+                            }
+                            count++;
+                            if ( players.get(playerAJogar).getId() == jogadoresNestaCasa.get(i).getId()){
+                                continue;
+                            }
+                            players.get(playerAJogar).alteraPresoNoCicloInfinito();
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    /*
                     for (int i = 0; i < players.size(); i++) {
                         for (int j = 1; j < players.size() ; j++) {
                             if (players.get(i).getPosPlayer() == players.get(j).getPosPlayer() && !jogadoresNestaCasa.contains(players.get(i))){
@@ -427,15 +463,15 @@ public class GameManager {
                     if ( jogadoresNestaCasa.size() >= 2){
                         for (int i = 0; i < players.size() ; i++) {
                             for (int j = 0; j < jogadoresNestaCasa.size() ; j++) {
-                                if ( players.get(i).getName().equals(jogadoresNestaCasa.get(j).getName()) ){
+                                if (players.get(i).getName().equals(jogadoresNestaCasa.get(j).getName())) {
                                     players.get(i).alteraPresoNoCicloInfinito();
                                 }
                             }
                         }
                     }
 
-                    /*
-                    int count=0;
+
+
                     ArrayList<Programmer> jogadoresstuck = new ArrayList<>();
                     for (int i = 0; i < players.size(); i++) {
                         for (int j = 1; j < players.size() ; j++) {
