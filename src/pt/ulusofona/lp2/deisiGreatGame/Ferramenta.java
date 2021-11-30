@@ -37,7 +37,7 @@ public class Ferramenta extends AbismoEFerramenta {
     String tituloDoAbismoOUFerramenta() {
         return switch (titulo) {
             case "Herança" -> "Ferramenta: inheritance";
-            case "Programação funcional" ->"Ferramenta: functional";
+            case "Programação Funcional" ->"Ferramenta: functional";
             case "Testes unitários" ->"Ferramenta: unit-tests";
             case "Tratamento de Excepções" ->"Ferramenta: catch";
             case "IDE" ->"Ferramenta: IDE";

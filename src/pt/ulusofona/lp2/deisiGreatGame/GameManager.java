@@ -391,7 +391,10 @@ public class GameManager {
 
             if (getImagePng(posPlayer).equals("bsod.png")){
                 //players.get(playerAJogar).getPosPlayerReset(1);
-                players.get(playerAJogar).alteraEstado();
+                if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
+                    players.get(playerAJogar).alteraEstado();
+                    players.remove(players.get(playerAJogar));
+                }
 
                 //playersDerrotados.add(players.get(playerAJogar));
                 //NAO POSSO REMOVER
@@ -575,9 +578,9 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-        //System.out.println(getProgrammersInfo());
-        System.out.println("Anterior "+posicaoAnterior);
-        System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
+        System.out.println(getProgrammersInfo());
+        //System.out.println("Anterior "+posicaoAnterior);
+        //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
 
     public boolean gameIsOver(){
@@ -602,8 +605,17 @@ public class GameManager {
 
         List<String> results = new ArrayList<>();
 
-        //Vai ordenar as posicoes dos jogadores restantes do maior para o menor (em termos de posicao)
         players.sort(Comparator.comparingInt((Programmer posicao)-> posicao.posPlayer).reversed());
+
+        Collections.sort(players, (p1, p2) -> {
+                    if (p1.getPosPlayer() < p2.getPosPlayer()) {
+                        return -1;
+                    } else if (p1.getPosPlayer() > 0) {
+                        return 1;
+                    } else {
+                        return p1.getName().compareTo(p2.getName());
+                    }
+        });
 
         results.add("O GRANDE JOGO DO DEISI");
         results.add("");
