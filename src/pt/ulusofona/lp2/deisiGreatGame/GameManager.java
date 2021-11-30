@@ -393,7 +393,7 @@ public class GameManager {
                 //players.get(playerAJogar).getPosPlayerReset(1);
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
                     players.get(playerAJogar).alteraEstado();
-                    players.remove(players.get(playerAJogar));
+                    //players.remove(players.get(playerAJogar));
                 }
 
                 //playersDerrotados.add(players.get(playerAJogar));
@@ -627,7 +627,10 @@ public class GameManager {
         results.add("");
         results.add("RESTANTES");
 
-        for (int i = 1; i < players.size(); i++) {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getName().equals(winner)){
+                continue;
+            }
             results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer());
         }
 
