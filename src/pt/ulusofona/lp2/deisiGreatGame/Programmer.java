@@ -13,6 +13,7 @@ public class Programmer {
     Abismo abismo;
     ArrayList<Ferramenta> ferramentas = new ArrayList<>();
     boolean presoNoCicloInfinito=false;
+    ArrayList<Integer> guardaPosicao = new ArrayList<>();
 
     public Programmer(String nome, int id, ProgrammerColor cor, ArrayList<String> linguagensFavoritas,int posPlayer) {
         this.id = id;
@@ -27,6 +28,14 @@ public class Programmer {
         this.nome = nome;
         this.linguagensFavoritas = linguagensFavoritas;
         this.cor = cor;
+    }
+
+    public ArrayList<Integer> getArrayListGuardaPosicao() {
+        return guardaPosicao;
+    }
+
+    public void adicionaGuardaPosicao(int pos) {
+        this.guardaPosicao.add(pos);
     }
 
     public Programmer(ArrayList<Ferramenta> ferramentas) {

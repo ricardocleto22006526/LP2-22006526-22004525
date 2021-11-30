@@ -11,7 +11,7 @@ public class GameManager {
     int playerAJogar=0;
     int nrDeTurnos=0;
     int nrPosicoesMovida=0;
-    ArrayList<Integer> guardaPosicoes = new ArrayList<>();
+    //ArrayList<Integer> guardaPosicoes = new ArrayList<>();
     int posicaoAnterior=0;
     int posicaoAntesDaAnterior=0;
 
@@ -94,7 +94,7 @@ public class GameManager {
     public boolean createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools){
 
         playersAbyssesAndTools.clear();
-        guardaPosicoes.clear();
+        //guardaPosicoes.clear();
 
         if (playerInfo == null) { return false; }
 
@@ -260,7 +260,8 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrPositions){
 
-        guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
+        //guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
+        players.get(playerAJogar).adicionaGuardaPosicao(players.get(playerAJogar).getPosPlayer());
 
         if (nrPositions < 1 || nrPositions > 6 || players.get(playerAJogar).presoNoCicloInfinito){
             return false;
@@ -269,18 +270,45 @@ public class GameManager {
         if (players.get(playerAJogar).getPosPlayer() + nrPositions <= tamanhoDoTabuleiro){
 
             nrPosicoesMovida = nrPositions;
+
+            posicaoAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size()-1);
+
+            if (players.get(playerAJogar).getArrayListGuardaPosicao().size()>1){
+                posicaoAntesDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size()-2);
+            }
+
+            /*
+            nrPosicoesMovida = nrPositions;
+
             posicaoAnterior = guardaPosicoes.get(guardaPosicoes.size()-1);
+
             if (guardaPosicoes.size()>2){
                 posicaoAntesDaAnterior = guardaPosicoes.get(guardaPosicoes.size()-2);
             }
+
+             */
+
             players.get(playerAJogar).andaParaAFrente(nrPositions);
         }else{
 
+            posicaoAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size()-1);
+
+            if (players.get(playerAJogar).getArrayListGuardaPosicao().size()>1){
+                posicaoAntesDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size()-2);
+            }
+
+            players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
+
+            /*
             posicaoAnterior = guardaPosicoes.get(guardaPosicoes.size()-1);
-            if (guardaPosicoes.size()>2){
+
+            if (guardaPosicoes.size()>=2){
                 posicaoAntesDaAnterior = guardaPosicoes.get(guardaPosicoes.size()-2);
             }
+
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
+             */
+
         }
 
         return true;
@@ -379,8 +407,9 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(1);
                 }else{
                     //FALTA FAZER ESTA PARTE
-                    players.get(playerAJogar).alteraPresoNoCicloInfinito();
-
+                    if (!players.get(playerAJogar).estaPresoNoCicloInfinito()){
+                        players.get(playerAJogar).alteraPresoNoCicloInfinito();
+                    }
 
                     ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
 
@@ -547,8 +576,8 @@ public class GameManager {
             playerAJogar++;
         }
         //System.out.println(getProgrammersInfo());
-        //System.out.println("Anterior "+posicaoAnterior);
-        //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
+        System.out.println("Anterior "+posicaoAnterior);
+        System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
 
     public boolean gameIsOver(){
