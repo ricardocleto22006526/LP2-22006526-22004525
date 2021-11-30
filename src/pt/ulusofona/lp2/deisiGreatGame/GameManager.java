@@ -388,7 +388,7 @@ public class GameManager {
             //COMO TIRAR O PLAYER DO MAPA?
             //ERRO NO alteraEstado()
             //OBRIGATORIA
-            /*
+
             if (getImagePng(posPlayer).equals("bsod.png")){
                 //players.get(playerAJogar).getPosPlayerReset(1);
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
@@ -401,7 +401,6 @@ public class GameManager {
                 //players.remove(players.get(playerAJogar));
                 //getProgrammers(false);
             }
-             */
 
             //FALTA FAZER
             //OBRIGATORIA
@@ -605,18 +604,15 @@ public class GameManager {
 
         List<String> results = new ArrayList<>();
 
-
-
         Collections.sort(players, (p1, p2) -> {
                     if (p1.getPosPlayer() < p2.getPosPlayer()) {
                         return -1;
-                    } else if (p1.getPosPlayer() > 0) {
+                    } else if (p1.getPosPlayer() > p2.getPosPlayer()) {
                         return 1;
                     } else {
                         return p1.getName().compareTo(p2.getName());
                     }
         });
-
 
         players.sort(Comparator.comparingInt((Programmer posicao)-> posicao.posPlayer).reversed());
 
