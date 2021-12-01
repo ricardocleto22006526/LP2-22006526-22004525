@@ -126,7 +126,7 @@ public class Programmer {
     }
 
     public boolean estaPresoNoCicloInfinito() {
-        return presoNoCicloInfinito;
+        return this.presoNoCicloInfinito;
     }
 
     @Override

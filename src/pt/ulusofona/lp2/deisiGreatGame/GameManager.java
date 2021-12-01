@@ -16,6 +16,7 @@ public class GameManager {
     int posicaoAntesDaAnterior=0;
 
     ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
+    ArrayList<Programmer> jogadoresNoCoreDumped = new ArrayList<>();
 
     public GameManager() {
     }
@@ -98,7 +99,8 @@ public class GameManager {
         playersAbyssesAndTools.clear(); // Serve para dar Reset ao hashmap de ferramentas de cada player
         posicaoAnterior=0; // Serve para dar Reset da variavel que guarda a posicao anterior
         posicaoAntesDaAnterior=0; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
-        //guardaPosicoes.clear();
+        jogadoresNestaCasa.clear();
+        jogadoresNoCoreDumped.clear();
 
         if (playerInfo == null) { return false; }
 
@@ -267,11 +269,9 @@ public class GameManager {
         //guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
         players.get(playerAJogar).adicionaGuardaPosicao(players.get(playerAJogar).getPosPlayer());
 
-        if (nrPositions < 1 || nrPositions > 6){
+        if (nrPositions < 1 || nrPositions > 6 || players.get(playerAJogar).presoNoCicloInfinito){
             return false;
         }
-
-        if (players.get(playerAJogar).presoNoCicloInfinito){ return false; }
 
         if (players.get(playerAJogar).getPosPlayer() + nrPositions <= tamanhoDoTabuleiro){
 
@@ -396,6 +396,7 @@ public class GameManager {
             //ERRO NO alteraEstado()
             //OBRIGATORIA
 
+            /*
             if (getImagePng(posPlayer).equals("bsod.png")){
                 //players.get(playerAJogar).getPosPlayerReset(1);
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
@@ -409,53 +410,57 @@ public class GameManager {
                 //getProgrammers(false);
             }
 
+             */
+
             //FALTA FAZER
             //OBRIGATORIA
             if (getImagePng(posPlayer).equals("infinite-loop.png")){
 
-                if(players.get(playerAJogar).getFerramentas(1)){
-                    players.get(playerAJogar).removeFerramenta(1);
-                }else{
+               // if(players.get(playerAJogar).getFerramentas(1)){
+               //     players.get(playerAJogar).removeFerramenta(1);
+               //}else{
                     //FALTA FAZER ESTA PARTE
 
-                    int count=0;
+                    //int count=0;
 
                     if (!players.get(playerAJogar).estaPresoNoCicloInfinito()){
                         players.get(playerAJogar).alteraPresoNoCicloInfinito();
+                        jogadoresNestaCasa.add(players.get(playerAJogar));
                     }
 
-
-
-                    jogadoresNestaCasa.add(players.get(playerAJogar));
-
-
+                    //Collections.reverse(jogadoresNestaCasa);
                     if (jogadoresNestaCasa.size()>1){
+                        playerAJogar--;
                         for (int i = 0; i < jogadoresNestaCasa.size() ; i++) {
+                            /*
                             if (!players.get(playerAJogar).estaPresoNoCicloInfinito()){
-                                jogadoresNestaCasa.remove(count);
+                                jogadoresNestaCasa.remove(0);
                             }
-                            count++;
-                            if ( players.get(playerAJogar).getId() == jogadoresNestaCasa.get(i).getId()){
+                             */
+
+                            if (players.get(playerAJogar).getId() == jogadoresNestaCasa.get(i).getId()){
                                 continue;
                             }
+
+
                             players.get(playerAJogar).alteraPresoNoCicloInfinito();
+                            jogadoresNestaCasa.remove(0);
+
+                            playerAJogar++;
+                            break;
+                            //count++;
+                            /*
+                            if (players.get(playerAJogar).getId() != jogadoresNestaCasa.get(i).getId()){
+                                continue;
+                            }
+
+                            if ( players.get(playerAJogar).getId() == jogadoresNestaCasa.get(i).getId() ){
+                                players.get(playerAJogar).alteraPresoNoCicloInfinito();
+                            }
+
+                             */
                         }
                     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                     /*
@@ -530,30 +535,34 @@ public class GameManager {
                     }
                       */
 
-                }
+                //}
             }
 
             if (getImagePng(posPlayer).equals("core-dumped.png")){ //NAO FUNCIONA CERTO
 
-                ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
+                jogadoresNoCoreDumped.add(players.get(playerAJogar));
 
+                /*
                 for (int i = 0; i < players.size(); i++) {
-                    for (int j = 1; j < players.size() ; j++) {
-                        if (players.get(i).getPosPlayer() == players.get(j).getPosPlayer()){
-                            jogadoresNestaCasa.add(players.get(i));
+                    for (int j = 1; j < jogadoresNoCoreDumped.size() ; j++) {
+                        if (players.get(i).getPosPlayer() == jogadoresNoCoreDumped.get(j).getPosPlayer()){
+                            jogadoresNoCoreDumped.add(players.get(i));
                         }
                     }
                 }
 
-                if ( jogadoresNestaCasa.size() >= 2){
+                 */
+
+                if (jogadoresNoCoreDumped.size() >= 2){
                     for (int i = 0; i < players.size() ; i++) {
-                        for (int j = 0; j < jogadoresNestaCasa.size() ; j++) {
-                            if ( players.get(i).getName().equals(jogadoresNestaCasa.get(j).getName()) ){
+                        for (int j = 0; j < jogadoresNoCoreDumped.size() ; j++) {
+                            if ( players.get(i).getName().equals(jogadoresNoCoreDumped.get(j).getName()) ){
                                 players.get(i).andaParaAFrente(-3);
                             }
                         }
                     }
                 }
+
             }
 
             //MOVIMENTOS QUANDO O PLAYER CAI EM FERRAMENTAS
@@ -621,8 +630,8 @@ public class GameManager {
             playerAJogar++;
         }
         //System.out.println(getProgrammersInfo());
-        System.out.println("Anterior "+posicaoAnterior);
-        System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
+        //System.out.println("Anterior "+posicaoAnterior);
+        //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
 
     public boolean gameIsOver(){
