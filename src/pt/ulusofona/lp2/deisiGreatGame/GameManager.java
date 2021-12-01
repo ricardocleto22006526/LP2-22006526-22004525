@@ -11,8 +11,8 @@ public class GameManager {
     int playerAJogar=0;
     int nrDeTurnos=0;
     int nrPosicoesMovida=0;
-    int posicaoAnterior=0;
-    int posicaoAntesDaAnterior=0;
+    int posicaoAnterior=1;
+    int posicaoAntesDaAnterior=1;
 
     ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
     ArrayList<Programmer> jogadoresNoCoreDumped = new ArrayList<>();
@@ -96,8 +96,8 @@ public class GameManager {
     public boolean createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools){
 
         playersAbyssesAndTools.clear(); // Serve para dar Reset ao hashmap de ferramentas de cada player
-        posicaoAnterior=0; // Serve para dar Reset da variavel que guarda a posicao anterior
-        posicaoAntesDaAnterior=0; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
+        posicaoAnterior=1; // Serve para dar Reset da variavel que guarda a posicao anterior
+        posicaoAntesDaAnterior=1; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
         jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
         jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
 
@@ -143,7 +143,9 @@ public class GameManager {
         }catch (Exception e){
             return false;
         }
-
+        for (int i = 0; i < tamanhoDoTabuleiro; i++) {
+            playersAbyssesAndTools.put(i,new Abismo(6));
+        }
         return createInitialBoard(playerInfo,worldSize);
     }
 
@@ -232,22 +234,26 @@ public class GameManager {
 
 
         for (int i = 0; i < players.size() ; i++) {
-            output.append(players.get(i).getName()).append(" : ");
 
-            if(players.get(i).getFerramentas()==null || players.get(i).getFerramentas().size()==0){
-                output.append("No tools");
-            }
+            if (players.get(i).getEstado().equals("Em Jogo")){
 
-            for (int j = 0; j < players.get(i).getFerramentas().size() ; j++) {
-                if (j==0){
-                    output.append(players.get(i).ferramentas.get(j).getTitulo());
-                }else{
-                    output.append(" ; ").append(players.get(i).ferramentas.get(j).titulo);
+                output.append(players.get(i).getName()).append(" : ");
+
+                if(players.get(i).getFerramentas()==null || players.get(i).getFerramentas().size()==0){
+                    output.append("No tools");
                 }
-            }
 
-            if ( !(i == players.size()-1) ){
-                output.append(" | ");
+                for (int j = 0; j < players.get(i).getFerramentas().size() ; j++) {
+                    if (j==0){
+                        output.append(players.get(i).ferramentas.get(j).getTitulo());
+                    }else{
+                        output.append(";").append(players.get(i).ferramentas.get(j).titulo);
+                    }
+                }
+
+                if ( !(i == players.size()-1) ){
+                    output.append(" | ");
+                }
             }
         }
 
@@ -300,11 +306,11 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrPositions){
 
-        players.get(playerAJogar).adicionaGuardaPosicao(players.get(playerAJogar).getPosPlayer());
-
         if (nrPositions < 1 || nrPositions > 6 || players.get(playerAJogar).presoNoCicloInfinito){
             return false;
         }
+
+        players.get(playerAJogar).adicionaGuardaPosicao(players.get(playerAJogar).getPosPlayer());
 
         if (players.get(playerAJogar).getPosPlayer() + nrPositions <= tamanhoDoTabuleiro){
 
@@ -514,9 +520,9 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-        System.out.println(getProgrammersInfo());
-        //System.out.println("Anterior "+posicaoAnterior);
-        //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
+        //System.out.println(getProgrammersInfo());
+        System.out.println("Anterior "+posicaoAnterior);
+        System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
 
     public boolean gameIsOver(){
