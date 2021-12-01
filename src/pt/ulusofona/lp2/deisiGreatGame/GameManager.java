@@ -243,11 +243,21 @@ public class GameManager {
 
                 }else{
 
+                   if(i==0){
+                       output.append(players.get(i).getName());
+                   }else{
+                       output.append(" | ").append(players.get(i).getName());
+                   }
+
+                    /*
                     if (i>0){
                         output.append(" | ").append(players.get(i).getName());
                     }else{
                         output.append(players.get(i).getName());
                     }
+
+                     */
+
                     for (int j = 0; j < players.get(i).getFerramentas().size() ; j++) {
                         if (j==0){
                             output.append(" : ").append(players.get(i).ferramentas.get(j).titulo);
