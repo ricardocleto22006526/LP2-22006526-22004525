@@ -396,7 +396,6 @@ public class GameManager {
             //ERRO NO alteraEstado()
             //OBRIGATORIA
 
-
             if (getImagePng(posPlayer).equals("bsod.png")){
                 //players.get(playerAJogar).getPosPlayerReset(1);
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
@@ -414,9 +413,9 @@ public class GameManager {
             //OBRIGATORIA
             if (getImagePng(posPlayer).equals("infinite-loop.png")){
 
-               // if(players.get(playerAJogar).getFerramentas(1)){
-               //     players.get(playerAJogar).removeFerramenta(1);
-               //}else{
+               if(players.get(playerAJogar).getFerramentas(1)){
+                    players.get(playerAJogar).removeFerramenta(1);
+               }else{
                     //FALTA FAZER ESTA PARTE
 
                     //int count=0;
@@ -533,7 +532,7 @@ public class GameManager {
                     }
                       */
 
-                //}
+               }
             }
 
             if (getImagePng(posPlayer).equals("core-dumped.png")){ //NAO FUNCIONA CERTO
