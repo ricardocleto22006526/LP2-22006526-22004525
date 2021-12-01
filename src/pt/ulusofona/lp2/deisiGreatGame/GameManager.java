@@ -230,6 +230,30 @@ public class GameManager {
 
         StringBuilder output = new StringBuilder();
 
+
+        for (int i = 0; i < players.size() ; i++) {
+            output.append(players.get(i).getName()).append(" : ");
+
+            if(players.get(i).getFerramentas()==null || players.get(i).getFerramentas().size()==0){
+                output.append("No tools");
+            }
+
+            for (int j = 0; j < players.get(i).getFerramentas().size() ; j++) {
+                if (j==0){
+                    output.append(players.get(i).ferramentas.get(j).getTitulo());
+                }else{
+                    output.append(" ; ").append(players.get(i).ferramentas.get(j).titulo);
+                }
+            }
+
+            if ( !(i == players.size()-1) ){
+                output.append(" | ");
+            }
+        }
+
+
+
+        /*
         for (int i = 0; i < players.size() ; i++) {
 
             if (players.get(i).getEstado().equals("Em Jogo")){
@@ -249,14 +273,11 @@ public class GameManager {
                        output.append(" | ").append(players.get(i).getName());
                    }
 
-                    /*
                     if (i>0){
                         output.append(" | ").append(players.get(i).getName());
                     }else{
                         output.append(players.get(i).getName());
                     }
-
-                     */
 
                     for (int j = 0; j < players.get(i).getFerramentas().size() ; j++) {
                         if (j==0){
@@ -268,6 +289,7 @@ public class GameManager {
                 }
             }
         }
+        */
 
         return output.toString();
     }
