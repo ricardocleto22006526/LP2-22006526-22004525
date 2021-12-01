@@ -15,6 +15,8 @@ public class GameManager {
     int posicaoAnterior=0;
     int posicaoAntesDaAnterior=0;
 
+    ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
+
     public GameManager() {
     }
 
@@ -93,7 +95,9 @@ public class GameManager {
 
     public boolean createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools){
 
-        playersAbyssesAndTools.clear();
+        playersAbyssesAndTools.clear(); // Serve para dar Reset ao hashmap de ferramentas de cada player
+        posicaoAnterior=0; // Serve para dar Reset da variavel que guarda a posicao anterior
+        posicaoAntesDaAnterior=0; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
         //guardaPosicoes.clear();
 
         if (playerInfo == null) { return false; }
@@ -310,8 +314,9 @@ public class GameManager {
 
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
              */
-
         }
+
+
 
         return true;
     }
@@ -419,7 +424,7 @@ public class GameManager {
                         players.get(playerAJogar).alteraPresoNoCicloInfinito();
                     }
 
-                    ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
+
 
                     jogadoresNestaCasa.add(players.get(playerAJogar));
 
@@ -615,9 +620,9 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-        System.out.println(getProgrammersInfo());
-        //System.out.println("Anterior "+posicaoAnterior);
-        //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
+        //System.out.println(getProgrammersInfo());
+        System.out.println("Anterior "+posicaoAnterior);
+        System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
 
     public boolean gameIsOver(){
