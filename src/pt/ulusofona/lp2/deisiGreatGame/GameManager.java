@@ -299,6 +299,23 @@ public class GameManager {
     }
 
     public int getCurrentPlayerID(){
+
+        if (!players.get(playerAJogar).getEstado().equals("Em Jogo")){
+
+            for (int i = playerAJogar; i < players.size() ; i++) {
+
+                if (players.get(playerAJogar).getEstado().equals("Em Jogo")){
+                    playerAJogar = i;
+                    return players.get(playerAJogar).getId();
+                }
+
+                if (i == players.size() -1 ){
+                    i=0;
+                }else{
+                    i++;
+                }
+            }
+        }
         return players.get(playerAJogar).getId();
     }
 
