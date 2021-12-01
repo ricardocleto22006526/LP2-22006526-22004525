@@ -238,12 +238,7 @@ public class GameManager {
                     if (i==0){
                         output.append(players.get(i).getName()).append(" : ").append("No tools");
                     }else{
-
-                        if (!players.get(i).getEstado().equals("Em Jogo")){
-                            output.append(" | ").append(players.get(i).getName()).append(" : ").append("No tools");
-                        }else{
-                            output.append(players.get(i).getName()).append(" : ").append("No tools");
-                        }
+                        output.append(" | ").append(players.get(i).getName()).append(" : ").append("No tools");
                     }
 
                 }else{
