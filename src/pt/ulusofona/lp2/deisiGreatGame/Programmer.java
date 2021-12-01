@@ -108,13 +108,6 @@ public class Programmer {
 
     public void alteraEstado() {
         this.estado="Derrotado";
-        /*
-        if (this.estado.equals("Em Jogo")){
-            this.estado = "Derrotado";
-        }else {
-            this.estado = "Em Jogo";
-        }
-         */
     }
     public void alteraPresoNoCicloInfinito() {
         if (this.presoNoCicloInfinito){

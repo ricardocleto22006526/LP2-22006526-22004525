@@ -11,7 +11,6 @@ public class GameManager {
     int playerAJogar=0;
     int nrDeTurnos=0;
     int nrPosicoesMovida=0;
-    //ArrayList<Integer> guardaPosicoes = new ArrayList<>();
     int posicaoAnterior=0;
     int posicaoAntesDaAnterior=0;
 
@@ -266,7 +265,6 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrPositions){
 
-        //guardaPosicoes.add(players.get(playerAJogar).getPosPlayer());
         players.get(playerAJogar).adicionaGuardaPosicao(players.get(playerAJogar).getPosPlayer());
 
         if (nrPositions < 1 || nrPositions > 6 || players.get(playerAJogar).presoNoCicloInfinito){
@@ -283,17 +281,6 @@ public class GameManager {
                 posicaoAntesDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size()-2);
             }
 
-            /*
-            nrPosicoesMovida = nrPositions;
-
-            posicaoAnterior = guardaPosicoes.get(guardaPosicoes.size()-1);
-
-            if (guardaPosicoes.size()>2){
-                posicaoAntesDaAnterior = guardaPosicoes.get(guardaPosicoes.size()-2);
-            }
-
-             */
-
             players.get(playerAJogar).andaParaAFrente(nrPositions);
         }else{
 
@@ -304,28 +291,19 @@ public class GameManager {
             }
 
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
-
-            /*
-            posicaoAnterior = guardaPosicoes.get(guardaPosicoes.size()-1);
-
-            if (guardaPosicoes.size()>=2){
-                posicaoAntesDaAnterior = guardaPosicoes.get(guardaPosicoes.size()-2);
-            }
-
-            players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
-             */
         }
-
-
 
         return true;
     }
 
     public String reactToAbyssOrTool(){
+
         int posPlayer=players.get(playerAJogar).getPosPlayer();
         String textOutput="";
 
         if (playersAbyssesAndTools.containsKey(posPlayer)) {
+
+            //MOVIMENTOS QUANDO O PLAYER CAI EM ABISMOS
 
             if (getImagePng(posPlayer).equals("syntax.png")){ //FUNCIONA
 
@@ -336,7 +314,6 @@ public class GameManager {
                 }else{
                     players.get(playerAJogar).andaParaAFrente(-1);
                 }
-
             }
 
             if (getImagePng(posPlayer).equals("logic.png")){//FUNCIONA
@@ -348,7 +325,6 @@ public class GameManager {
                 }else{
                     players.get(playerAJogar).andaParaAFrente(-(nrPosicoesMovida/2));
                 }
-
             }
 
             if (getImagePng(posPlayer).equals("exception.png")) {//FUNCIONA
@@ -360,7 +336,6 @@ public class GameManager {
                 }else{
                     players.get(playerAJogar).andaParaAFrente(-2);
                 }
-
             }
 
             if (getImagePng(posPlayer).equals("file-not-found-exception.png")){//FUNCIONA
@@ -382,7 +357,6 @@ public class GameManager {
                 players.get(playerAJogar).getPosPlayerReset(posicaoAnterior);
             }
 
-            //FALTA FAZER ESTA
             if (getImagePng(posPlayer).equals("secondary-effects.png")){
                 if(players.get(playerAJogar).getFerramentas(1)){
                     players.get(playerAJogar).removeFerramenta(1);
@@ -392,163 +366,44 @@ public class GameManager {
 
             }
 
-            //COMO TIRAR O PLAYER DO MAPA?
-            //ERRO NO alteraEstado()
-            //OBRIGATORIA
-
             if (getImagePng(posPlayer).equals("bsod.png")){
-                //players.get(playerAJogar).getPosPlayerReset(1);
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
                     players.get(playerAJogar).alteraEstado();
-                    //players.remove(players.get(playerAJogar));
                 }
-
-                //playersDerrotados.add(players.get(playerAJogar));
-                //NAO POSSO REMOVER
-                //players.remove(players.get(playerAJogar));
-                //getProgrammers(false);
             }
 
-            //FALTA FAZER
-            //OBRIGATORIA
             if (getImagePng(posPlayer).equals("infinite-loop.png")){
 
                if(players.get(playerAJogar).getFerramentas(1)){
                     players.get(playerAJogar).removeFerramenta(1);
                }else{
-                    //FALTA FAZER ESTA PARTE
 
-                    //int count=0;
-
-                    if (!players.get(playerAJogar).estaPresoNoCicloInfinito()){
+                   if (!players.get(playerAJogar).estaPresoNoCicloInfinito()){
                         players.get(playerAJogar).alteraPresoNoCicloInfinito();
                         jogadoresNestaCasa.add(players.get(playerAJogar));
-                    }
+                   }
 
-                    //Collections.reverse(jogadoresNestaCasa);
                     if (jogadoresNestaCasa.size()>1){
                         playerAJogar--;
                         for (int i = 0; i < jogadoresNestaCasa.size() ; i++) {
-                            /*
-                            if (!players.get(playerAJogar).estaPresoNoCicloInfinito()){
-                                jogadoresNestaCasa.remove(0);
-                            }
-                             */
 
                             if (players.get(playerAJogar).getId() == jogadoresNestaCasa.get(i).getId()){
                                 continue;
                             }
-
 
                             players.get(playerAJogar).alteraPresoNoCicloInfinito();
                             jogadoresNestaCasa.remove(0);
 
                             playerAJogar++;
                             break;
-                            //count++;
-                            /*
-                            if (players.get(playerAJogar).getId() != jogadoresNestaCasa.get(i).getId()){
-                                continue;
-                            }
-
-                            if ( players.get(playerAJogar).getId() == jogadoresNestaCasa.get(i).getId() ){
-                                players.get(playerAJogar).alteraPresoNoCicloInfinito();
-                            }
-
-                             */
                         }
                     }
-
-
-                    /*
-                    for (int i = 0; i < players.size(); i++) {
-                        for (int j = 1; j < players.size() ; j++) {
-                            if (players.get(i).getPosPlayer() == players.get(j).getPosPlayer() && !jogadoresNestaCasa.contains(players.get(i))){
-                                jogadoresNestaCasa.add(players.get(i));
-                            }
-                        }
-                    }
-
-                    if ( jogadoresNestaCasa.size() >= 2){
-                        for (int i = 0; i < players.size() ; i++) {
-                            for (int j = 0; j < jogadoresNestaCasa.size() ; j++) {
-                                if (players.get(i).getName().equals(jogadoresNestaCasa.get(j).getName())) {
-                                    players.get(i).alteraPresoNoCicloInfinito();
-                                }
-                            }
-                        }
-                    }
-
-
-
-                    ArrayList<Programmer> jogadoresstuck = new ArrayList<>();
-                    for (int i = 0; i < players.size(); i++) {
-                        for (int j = 1; j < players.size() ; j++) {
-                            if (players.get(i).getPosPlayer() == players.get(j).getPosPlayer()){
-                                if (!jogadoresstuck.contains(players.get(i))){
-                                    jogadoresstuck.add(players.get(i));
-                                }
-
-                            }
-                        }
-                    }
-
-                    if (jogadoresstuck.size()>1){
-                        players.get(playerAJogar).alteraPresoNoCicloInfinito();
-                    }
-
-
-
-
-                    /*
-                    if (jogadoresstuck.size()>1){
-                        for (int i = 0; i < players.size() ; i++) {
-                            for (int j = 0; j < jogadoresstuck.size() ; j++) {
-                                if (players.get(playerAJogar).estaPresoNoCicloInfinito()){
-                                    jogadoresstuck.remove(count);
-                                }
-                                count++;
-                                if (players.get(playerAJogar).getId() == jogadoresstuck.get(j).getId()){
-                                    continue;
-                                }
-                                players.get(playerAJogar).alteraPresoNoCicloInfinito();
-                            }
-                        }
-                    }
-
-                    /*
-                    ArrayList<Programmer> stuck = new ArrayList<>();
-                    stuck.add(players.get(playerAJogar));
-
-                    while (players.get(playerAJogar).estaPresoNoCicloInfinito()){
-
-                        for (int i = 0; i < players.size() ; i++) {
-                            for (int j = 0; j < stuck.size() ; j++) {
-                                if (players.get(i).getId()==stuck.get(j).getId()){
-
-                                }
-                            }
-                        }
-                    }
-                      */
-
                }
             }
 
-            if (getImagePng(posPlayer).equals("core-dumped.png")){ //NAO FUNCIONA CERTO
+            if (getImagePng(posPlayer).equals("core-dumped.png")){
 
                 jogadoresNoCoreDumped.add(players.get(playerAJogar));
-
-                /*
-                for (int i = 0; i < players.size(); i++) {
-                    for (int j = 1; j < jogadoresNoCoreDumped.size() ; j++) {
-                        if (players.get(i).getPosPlayer() == jogadoresNoCoreDumped.get(j).getPosPlayer()){
-                            jogadoresNoCoreDumped.add(players.get(i));
-                        }
-                    }
-                }
-
-                 */
 
                 if (jogadoresNoCoreDumped.size() >= 2){
                     for (int i = 0; i < players.size() ; i++) {
@@ -559,7 +414,6 @@ public class GameManager {
                         }
                     }
                 }
-
             }
 
             //MOVIMENTOS QUANDO O PLAYER CAI EM FERRAMENTAS
@@ -569,7 +423,6 @@ public class GameManager {
                 if(!players.get(playerAJogar).getFerramentas(0)){
                     players.get(playerAJogar).adicionaFerramenta(new Ferramenta(0));
                 }
-
             }
 
             if (getImagePng(posPlayer).equals("functional.png")){
