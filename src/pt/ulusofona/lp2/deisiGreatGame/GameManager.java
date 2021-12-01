@@ -396,7 +396,7 @@ public class GameManager {
             //ERRO NO alteraEstado()
             //OBRIGATORIA
 
-            /*
+
             if (getImagePng(posPlayer).equals("bsod.png")){
                 //players.get(playerAJogar).getPosPlayerReset(1);
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
@@ -409,8 +409,6 @@ public class GameManager {
                 //players.remove(players.get(playerAJogar));
                 //getProgrammers(false);
             }
-
-             */
 
             //FALTA FAZER
             //OBRIGATORIA
