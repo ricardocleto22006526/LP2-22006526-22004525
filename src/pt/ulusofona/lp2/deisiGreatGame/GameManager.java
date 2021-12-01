@@ -98,8 +98,8 @@ public class GameManager {
         playersAbyssesAndTools.clear(); // Serve para dar Reset ao hashmap de ferramentas de cada player
         posicaoAnterior=0; // Serve para dar Reset da variavel que guarda a posicao anterior
         posicaoAntesDaAnterior=0; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
-        jogadoresNestaCasa.clear();
-        jogadoresNoCoreDumped.clear();
+        jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
+        jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
 
         if (playerInfo == null) { return false; }
 
@@ -238,7 +238,12 @@ public class GameManager {
                     if (i==0){
                         output.append(players.get(i).getName()).append(" : ").append("No tools");
                     }else{
-                        output.append(" | ").append(players.get(i).getName()).append(" : ").append("No tools");
+
+                        if (!players.get(i).getEstado().equals("Em Jogo")){
+                            output.append(" | ").append(players.get(i).getName()).append(" : ").append("No tools");
+                        }else{
+                            output.append(players.get(i).getName()).append(" : ").append("No tools");
+                        }
                     }
 
                 }else{
@@ -257,7 +262,6 @@ public class GameManager {
                     }
                 }
             }
-
         }
 
         return output.toString();
@@ -483,7 +487,7 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-        //System.out.println(getProgrammersInfo());
+        System.out.println(getProgrammersInfo());
         //System.out.println("Anterior "+posicaoAnterior);
         //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
