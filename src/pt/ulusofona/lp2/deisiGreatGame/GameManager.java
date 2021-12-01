@@ -143,9 +143,7 @@ public class GameManager {
         }catch (Exception e){
             return false;
         }
-        for (int i = 0; i < tamanhoDoTabuleiro; i++) {
-            playersAbyssesAndTools.put(i,new Abismo(6));
-        }
+
         return createInitialBoard(playerInfo,worldSize);
     }
 
