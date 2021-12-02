@@ -146,9 +146,6 @@ public class GameManager {
             return false;
         }
 
-        for (int i = 2; i < tamanhoDoTabuleiro ; i++) {
-            playersAbyssesAndTools.put(i,new Abismo(7));
-        }
         return createInitialBoard(playerInfo,worldSize);
     }
 
@@ -305,22 +302,18 @@ public class GameManager {
 
     public int getCurrentPlayerID(){
 
-        if (!players.get(playerAJogar).getEstado().equals("Em Jogo")){
-
-            for (int i = playerAJogar; i < players.size() ; i++) {
-
-                if (players.get(playerAJogar).getEstado().equals("Em Jogo")){
-                    playerAJogar = i;
-                    return players.get(playerAJogar).getId();
-                }
-
-                if (i == players.size() -1 ){
-                    i=0;
-                }else{
-                    i++;
-                }
+        for (int i = playerAJogar; i < players.size() ; i++) {
+            if (players.get(playerAJogar).getEstado().equals("Em Jogo")){
+                playerAJogar = i;
+                return players.get(playerAJogar).getId();
+            }
+            if (i == players.size() -1 ){
+                i=0;
+            }else{
+                i++;
             }
         }
+
         return players.get(playerAJogar).getId();
     }
 
@@ -415,7 +408,12 @@ public class GameManager {
             }
 
             if (getImagePng(posPlayer).equals("duplicated-code.png")){//FUNCIONA
-                players.get(playerAJogar).getPosPlayerReset(posicaoAnterior);
+                if(players.get(playerAJogar).getFerramentas(0)){
+                    players.get(playerAJogar).removeFerramenta(0);
+                }else{
+                    players.get(playerAJogar).getPosPlayerReset(posicaoAnterior);
+                }
+
             }
 
             if (getImagePng(posPlayer).equals("secondary-effects.png")){
@@ -524,22 +522,23 @@ public class GameManager {
 
             return textOutput;
         }
+
         if (!gameIsOver()){
             mudancaDeTurno();
         }
-
         return null;
     }
 
     //FUNCAO QUE ALTERA O TURNO
     public void mudancaDeTurno(){
         nrDeTurnos++;
-
+        System.out.println(getCurrentPlayerID());
         if (playerAJogar == players.size()-1){
             playerAJogar=0;
         }else{
             playerAJogar++;
         }
+
         //System.out.println(getProgrammersInfo());
         //System.out.println("Anterior "+posicaoAnterior);
         //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
@@ -564,7 +563,6 @@ public class GameManager {
                 playersEmJogo.add(players.get(i));
             }
         }
-
 
         return false;
 
