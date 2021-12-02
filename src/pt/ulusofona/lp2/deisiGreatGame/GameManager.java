@@ -101,7 +101,7 @@ public class GameManager {
         posicaoAntesDaAnterior=1; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
         jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
         jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
-        playersEmJogo.clear();
+        playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
 
         if (playerInfo == null) { return false; }
 
@@ -251,68 +251,46 @@ public class GameManager {
                     }
                 }
 
-                if ( !(i == players.size()-1) ){
+                if ( i != players.size()-1 ){ // ! (i == players.size()-1)
                     output.append(" | ");
                 }
             }
         }
-
-
-
-        /*
-        for (int i = 0; i < players.size() ; i++) {
-
-            if (players.get(i).getEstado().equals("Em Jogo")){
-
-                if(players.get(i).getFerramentas()==null || players.get(i).getFerramentas().size()==0){
-                    if (i==0){
-                        output.append(players.get(i).getName()).append(" : ").append("No tools");
-                    }else{
-                        output.append(" | ").append(players.get(i).getName()).append(" : ").append("No tools");
-                    }
-
-                }else{
-
-                   if(i==0){
-                       output.append(players.get(i).getName());
-                   }else{
-                       output.append(" | ").append(players.get(i).getName());
-                   }
-
-                    if (i>0){
-                        output.append(" | ").append(players.get(i).getName());
-                    }else{
-                        output.append(players.get(i).getName());
-                    }
-
-                    for (int j = 0; j < players.get(i).getFerramentas().size() ; j++) {
-                        if (j==0){
-                            output.append(" : ").append(players.get(i).ferramentas.get(j).titulo);
-                        }else{
-                            output.append(" ; ").append(players.get(i).ferramentas.get(j).titulo);
-                        }
-                    }
-                }
-            }
-        }
-        */
-
+        
         return output.toString();
     }
 
-    public int getCurrentPlayerID(){
+    public int getCurrentPlayerID() {
 
-        for (int i = playerAJogar; i < players.size() ; i++) {
-            if (players.get(playerAJogar).getEstado().equals("Em Jogo")){
+        if(!players.get(playerAJogar).getEstado().equals("Em Jogo")){
+
+            for (int i = playerAJogar; i < players.size(); i++) {
+                if (!players.get(playerAJogar).getEstado().equals("Em Jogo")) {
+                    playerAJogar = i;
+                    return players.get(playerAJogar).getId();
+                }
+                if (i == players.size() - 1) {
+                    i = 0;
+                } else {
+                    i++;
+                }
+            }
+        }
+
+        /*
+        for (int i = playerAJogar; i < players.size(); i++) {
+            if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
                 playerAJogar = i;
                 return players.get(playerAJogar).getId();
             }
-            if (i == players.size() -1 ){
-                i=0;
-            }else{
+            if (i == players.size() - 1) {
+                i = 0;
+            } else {
                 i++;
             }
         }
+
+         */
 
         return players.get(playerAJogar).getId();
     }
@@ -517,6 +495,9 @@ public class GameManager {
 
             if (!gameIsOver()){
                 mudancaDeTurno();
+                if (!players.get(playerAJogar).getEstado().equals("Em Jogo")){
+                    mudancaDeTurno();
+                }
             }
 
             return textOutput;
@@ -537,7 +518,6 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-
         //System.out.println(getProgrammersInfo());
         //System.out.println("Anterior: "+posicaoAnterior);
         //System.out.println("AntesDaAnterior: "+posicaoAntesDaAnterior);
