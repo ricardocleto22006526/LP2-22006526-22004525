@@ -269,28 +269,15 @@ public class GameManager {
                     playerAJogar = i;
                     return players.get(playerAJogar).getId();
                 }
+
                 if (i == players.size() - 1) {
                     i = 0;
                 } else {
                     i++;
                 }
+
             }
         }
-
-        /*
-        for (int i = playerAJogar; i < players.size(); i++) {
-            if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
-                playerAJogar = i;
-                return players.get(playerAJogar).getId();
-            }
-            if (i == players.size() - 1) {
-                i = 0;
-            } else {
-                i++;
-            }
-        }
-
-         */
 
         return players.get(playerAJogar).getId();
     }
@@ -495,9 +482,6 @@ public class GameManager {
 
             if (!gameIsOver()){
                 mudancaDeTurno();
-                if (!players.get(playerAJogar).getEstado().equals("Em Jogo")){
-                    mudancaDeTurno();
-                }
             }
 
             return textOutput;
