@@ -346,7 +346,6 @@ public class GameManager {
 
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
         }
-
         return true;
     }
 
@@ -532,7 +531,7 @@ public class GameManager {
     //FUNCAO QUE ALTERA O TURNO
     public void mudancaDeTurno(){
         nrDeTurnos++;
-        System.out.println(getCurrentPlayerID());
+        //System.out.println("TURNO: "+getCurrentPlayerID());
         if (playerAJogar == players.size()-1){
             playerAJogar=0;
         }else{
@@ -540,8 +539,8 @@ public class GameManager {
         }
 
         //System.out.println(getProgrammersInfo());
-        //System.out.println("Anterior "+posicaoAnterior);
-        //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
+        //System.out.println("Anterior: "+posicaoAnterior);
+        //System.out.println("AntesDaAnterior: "+posicaoAntesDaAnterior);
     }
 
     public boolean gameIsOver(){
