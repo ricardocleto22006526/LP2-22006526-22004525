@@ -16,6 +16,7 @@ public class GameManager {
 
     ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
     ArrayList<Programmer> jogadoresNoCoreDumped = new ArrayList<>();
+    ArrayList<Programmer> playersEmJogo = new ArrayList<>();
 
     public GameManager() {
     }
@@ -100,6 +101,7 @@ public class GameManager {
         posicaoAntesDaAnterior=1; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
         jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
         jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
+        playersEmJogo.clear();
 
         if (playerInfo == null) { return false; }
 
@@ -144,6 +146,9 @@ public class GameManager {
             return false;
         }
 
+        for (int i = 2; i < tamanhoDoTabuleiro ; i++) {
+            playersAbyssesAndTools.put(i,new Abismo(7));
+        }
         return createInitialBoard(playerInfo,worldSize);
     }
 
@@ -536,24 +541,31 @@ public class GameManager {
             playerAJogar++;
         }
         //System.out.println(getProgrammersInfo());
-        System.out.println("Anterior "+posicaoAnterior);
-        System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
+        //System.out.println("Anterior "+posicaoAnterior);
+        //System.out.println("AntesDaAnterior "+posicaoAntesDaAnterior);
     }
 
     public boolean gameIsOver(){
-        ArrayList<Programmer> playersEmJogo = new ArrayList<>();
 
-        for (int i = 0; i < players.size() ; i++) {
-            if (players.get(i).getEstado().equals("Em Jogo")){
-                playersEmJogo.add(players.get(i));
-            }
-        }
-
-        if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro || playersEmJogo.size()==1){
+        if (players.size()-playersEmJogo.size() == 1){
             winner = players.get(playerAJogar).getName();
             nrDeTurnos++;
             return true;
         }
+
+        if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro){
+            winner = players.get(playerAJogar).getName();
+            nrDeTurnos++;
+            return true;
+        }
+
+        for (int i = 0; i < players.size() ; i++) {
+            if (players.get(i).getEstado().equals("Derrotado") && !playersEmJogo.contains(players.get(i))){
+                playersEmJogo.add(players.get(i));
+            }
+        }
+
+
         return false;
 
     }
