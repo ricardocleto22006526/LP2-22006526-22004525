@@ -17,6 +17,7 @@ public class GameManager {
     ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
     ArrayList<Programmer> jogadoresNoCoreDumped = new ArrayList<>();
     ArrayList<Programmer> playersEmJogo = new ArrayList<>();
+    ArrayList<Programmer> jogadoresMortosBSOD = new ArrayList<>();
 
     public GameManager() {
     }
@@ -206,7 +207,8 @@ public class GameManager {
             }
             listaJogadores=programmersVivosEmjogo;
         } else {
-            listaJogadores = players;
+            listaJogadores = jogadoresMortosBSOD;
+            //listaJogadores = players;
         }
 
         return listaJogadores;
@@ -284,7 +286,7 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrPositions){
 
-        if (nrPositions < 1 || nrPositions > 6 || players.get(playerAJogar).presoNoCicloInfinito){
+        if (nrPositions < 1 || nrPositions > 6 || players.get(playerAJogar).presoNoCicloInfinito ){ //|| !players.get(playerAJogar).getEstado().equals("Em Jogo")
             return false;
         }
 
@@ -392,6 +394,11 @@ public class GameManager {
             if (getImagePng(posPlayer).equals("bsod.png")){
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
                     players.get(playerAJogar).alteraEstado();
+
+                    jogadoresMortosBSOD.add(players.get(playerAJogar));
+                    players.remove(players.get(playerAJogar));
+                    playerAJogar=0;
+
                 }
             }
 
