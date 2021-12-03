@@ -17,7 +17,6 @@ public class GameManager {
     ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
     ArrayList<Programmer> jogadoresNoCoreDumped = new ArrayList<>();
     ArrayList<Programmer> playersEmJogo = new ArrayList<>();
-    ArrayList<Programmer> jogadoresMortosBSOD = new ArrayList<>();
 
     public GameManager() {
     }
@@ -257,7 +256,7 @@ public class GameManager {
                 }
             }
         }
-        
+
         return output.toString();
     }
 
@@ -285,7 +284,7 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrPositions){
 
-        if (nrPositions < 1 || nrPositions > 6 || players.get(playerAJogar).presoNoCicloInfinito ){ //|| !players.get(playerAJogar).getEstado().equals("Em Jogo")
+        if (nrPositions < 1 || nrPositions > 6 || players.get(playerAJogar).presoNoCicloInfinito){
             return false;
         }
 
@@ -393,25 +392,19 @@ public class GameManager {
             if (getImagePng(posPlayer).equals("bsod.png")){
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
                     players.get(playerAJogar).alteraEstado();
-
-                    //Adicionado para testar FullGame
-                    jogadoresMortosBSOD.add(players.get(playerAJogar));
-                    players.remove(players.get(playerAJogar));
-                    playerAJogar=0;
-
                 }
             }
 
             if (getImagePng(posPlayer).equals("infinite-loop.png")){
 
-               if(players.get(playerAJogar).getFerramentas(1)){
+                if(players.get(playerAJogar).getFerramentas(1)){
                     players.get(playerAJogar).removeFerramenta(1);
-               }else{
+                }else{
 
-                   if (!players.get(playerAJogar).estaPresoNoCicloInfinito()){
+                    if (!players.get(playerAJogar).estaPresoNoCicloInfinito()){
                         players.get(playerAJogar).alteraPresoNoCicloInfinito();
                         jogadoresNestaCasa.add(players.get(playerAJogar));
-                   }
+                    }
 
                     if (jogadoresNestaCasa.size()>1){
                         playerAJogar--;
@@ -428,7 +421,7 @@ public class GameManager {
                             break;
                         }
                     }
-               }
+                }
             }
 
             if (getImagePng(posPlayer).equals("core-dumped.png")){
@@ -543,13 +536,13 @@ public class GameManager {
         List<String> results = new ArrayList<>();
 
         Collections.sort(players, (p1, p2) -> {
-                    if (p1.getPosPlayer() < p2.getPosPlayer()) {
-                        return -1;
-                    } else if (p1.getPosPlayer() > p2.getPosPlayer()) {
-                        return 1;
-                    } else {
-                        return p1.getName().compareTo(p2.getName());
-                    }
+            if (p1.getPosPlayer() < p2.getPosPlayer()) {
+                return -1;
+            } else if (p1.getPosPlayer() > p2.getPosPlayer()) {
+                return 1;
+            } else {
+                return p1.getName().compareTo(p2.getName());
+            }
         });
 
         players.sort(Comparator.comparingInt((Programmer posicao)-> posicao.posPlayer).reversed());
