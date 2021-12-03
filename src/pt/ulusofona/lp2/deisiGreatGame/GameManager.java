@@ -85,7 +85,6 @@ public class GameManager {
                 }
             }
 
-
         }catch (Exception e){
             return false;
         }
@@ -130,7 +129,7 @@ public class GameManager {
 
                 }
 
-                if ( ( Integer.parseInt(abyssesAndTools[i][2]) < 1 && Integer.parseInt(abyssesAndTools[i][2]) > tamanhoDoTabuleiro ) ){
+                if ( ( Integer.parseInt(abyssesAndTools[i][2]) < 1 || Integer.parseInt(abyssesAndTools[i][2]) > worldSize ) ){
                     return false;
                 }
 
