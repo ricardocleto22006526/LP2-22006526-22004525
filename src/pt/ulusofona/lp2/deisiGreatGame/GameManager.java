@@ -207,8 +207,7 @@ public class GameManager {
             }
             listaJogadores=programmersVivosEmjogo;
         } else {
-            listaJogadores = jogadoresMortosBSOD;
-            //listaJogadores = players;
+            listaJogadores = players;
         }
 
         return listaJogadores;
@@ -395,6 +394,7 @@ public class GameManager {
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
                     players.get(playerAJogar).alteraEstado();
 
+                    //Adicionado para testar FullGame
                     jogadoresMortosBSOD.add(players.get(playerAJogar));
                     players.remove(players.get(playerAJogar));
                     playerAJogar=0;
