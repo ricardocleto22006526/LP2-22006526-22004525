@@ -144,7 +144,9 @@ public class GameManager {
         }catch (Exception e){
             return false;
         }
-
+        for (int i = 2; i < 5 ; i++) {
+            playersAbyssesAndTools.put(i,new Abismo(7));
+        }
         return createInitialBoard(playerInfo,worldSize);
     }
 
@@ -261,12 +263,12 @@ public class GameManager {
 
     public int getCurrentPlayerID() {
 
-        if(!players.get(playerAJogar).getEstado().equals("Em Jogo")){
+        if(players.get(playerAJogar).getEstado().equals("Derrotado")){
 
-            for (int i = playerAJogar; i < players.size(); i++) {
-                if (!players.get(playerAJogar).getEstado().equals("Em Jogo")) {
+            for (int i = playerAJogar; i < players.size();) {
+                if (players.get(i).getEstado().equals("Em Jogo")) {
                     playerAJogar = i;
-                    return players.get(playerAJogar).getId();
+                    return players.get(i).getId();
                 }
 
                 if (i == players.size() - 1) {
