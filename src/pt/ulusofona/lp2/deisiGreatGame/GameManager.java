@@ -141,12 +141,14 @@ public class GameManager {
 
             }
 
-        }catch (Exception e){
+        }catch (Exception e) {
             return false;
         }
+        /*
         for (int i = 2; i < 5 ; i++) {
             playersAbyssesAndTools.put(i,new Abismo(7));
         }
+        */
         return createInitialBoard(playerInfo,worldSize);
     }
 
