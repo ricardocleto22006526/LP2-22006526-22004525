@@ -442,6 +442,7 @@ public class TestesUnitarios {
         game.gameIsOver();
         game.getProgrammers(5);
         game.getProgrammers(3);
+        game.getCurrentPlayerID();
         game.getProgrammers(true);
         game.getProgrammers(false);
         game.getGameResults();
@@ -737,4 +738,60 @@ public class TestesUnitarios {
         game.getProgrammersInfo();
         game.gameIsOver();
     }
+
+    @Test
+    public void testreactToAbyssORTools04(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+        String[][] abismos = new String[2][3];
+
+        abismos[0][0] = "0";
+        abismos[0][1] = "5";
+        abismos[0][2] = "5";
+
+        abismos[1][0] = "1";
+        abismos[1][1] = "1";
+        abismos[1][2] = "4";
+
+        game.createInitialBoard(players, 25, abismos);
+
+        assertTrue(game.moveCurrentPlayer(3));
+        String expected1 = "Ferramenta: functional";
+        assertEquals(expected1, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        String expected2 = "Abismo: duplicated-code";
+        assertEquals(expected2, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected3 = null;
+        assertEquals(expected3, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(3));
+        String expected4 = "Ferramenta: functional";
+        assertEquals(expected4, game.reactToAbyssOrTool());
+
+        game.getProgrammersInfo();
+        game.gameIsOver();
+    }
+
+    @Test
+    public void testreactToAbyssORTools05(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+        String[][] abismos = new String[1][3];
+
+        abismos[0][0] = "0";
+        abismos[0][1] = "4";
+        abismos[0][2] = "2";
+
+        game.createInitialBoard(players, 25, abismos);
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected1 = "Abismo: crash";
+        assertEquals(expected1, game.reactToAbyssOrTool());
+
+    }
+
+
 }
