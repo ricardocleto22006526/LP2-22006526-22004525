@@ -406,6 +406,15 @@ public class TestesUnitarios {
     }
 
     @Test
+    public void testCreateInitialBoard11com3parametros(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+        String[][] abismoOUferramenta = createAbismosOUTools(null,"7","5");
+        game.createInitialBoard(players,10,abismoOUferramenta);
+
+    }
+
+    @Test
     public void testBSOD01() {
 
         GameManager game = new GameManager();
@@ -793,5 +802,411 @@ public class TestesUnitarios {
 
     }
 
+    @Test
+    public void testreactToAbyssORTools06(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+        String[][] abismos = new String[4][3];
+
+        abismos[0][0] = "1";
+        abismos[0][1] = "5";
+        abismos[0][2] = "2";
+
+        abismos[1][0] = "0";
+        abismos[1][1] = "0";
+        abismos[1][2] = "3";
+
+        abismos[2][0] = "1";
+        abismos[2][1] = "4";
+        abismos[2][2] = "4";
+
+        abismos[3][0] = "0";
+        abismos[3][1] = "0";
+        abismos[3][2] = "5";
+
+        game.createInitialBoard(players, 25, abismos);
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected1 = "Ferramenta: ajuda-professor";
+        assertEquals(expected1, game.reactToAbyssOrTool());
+
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected2 = "Abismo: syntax";
+        assertEquals(expected2, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected3 = "Ferramenta: IDE";
+        assertEquals(expected3, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected4 = "Abismo: syntax";
+        assertEquals(expected4, game.reactToAbyssOrTool());
+    }
+
+    @Test
+    public void testreactToAbyssORTools07(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+        String[][] abismos = new String[4][3];
+
+        abismos[0][0] = "1";
+        abismos[0][1] = "5";
+        abismos[0][2] = "2";
+
+        abismos[1][0] = "0";
+        abismos[1][1] = "1";
+        abismos[1][2] = "3";
+
+        abismos[2][0] = "1";
+        abismos[2][1] = "2";
+        abismos[2][2] = "4";
+
+        abismos[3][0] = "0";
+        abismos[3][1] = "1";
+        abismos[3][2] = "5";
+
+        game.createInitialBoard(players, 25, abismos);
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected1 = "Ferramenta: ajuda-professor";
+        assertEquals(expected1, game.reactToAbyssOrTool());
+
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected2 = "Abismo: logic";
+        assertEquals(expected2, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected3 = "Ferramenta: unit-tests";
+        assertEquals(expected3, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected4 = "Abismo: logic";
+        assertEquals(expected4, game.reactToAbyssOrTool());
+    }
+
+    @Test
+    public void testreactToAbyssORTools08(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+        String[][] abismos = new String[4][3];
+
+        abismos[0][0] = "1";
+        abismos[0][1] = "5";
+        abismos[0][2] = "2";
+
+        abismos[1][0] = "0";
+        abismos[1][1] = "2";
+        abismos[1][2] = "3";
+
+        abismos[2][0] = "1";
+        abismos[2][1] = "3";
+        abismos[2][2] = "4";
+
+        abismos[3][0] = "0";
+        abismos[3][1] = "2";
+        abismos[3][2] = "5";
+
+        game.createInitialBoard(players, 25, abismos);
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected1 = "Ferramenta: ajuda-professor";
+        assertEquals(expected1, game.reactToAbyssOrTool());
+
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected2 = "Abismo: exception";
+        assertEquals(expected2, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected3 = "Ferramenta: catch";
+        assertEquals(expected3, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected4 = "Abismo: exception";
+        assertEquals(expected4, game.reactToAbyssOrTool());
+    }
+
+    @Test
+    public void testreactToAbyssORTools09(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+        String[][] abismos = new String[4][3];
+
+        abismos[0][0] = "1";
+        abismos[0][1] = "5";
+        abismos[0][2] = "2";
+
+        abismos[1][0] = "0";
+        abismos[1][1] = "3";
+        abismos[1][2] = "3";
+
+        abismos[2][0] = "1";
+        abismos[2][1] = "3";
+        abismos[2][2] = "4";
+
+        abismos[3][0] = "0";
+        abismos[3][1] = "3";
+        abismos[3][2] = "5";
+
+        game.createInitialBoard(players, 25, abismos);
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected1 = "Ferramenta: ajuda-professor";
+        assertEquals(expected1, game.reactToAbyssOrTool());
+
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected2 = "Abismo: file-not-found-exception";
+        assertEquals(expected2, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected3 = "Ferramenta: catch";
+        assertEquals(expected3, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected4 = "Abismo: file-not-found-exception";
+        assertEquals(expected4, game.reactToAbyssOrTool());
+    }
+
+    @Test
+    public void testreactToAbyssORTools10(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+        String[][] abismos = new String[4][3];
+
+        abismos[0][0] = "1";
+        abismos[0][1] = "0";
+        abismos[0][2] = "2";
+
+        abismos[1][0] = "0";
+        abismos[1][1] = "5";
+        abismos[1][2] = "3";
+
+        abismos[2][0] = "1";
+        abismos[2][1] = "0";
+        abismos[2][2] = "4";
+
+        abismos[3][0] = "0";
+        abismos[3][1] = "5";
+        abismos[3][2] = "5";
+
+        game.createInitialBoard(players, 25, abismos);
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected1 = "Ferramenta: inheritance";
+        assertEquals(expected1, game.reactToAbyssOrTool());
+
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected2 = "Abismo: duplicated-code";
+        assertEquals(expected2, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected3 = "Ferramenta: inheritance";
+        assertEquals(expected3, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+        assertTrue(game.moveCurrentPlayer(4));
+        game.reactToAbyssOrTool();
+        game.getCurrentPlayerID();
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected4 = "Abismo: duplicated-code";
+        assertEquals(expected4, game.reactToAbyssOrTool());
+    }
+
+    @Test
+    public void testreactToAbyssORTools11(){
+        GameManager game = new GameManager();
+        String[][] players = new String[2][4];
+        String[][] abismos = new String[2][3];
+
+        abismos[0][0] = "1";
+        abismos[0][1] = "1";
+        abismos[0][2] = "2";
+
+        abismos[1][0] = "0";
+        abismos[1][1] = "8";
+        abismos[1][2] = "3";
+
+        players[0][0] = "1"; //ID
+        players[0][1] = "Jogador 1"; //NOME
+        players[0][2] = "Java"; //Linguagens Favoritas
+        players[0][3] = "Purple"; //Cor do player
+
+        players[1][0] = "2";
+        players[1][1] = "Jogador2";
+        players[1][2] = "C";
+        players[1][3] = "Blue";
+
+        game.createInitialBoard(players, 25, abismos);
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected1 = "Ferramenta: functional";
+        assertEquals(expected1, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(5));
+        String expected2 = null;
+        assertEquals(expected2, game.reactToAbyssOrTool());
+
+
+        assertTrue(game.moveCurrentPlayer(1));
+        String expected3 = "Abismo: infinite-loop";
+        assertEquals(expected3, game.reactToAbyssOrTool());
+
+        assertTrue(game.moveCurrentPlayer(3));
+    }
 
 }
