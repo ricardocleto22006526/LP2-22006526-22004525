@@ -452,8 +452,9 @@ public class TestesUnitarios {
         game.getProgrammers(5);
         game.getProgrammers(3);
         game.getCurrentPlayerID();
-        game.getProgrammers(true);
         game.getProgrammers(false);
+        game.getGameResults();
+        game.getProgrammers(true);
         game.getGameResults();
         game.getAuthorsPanel();
 
@@ -1207,6 +1208,30 @@ public class TestesUnitarios {
         assertEquals(expected3, game.reactToAbyssOrTool());
 
         assertTrue(game.moveCurrentPlayer(3));
+    }
+
+    @Test
+    public void testmoveCurrentPlayer01(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+
+        game.createInitialBoard(players,10);
+
+        for (int i = 0; i <3 ; i++) {
+            assertTrue(game.moveCurrentPlayer(5));
+
+
+            assertTrue(game.moveCurrentPlayer(5));
+
+
+            assertTrue(game.moveCurrentPlayer(5));
+
+
+            assertTrue(game.moveCurrentPlayer(5));
+
+        }
+        game.gameIsOver();
+
     }
 
 }
