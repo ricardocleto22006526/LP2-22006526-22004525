@@ -11,4 +11,5 @@
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
  ➤UML (Projeto Parte 2):
+ (PS: Abrir a imagem noutro separador -> Através da preview, por algum motivo não dá para ler)
 ![](https://github.com/ricardocleto22006526/LP2-22006526-22004525/blob/master/UML%20-%20Projeto%20(LP2-Parte2).png)
