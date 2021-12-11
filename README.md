@@ -4,6 +4,7 @@
 
 ➤ A implementação dos Getters, facilitaram a resolução dos problemas, utilizando os paradigmas da  programação por objetos (OO).
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   ➤UML (Projeto Parte 1):
 ![](https://github.com/ricardocleto22006526/LP2-22006526-22004525/blob/master/UML%20-%20Projeto%20(LP2-Parte1).jpg)
