@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiGreatGame
 
+import javax.swing.ImageIcon
+
 enum class CommandType { GET, POST }
 
 fun router(){
@@ -22,7 +24,8 @@ fun getPlayer(manager: GameManager, args: List<String>): String?{
         "POLYGLOTS" -> return polyglots()
         "MOST_USED_POSITIONS" -> return mostUsedPositions()
         "MOST_USED_ABYSSES" -> return mostUsedAbysses()
-
+        "MOVE" -> return move()
+        "ABYSS" -> return abyss()
     }
     return null
 }
@@ -46,3 +49,12 @@ fun mostUsedPositions():String{
 fun mostUsedAbysses():String{
     return ""
 }
+
+fun move():String{
+    return ""
+}
+
+fun abyss():String{
+    return ""
+}
+
