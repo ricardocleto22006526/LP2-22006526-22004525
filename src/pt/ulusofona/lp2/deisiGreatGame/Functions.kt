@@ -1,0 +1,48 @@
+package pt.ulusofona.lp2.deisiGreatGame
+
+enum class CommandType { GET, POST }
+
+fun router(){
+
+    return getFuncao();
+}
+
+fun getFuncao(){
+
+}
+
+
+
+
+
+fun getPlayer(manager: GameManager, args: List<String>): String?{
+    when(args[0]){
+        "PLAYER" -> return player()
+        "PLAYERS_BY_LANGUAGE" -> return playersByLanguage()
+        "POLYGLOTS" -> return polyglots()
+        "MOST_USED_POSITIONS" -> return mostUsedPositions()
+        "MOST_USED_ABYSSES" -> return mostUsedAbysses()
+
+    }
+    return null
+}
+
+fun player():String{
+    return ""
+}
+
+fun playersByLanguage():String{
+    return ""
+}
+
+fun polyglots():String{
+    return ""
+}
+
+fun mostUsedPositions():String{
+    return ""
+}
+
+fun mostUsedAbysses():String{
+    return ""
+}

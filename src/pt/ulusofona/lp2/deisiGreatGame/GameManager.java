@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.*;
 
 public class GameManager {
@@ -21,7 +22,7 @@ public class GameManager {
     public GameManager() {
     }
 
-    public boolean createInitialBoard(String[][] playerInfo, int worldSize){
+    public void createInitialBoard(String[][] playerInfo, int worldSize) throws InvalidInitialBoardException{
         players.clear(); // Serve para Limpar os players
         nrDeTurnos=0; // Serve para Limpar os turnos
         playerAJogar=0; // Serve para dar Reset do player a jogar
@@ -30,7 +31,8 @@ public class GameManager {
         ArrayList<String> coresRepetidas = new ArrayList<>();
 
         if ( playerInfo.length < 2 || playerInfo.length > 4  || worldSize < playerInfo.length*2 ){
-            return false;
+            //return false;
+            throw new InvalidInitialBoardException("Numero de jogadores ou tamanho do tabuleiro invalido",0,-1);
         }else{
             tamanhoDoTabuleiro=worldSize;
         }
@@ -47,7 +49,8 @@ public class GameManager {
 
                 for (int j = 0; j < players.size() ; j++) {
                     if (players.get(j).getName() == null || players.get(j).getName().equals("")) {
-                        return false;
+                        //return false;
+                        throw new InvalidInitialBoardException("Nome do jogador invalido",0,-1);
                     }
                 }
                 String nome = playerInfo[i][1];
@@ -72,7 +75,8 @@ public class GameManager {
             for (int j = 0; j < players.size() ; j++) {
                 for (int k = j+1; k < coresRepetidas.size() ; k++) {
                     if (players.get(j).cor.toString().equals(coresRepetidas.get(k))){
-                        return false;
+                        //return false;
+                        throw new InvalidInitialBoardException("Existem jogadores com cores repetidas",0,-1);
                     }
                 }
             }
@@ -80,20 +84,27 @@ public class GameManager {
             for (int i = 0; i < players.size() ; i++) {
                 for (int j = i+1; j < idsRepetidos.size() ; j++) {
                     if (players.get(i).id == idsRepetidos.get(j)){
-                        return false;
+                        //return false;
+                        throw new InvalidInitialBoardException("Existem jogadores com IDs repetidos",0,-1);
                     }
                 }
             }
 
         }catch (Exception e){
-            return false;
+            //return false;
+            if (e.getMessage() == null){
+                throw new InvalidInitialBoardException("Ocorreu um erro ao correr a createInitialBoard",0,-1);
+            }else{
+                throw e;
+            }
+
         }
         // Organiza os players por ID
         players.sort(Comparator.comparingInt((Programmer)-> Programmer.id));
-        return true;
+       // return true;
     }
 
-    public boolean createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools){
+    public void createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools) throws InvalidInitialBoardException{
 
         playersAbyssesAndTools.clear(); // Serve para dar Reset ao hashmap de ferramentas de cada player
         posicaoAnterior=1; // Serve para dar Reset da variavel que guarda a posicao anterior
@@ -102,7 +113,10 @@ public class GameManager {
         jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
         playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
 
-        if (playerInfo == null) { return false; }
+        if (playerInfo == null) {
+            //return false;
+            throw new InvalidInitialBoardException("Informacao dos jogadores incorreta",0,-1);
+        }
 
         try{
 
@@ -110,27 +124,32 @@ public class GameManager {
 
 
                 if ( !abyssesAndTools[i][0].equals("0") && !(abyssesAndTools[i][0].equals("1")) ){
-                    return false;
+                    //return false;
+                    throw new InvalidInitialBoardException("Tipo de Abysses ou Tool invalido",0,-1);
+
                 }
 
 
                 if ( abyssesAndTools[i][0].equals("0") ){
                     //Valida os ids dos abismos
                     if ( !( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 9 ) ){
-                        return false;
+                        //return false;
+                        throw new InvalidInitialBoardException("ID do abismo nao esta no range correto (0 - 9)",1, Integer.parseInt(abyssesAndTools[i][1]) );
                     }
 
                 }else{
 
                     //Valida os ids das ferramentas
                     if (  !( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 5)  ){
-                        return false;
+                        //return false;
+                        throw new InvalidInitialBoardException("ID da ferramenta nao esta no range correto (0 - 5)",2, Integer.parseInt(abyssesAndTools[i][1]) );
                     }
 
                 }
 
                 if ( ( Integer.parseInt(abyssesAndTools[i][2]) < 1 || Integer.parseInt(abyssesAndTools[i][2]) > worldSize ) ){
-                    return false;
+                    //return false;
+                    throw new InvalidInitialBoardException("Nao e possivel colocar ferramentas ou abismos fora do tabuleiro",0,-1);
                 }
 
                 if ( abyssesAndTools[i][0].equals("0") ){
@@ -141,11 +160,17 @@ public class GameManager {
 
             }
 
-        }catch (Exception e) {
-            return false;
+        }catch (InvalidInitialBoardException e) {
+           // return false;
+            if (e.getMessage() == null){
+                throw new InvalidInitialBoardException("Ocorreu um erro ao correr a createInitialBoard (com AbyssesOuTools)",0,-1);
+            }else{
+                throw e;
+            }
+
         }
 
-        return createInitialBoard(playerInfo,worldSize);
+        createInitialBoard(playerInfo,worldSize);
     }
 
     //FUNCAO CRIADA PARA VERIFICAR SE TEM COR VALIDA
@@ -501,7 +526,7 @@ public class GameManager {
         }else{
             playerAJogar++;
         }
-        //System.out.println(getProgrammersInfo());
+        //System.out.println("Turno:" + nrDeTurnos  + " -> " + getProgrammersInfo());
         //System.out.println("Anterior: "+posicaoAnterior);
         //System.out.println("AntesDaAnterior: "+posicaoAntesDaAnterior);
     }
@@ -601,6 +626,14 @@ public class GameManager {
         creditos.add(label7);
 
         return creditos;
+    }
+
+    public boolean saveGame(File file){
+        return false;
+    }
+
+    public boolean loadGame(File file){
+        return false;
     }
 
 }
