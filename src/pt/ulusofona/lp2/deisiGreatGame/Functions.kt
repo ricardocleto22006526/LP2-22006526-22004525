@@ -1,19 +1,18 @@
 package pt.ulusofona.lp2.deisiGreatGame
 
-import javax.swing.ImageIcon
-
 enum class CommandType { GET, POST }
 
 fun router(){
 
-    return getFuncao();
 }
 
-fun getFuncao(){
-
+/*
+fun abc(tipo:CommandType) : CommandType{
+    when(tipo){
+        CommandType.GET -> return enumValueOf("GET")
+        CommandType.POST -> return enumValueOf("POST")
+    }
 }
-
-
 
 
 
@@ -29,6 +28,8 @@ fun getPlayer(manager: GameManager, args: List<String>): String?{
     }
     return null
 }
+
+ */
 
 fun player():String{
     return ""
