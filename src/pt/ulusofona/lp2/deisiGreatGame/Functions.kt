@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.deisiGreatGame
 
-enum class CommandType { GET, POST }
-
 fun router() {
     //getPlayer(manager,args)
 }
