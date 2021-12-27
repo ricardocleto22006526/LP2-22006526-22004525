@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiGreatGame
 
 //enum class CommandType { GET, POST }
 
-fun router(manager: GameManager, args: List<String>) {
+fun router() {
     //getPlayer(manager,args)
 }
 
