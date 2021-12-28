@@ -5,7 +5,7 @@ import java.io.File;
 public class Main {
     public static void main(String[] args) {
         GameManager manager = new GameManager();
-/*
+
         try {
             manager.createInitialBoard(creat4Players(),50,abyssesAndTools());
             File fp = new File("filename.txt");
@@ -25,13 +25,15 @@ public class Main {
             e.printStackTrace();
         }
 
-*/
 
 
+        /*
         File fp = new File("filename.txt");
         manager.loadGame(fp);
         int ola=0;
 
+
+         */
     }
     public static String[][] creat4PlayersExtra() {
         String[][] jogadores = new String[4][4];
