@@ -11,7 +11,6 @@ fun router(): ((CommandType) -> (GameManager, List<String>) -> String)? {
 }
 
 
-
 fun abc(tipo:CommandType,manager: GameManager, args: List<String>) : String {
     when(tipo){
         CommandType.GET ->return comando(manager,args).toString()

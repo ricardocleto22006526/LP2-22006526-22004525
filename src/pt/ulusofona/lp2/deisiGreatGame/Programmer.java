@@ -30,6 +30,19 @@ public class Programmer {
         this.cor = cor;
     }
 
+    public Programmer(int id, String nome, ArrayList<String> linguagensFavoritas, ProgrammerColor cor, String estado, int posPlayer, ArrayList<Ferramenta> ferramentas,
+                      boolean presoNoCicloInfinito, ArrayList<Integer> guardaPosicao) {
+        this.id = id;
+        this.nome = nome;
+        this.linguagensFavoritas = linguagensFavoritas;
+        this.cor = cor;
+        this.estado = estado;
+        this.posPlayer = posPlayer;
+        this.ferramentas = ferramentas;
+        this.presoNoCicloInfinito = presoNoCicloInfinito;
+        this.guardaPosicao = guardaPosicao;
+    }
+
     public ArrayList<Integer> getArrayListGuardaPosicao() {
         return guardaPosicao;
     }
@@ -79,6 +92,10 @@ public class Programmer {
 
     public String getName(){
         return this.nome;
+    }
+
+    public ArrayList<String> getLinguagensFavoritas() {
+        return linguagensFavoritas;
     }
 
     public ProgrammerColor getColor(){
@@ -160,7 +177,7 @@ public class Programmer {
         //Stringbuilder das ferramentas
         StringBuilder outputferramentas = new StringBuilder();
 
-        if (ferramentas.size()==0){
+        if (ferramentas.size() == 0){
             outputferramentas.append("No tools");
         }else{
             for (int i = 0; i < ferramentas.size() ; i++) {

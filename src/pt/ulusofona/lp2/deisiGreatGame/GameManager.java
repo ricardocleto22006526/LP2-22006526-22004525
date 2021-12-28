@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import javax.swing.*;
-import java.io.File;
+import java.io.*;
 import java.util.*;
 
 public class GameManager {
@@ -629,11 +629,165 @@ public class GameManager {
     }
 
     public boolean saveGame(File file){
-        return false;
+
+        try{
+            FileWriter writer = new FileWriter(file);
+            PrintWriter write = new PrintWriter(writer);
+
+
+            write.println(tamanhoDoTabuleiro);
+            write.println(playerAJogar);
+            write.println(nrDeTurnos);
+            write.println(nrPosicoesMovida);
+            write.println(posicaoAnterior);
+            write.println(posicaoAntesDaAnterior);
+
+            for (int i = 0; i < players.size() ; i++) {
+                write.println(players.get(i).getId() + "@" + players.get(i).getName() + "@" + players.get(i).getLinguagensFavoritas() + "@" + players.get(i).getColor()
+                + "@" + players.get(i).getEstado() + "@" + players.get(i).getPosPlayer() + "@" + players.get(i).getFerramentas() + "@"
+                + players.get(i).estaPresoNoCicloInfinito() + "@" + players.get(i).getArrayListGuardaPosicao() );
+            }
+
+            writer.close();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public boolean loadGame(File file){
-        return false;
+        players.clear(); // Serve para Limpar os players
+        nrDeTurnos=0; // Serve para Limpar os turnos
+        playerAJogar=0; // Serve para dar Reset do player a jogar
+        winner=""; // Serve para Limpar o nome do vencedor
+        playersAbyssesAndTools.clear(); // Serve para dar Reset ao hashmap de ferramentas de cada player
+        posicaoAnterior=1; // Serve para dar Reset da variavel que guarda a posicao anterior
+        posicaoAntesDaAnterior=1; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
+        jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
+        jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
+        playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
+
+        try {
+
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+
+            String linha = null;
+
+            int linhaFile = 1;
+
+            while((linha = reader.readLine()) != null) {
+
+                String[] dados = linha.split("@");
+
+
+                if (linhaFile <= 6){
+
+                    switch (linhaFile) {
+                        case 1 -> {
+                            String leituraTamanhoTabuleiro = dados[0];
+                            tamanhoDoTabuleiro = Integer.parseInt(leituraTamanhoTabuleiro);
+                            linhaFile++;
+                            continue;
+                        }
+                        case 2 -> {
+                            String leituraPlayerAJogar = dados[0];
+                            playerAJogar = Integer.parseInt(leituraPlayerAJogar);
+                            linhaFile++;
+                            continue;
+                        }
+                        case 3 -> {
+                            String leituraNrTurnos = dados[0];
+                            nrDeTurnos = Integer.parseInt(leituraNrTurnos);
+                            linhaFile++;
+                            continue;
+                        }
+                        case 4 -> {
+                            String leituranrPosicoesMovida = dados[0];
+                            nrPosicoesMovida = Integer.parseInt(leituranrPosicoesMovida);
+                            linhaFile++;
+                            continue;
+                        }
+                        case 5 -> {
+                            String leituraposicaoAnterior = dados[0];
+                            posicaoAnterior = Integer.parseInt(leituraposicaoAnterior);
+                            linhaFile++;
+                            continue;
+                        }
+                        case 6 -> {
+                            String leituraposicaoAntesDaAnterior = dados[0];
+                            posicaoAntesDaAnterior = Integer.parseInt(leituraposicaoAntesDaAnterior);
+                            linhaFile++;
+                            continue;
+                        }
+                    }
+                }
+
+                int id = Integer.parseInt(dados[0]);
+                String nome = dados[1];
+
+                ArrayList<String> linguagensFavoritas = new ArrayList<>();
+                String[] nomesLinguagens = dados[2].replace("[","").replace("]","").split(",");
+                for (int i=0 ; nomesLinguagens.length==0 || i < nomesLinguagens.length ; i++) {
+                    linguagensFavoritas.add(nomesLinguagens[i]);
+                }
+
+                ProgrammerColor color = ProgrammerColor.valueOf(dados[3].trim());
+                String estado = dados[4].trim();
+                int posPlayer = Integer.parseInt(dados[5].trim());
+
+                ArrayList<Ferramenta> playerFerramentas = new ArrayList<>();
+                String[] nomesFerramentas = dados[6].replace("[","").replace("]","").split(",");
+
+                if (!nomesFerramentas[0].equals("")){
+                    for (int i=0 ; i < nomesFerramentas.length ; i++) {
+                        playerFerramentas.add(new Ferramenta(nomeFerramentaFuncao(nomesFerramentas[i])));
+                    }
+                }
+
+                boolean presoNoCiclo = Boolean.parseBoolean(dados[7].trim());
+
+                ArrayList<Integer> guardaPosicoes = new ArrayList<>();
+                String[] posicaoPlayers = dados[8].replace(" ","").replace("[","").replace("]","").replace("\"","").split(",");
+                for (int i=0 ;posicaoPlayers.length==0 ||  i < posicaoPlayers.length ; i++) {
+                    guardaPosicoes.add(Integer.valueOf(posicaoPlayers[i]));
+                }
+
+                players.add(new Programmer(id,nome,linguagensFavoritas,color,estado,posPlayer,playerFerramentas,presoNoCiclo,guardaPosicoes) );
+
+            }
+            reader.close();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public int nomeFerramentaFuncao(String ferramenta){
+        switch (ferramenta) {
+            case "Herança"-> {
+                return 0;
+            }
+            case "Programação Funcional"-> {
+                return 1;
+            }
+            case "Testes unitários"-> {
+                return 2;
+            }
+            case "Tratamento de Excepções"-> {
+                return 3;
+            }
+            case "IDE"-> {
+                return 4;
+            }
+            case "Ajuda Do Professor"-> {
+                return 5;
+            }
+
+            default -> {
+                return -1;
+            }
+        }
     }
 
 }
