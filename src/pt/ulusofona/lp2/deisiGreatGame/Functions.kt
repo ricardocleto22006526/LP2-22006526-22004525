@@ -2,24 +2,28 @@ package pt.ulusofona.lp2.deisiGreatGame
 
 enum class CommandType { GET, POST }
 
-fun router() : String  {
-    //getPlayer(manager,args)
-    return ""
+//Function1<CommandType, Function2<GameManager, List<String>, String>> = (CommandType) -> (GameManager, List<String>) -> String OU ((CommandType) -> (GameManager, List<String>))?
+
+fun router(): ((CommandType) -> (GameManager, List<String>) -> String)? {
+    //return comando(abc())
+    // return CommandType.valueOf(abc(CommandType))
+    return null
 }
 
-/*
-fun abc(tipo:CommandType) : CommandType{
+
+
+fun abc(tipo:CommandType,manager: GameManager, args: List<String>) : String {
     when(tipo){
-        CommandType.GET -> return enumValueOf("GET")
-        CommandType.POST -> return enumValueOf("POST")
+        CommandType.GET ->return comando(manager,args).toString()
+        CommandType.POST ->return  comando(manager,args).toString()
     }
 }
 
 
 
-fun getPlayer(manager: GameManager, args: List<String>): String?{
+fun comando(manager: GameManager, args: List<String>): String?{
     when(args[0]){
-        "PLAYER" -> return player()
+        "PLAYER" -> return getplayer(manager,args)
         "PLAYERS_BY_LANGUAGE" -> return playersByLanguage()
         "POLYGLOTS" -> return polyglots()
         "MOST_USED_POSITIONS" -> return mostUsedPositions()
@@ -29,10 +33,14 @@ fun getPlayer(manager: GameManager, args: List<String>): String?{
     }
     return null
 }
- */
 
-fun player():String{
-    return ""
+
+fun getplayer(manager: GameManager,args: List<String>):String {
+    //NAO SEI SE FUNCIONA
+    if (manager.players.equals(args[1])){
+        return manager.players.toString()
+    }
+    return "Inexistent player"
 }
 
 fun playersByLanguage():String{

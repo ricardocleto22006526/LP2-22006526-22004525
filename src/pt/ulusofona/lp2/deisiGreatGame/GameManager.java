@@ -90,12 +90,12 @@ public class GameManager {
                 }
             }
 
-        }catch (Exception e){
+        }catch (Exception exceptionMemory){
             //return false;
-            if (e.getMessage() == null){
+            if (exceptionMemory.getMessage() == null){
                 throw new InvalidInitialBoardException("Ocorreu um erro ao correr a createInitialBoard",0,-1);
             }else{
-                throw e;
+                throw exceptionMemory;
             }
 
         }
@@ -160,12 +160,12 @@ public class GameManager {
 
             }
 
-        }catch (InvalidInitialBoardException e) {
+        }catch (InvalidInitialBoardException exceptionMemory) {
            // return false;
-            if (e.getMessage() == null){
+            if (exceptionMemory.getMessage() == null){
                 throw new InvalidInitialBoardException("Ocorreu um erro ao correr a createInitialBoard (com AbyssesOuTools)",0,-1);
             }else{
-                throw e;
+                throw exceptionMemory;
             }
 
         }
