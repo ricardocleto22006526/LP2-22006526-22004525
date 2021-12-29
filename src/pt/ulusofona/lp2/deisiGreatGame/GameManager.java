@@ -23,6 +23,77 @@ public class GameManager {
     }
 
     public void createInitialBoard(String[][] playerInfo, int worldSize) throws InvalidInitialBoardException{
+        createInitialBoard(playerInfo,worldSize,null);
+    }
+
+    public void createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools) throws InvalidInitialBoardException{
+
+        playersAbyssesAndTools.clear(); // Serve para dar Reset ao hashmap de ferramentas de cada player
+        posicaoAnterior=1; // Serve para dar Reset da variavel que guarda a posicao anterior
+        posicaoAntesDaAnterior=1; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
+        jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
+        jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
+        playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
+
+        if (playerInfo == null) {
+            //return false;
+            throw new InvalidInitialBoardException("Informacao dos jogadores incorreta",0,-1);
+        }
+
+        if (abyssesAndTools!=null){
+            try{
+
+                for (int i = 0; i < abyssesAndTools.length ; i++) {
+
+
+                    if ( !abyssesAndTools[i][0].equals("0") && !(abyssesAndTools[i][0].equals("1")) ){
+                        //return false;
+                        throw new InvalidInitialBoardException("Tipo de Abysses ou Tool invalido",0,-1);
+
+                    }
+
+
+                    if ( abyssesAndTools[i][0].equals("0") ){
+                        //Valida os ids dos abismos
+                        if ( !( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 9 ) ){
+                            //return false;
+                            throw new InvalidInitialBoardException("ID do abismo nao esta no range correto (0 - 9)",1, Integer.parseInt(abyssesAndTools[i][1]) );
+                        }
+
+                    }else{
+
+                        //Valida os ids das ferramentas
+                        if (  !( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 5)  ){
+                            //return false;
+                            throw new InvalidInitialBoardException("ID da ferramenta nao esta no range correto (0 - 5)",2, Integer.parseInt(abyssesAndTools[i][1]) );
+                        }
+
+                    }
+
+                    if ( ( Integer.parseInt(abyssesAndTools[i][2]) < 1 || Integer.parseInt(abyssesAndTools[i][2]) > worldSize ) ){
+                        //return false;
+                        throw new InvalidInitialBoardException("Nao e possivel colocar ferramentas ou abismos fora do tabuleiro",0,-1);
+                    }
+
+                    if ( abyssesAndTools[i][0].equals("0") ){
+                        playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Abismo( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                    }else {
+                        playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Ferramenta( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                    }
+
+                }
+
+            }catch (InvalidInitialBoardException exceptionMemory) {
+                // return false;
+                if (exceptionMemory.getMessage() == null){
+                    throw new InvalidInitialBoardException("Ocorreu um erro ao correr a createInitialBoard (com AbyssesOuTools)",0,-1);
+                }else{
+                    throw exceptionMemory;
+                }
+
+            }
+        }
+
         players.clear(); // Serve para Limpar os players
         nrDeTurnos=0; // Serve para Limpar os turnos
         playerAJogar=0; // Serve para dar Reset do player a jogar
@@ -101,76 +172,7 @@ public class GameManager {
         }
         // Organiza os players por ID
         players.sort(Comparator.comparingInt((Programmer)-> Programmer.id));
-       // return true;
-    }
 
-    public void createInitialBoard(String[][]playerInfo, int worldSize,String[][] abyssesAndTools) throws InvalidInitialBoardException{
-
-        playersAbyssesAndTools.clear(); // Serve para dar Reset ao hashmap de ferramentas de cada player
-        posicaoAnterior=1; // Serve para dar Reset da variavel que guarda a posicao anterior
-        posicaoAntesDaAnterior=1; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
-        jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
-        jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
-        playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
-
-        if (playerInfo == null) {
-            //return false;
-            throw new InvalidInitialBoardException("Informacao dos jogadores incorreta",0,-1);
-        }
-
-        try{
-
-            for (int i = 0; i < abyssesAndTools.length ; i++) {
-
-
-                if ( !abyssesAndTools[i][0].equals("0") && !(abyssesAndTools[i][0].equals("1")) ){
-                    //return false;
-                    throw new InvalidInitialBoardException("Tipo de Abysses ou Tool invalido",0,-1);
-
-                }
-
-
-                if ( abyssesAndTools[i][0].equals("0") ){
-                    //Valida os ids dos abismos
-                    if ( !( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 9 ) ){
-                        //return false;
-                        throw new InvalidInitialBoardException("ID do abismo nao esta no range correto (0 - 9)",1, Integer.parseInt(abyssesAndTools[i][1]) );
-                    }
-
-                }else{
-
-                    //Valida os ids das ferramentas
-                    if (  !( Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 5)  ){
-                        //return false;
-                        throw new InvalidInitialBoardException("ID da ferramenta nao esta no range correto (0 - 5)",2, Integer.parseInt(abyssesAndTools[i][1]) );
-                    }
-
-                }
-
-                if ( ( Integer.parseInt(abyssesAndTools[i][2]) < 1 || Integer.parseInt(abyssesAndTools[i][2]) > worldSize ) ){
-                    //return false;
-                    throw new InvalidInitialBoardException("Nao e possivel colocar ferramentas ou abismos fora do tabuleiro",0,-1);
-                }
-
-                if ( abyssesAndTools[i][0].equals("0") ){
-                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Abismo( Integer.parseInt(abyssesAndTools[i][1]) ) );
-                }else {
-                    playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Ferramenta( Integer.parseInt(abyssesAndTools[i][1]) ) );
-                }
-
-            }
-
-        }catch (InvalidInitialBoardException exceptionMemory) {
-           // return false;
-            if (exceptionMemory.getMessage() == null){
-                throw new InvalidInitialBoardException("Ocorreu um erro ao correr a createInitialBoard (com AbyssesOuTools)",0,-1);
-            }else{
-                throw exceptionMemory;
-            }
-
-        }
-
-        createInitialBoard(playerInfo,worldSize);
     }
 
     //FUNCAO CRIADA PARA VERIFICAR SE TEM COR VALIDA
@@ -682,6 +684,7 @@ public class GameManager {
     }
 
     public boolean loadGame(File file){
+
         players.clear(); // Serve para Limpar os players
         nrDeTurnos=0; // Serve para Limpar os turnos
         playerAJogar=0; // Serve para dar Reset do player a jogar
@@ -692,6 +695,8 @@ public class GameManager {
         jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
         jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
         playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
+
+
 
         try {
 
