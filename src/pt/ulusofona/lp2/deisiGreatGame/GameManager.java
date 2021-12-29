@@ -644,6 +644,9 @@ public class GameManager {
             write.println(posicaoAntesDaAnterior);
 
             for (int i = 0; i < players.size() ; i++) {
+                if (players.get(i).getArrayListGuardaPosicao()==null || players.get(i).getArrayListGuardaPosicao().size()==0 ){
+                    players.get(i).getArrayListGuardaPosicao().add(1);
+                }
                 write.println(players.get(i).getId() + "@" + players.get(i).getName() + "@" + players.get(i).getLinguagensFavoritas() + "@" + players.get(i).getColor()
                 + "@" + players.get(i).getEstado() + "@" + players.get(i).getPosPlayer() + "@" + players.get(i).getFerramentas() + "@"
                 + players.get(i).estaPresoNoCicloInfinito() + "@" + players.get(i).getArrayListGuardaPosicao() );
