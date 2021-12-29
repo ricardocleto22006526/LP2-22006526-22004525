@@ -829,7 +829,6 @@ public class GameManager {
                 }
 
             }
-
             reader.close();
             return true;
         }catch (Exception e){

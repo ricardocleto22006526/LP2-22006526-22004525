@@ -37,10 +37,10 @@ public class InvalidInitialBoardException extends Exception {
         return true;
     }
 
-    public int getTypeId(){
+    public String getTypeId(){
         if (invalidAbyssOrTool == 1 || invalidAbyssOrTool == 2){
-            return numeroAbyssOuTool;
+            return String.valueOf(numeroAbyssOuTool);
         }
-        return -1;
+        return null;
     }
 }
