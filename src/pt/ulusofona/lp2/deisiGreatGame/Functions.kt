@@ -2,10 +2,10 @@ package pt.ulusofona.lp2.deisiGreatGame
 
 enum class CommandType { GET, POST }
 
-//Function1<CommandType, Function2<GameManager, List<String>, String>> = (CommandType) -> (GameManager, List<String>) -> String OU ((CommandType) -> (GameManager, List<String>))?
-
-fun router(): (CommandType?) -> ((CommandType) -> (GameManager, List<String>) -> String)? {
-    return ::comando
+//Function1<CommandType, Function2<GameManager, List<String>, String>> = ((CommandType) -> (GameManager, List<String>)->String)?
+//(CommandType?) -> ((CommandType) -> (GameManager, List<String>) -> String)?
+fun router(): ((CommandType) -> (GameManager, List<String>)->String)? {
+    return null
 }
 
 fun comando(tipo : CommandType?): ((CommandType) -> (GameManager, List<String>) -> String)?{
