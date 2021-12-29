@@ -647,11 +647,21 @@ public class GameManager {
                 + players.get(i).estaPresoNoCicloInfinito() + "@" + players.get(i).getArrayListGuardaPosicao() );
             }
 
-            /*
-            for (int i = 0; i <playersAbyssesAndTools.size() ; i++) {
-                write.println(playersAbyssesAndTools.values().iterator().next());
+
+            for (int i = 0; i < tamanhoDoTabuleiro ; i++) {
+                if (playersAbyssesAndTools.containsKey(i)){
+
+                    if (playersAbyssesAndTools.get(i).titulo.equals("Herança") || playersAbyssesAndTools.get(i).titulo.equals("Programação Funcional")
+                        || playersAbyssesAndTools.get(i).titulo.equals("Testes unitários") || playersAbyssesAndTools.get(i).titulo.equals("Tratamento de Excepções")
+                        || playersAbyssesAndTools.get(i).titulo.equals("IDE")  || playersAbyssesAndTools.get(i).titulo.equals("Ajuda Do Professor")){
+                        write.println(i + "@" + playersAbyssesAndTools.get(i));
+                    }else{
+                        write.println(i + "@" + playersAbyssesAndTools.get(i).titulo);
+                    }
+
+                }
             }
-             */
+
             writer.close();
             return true;
         }catch (Exception e){
@@ -727,37 +737,51 @@ public class GameManager {
                     }
                 }
 
-                int id = Integer.parseInt(dados[0]);
-                String nome = dados[1];
+                if (dados.length==9){
+                    int id = Integer.parseInt(dados[0]);
+                    String nome = dados[1];
 
-                ArrayList<String> linguagensFavoritas = new ArrayList<>();
-                String[] nomesLinguagens = dados[2].replace("[","").replace("]","").split(",");
-                for (int i=0 ; nomesLinguagens.length==0 || i < nomesLinguagens.length ; i++) {
-                    linguagensFavoritas.add(nomesLinguagens[i]);
+                    ArrayList<String> linguagensFavoritas = new ArrayList<>();
+                    String[] nomesLinguagens = dados[2].replace("[","").replace("]","").split(",");
+                    for (int i=0 ; nomesLinguagens.length==0 || i < nomesLinguagens.length ; i++) {
+                        linguagensFavoritas.add(nomesLinguagens[i]);
+                    }
+
+                    ProgrammerColor color = ProgrammerColor.valueOf(dados[3].trim());
+                    String estado = dados[4].trim();
+                    int posPlayer = Integer.parseInt(dados[5].trim());
+
+                    ArrayList<Ferramenta> playerFerramentas = new ArrayList<>();
+                    String[] nomesFerramentas = dados[6].replace("[","").replace("]","").split(",");
+
+                    if (!nomesFerramentas[0].equals("")){
+                        for (int i=0 ; i < nomesFerramentas.length ; i++) {
+                            playerFerramentas.add(new Ferramenta(nomeFerramentaFuncao(nomesFerramentas[i])));
+                        }
+                    }
+
+                    boolean presoNoCiclo = Boolean.parseBoolean(dados[7].trim());
+
+                    ArrayList<Integer> guardaPosicoes = new ArrayList<>();
+                    String[] posicaoPlayers = dados[8].replace(" ","").replace("[","").replace("]","").replace("\"","").split(",");
+                    for (int i=0 ;posicaoPlayers.length==0 ||  i < posicaoPlayers.length ; i++) {
+                        guardaPosicoes.add(Integer.valueOf(posicaoPlayers[i]));
+                    }
+
+                    players.add(new Programmer(id,nome,linguagensFavoritas,color,estado,posPlayer,playerFerramentas,presoNoCiclo,guardaPosicoes) );
                 }
 
-                ProgrammerColor color = ProgrammerColor.valueOf(dados[3].trim());
-                String estado = dados[4].trim();
-                int posPlayer = Integer.parseInt(dados[5].trim());
-
-                ArrayList<Ferramenta> playerFerramentas = new ArrayList<>();
-                String[] nomesFerramentas = dados[6].replace("[","").replace("]","").split(",");
-
-                if (!nomesFerramentas[0].equals("")){
-                    for (int i=0 ; i < nomesFerramentas.length ; i++) {
-                        playerFerramentas.add(new Ferramenta(nomeFerramentaFuncao(nomesFerramentas[i])));
+                if (dados.length==2){
+                    int posicaoTabuleiro = Integer.parseInt(dados[0]);
+                    String nomesAbismosOUTools = dados[1];
+                    if (nomesAbismosOUTools.equals("Herança") || nomesAbismosOUTools.equals("Programação Funcional") || nomesAbismosOUTools.equals("Testes unitários") ||
+                            nomesAbismosOUTools.equals("Tratamento de Excepções")  || nomesAbismosOUTools.equals("IDE")  || nomesAbismosOUTools.equals("Ajuda Do Professor")){
+                        playersAbyssesAndTools.put( posicaoTabuleiro , new Ferramenta( abismoOUFerramentaID(nomesAbismosOUTools,1) ) );
+                    }else {
+                        playersAbyssesAndTools.put( posicaoTabuleiro, new Abismo( abismoOUFerramentaID(nomesAbismosOUTools,0) ) );
                     }
                 }
 
-                boolean presoNoCiclo = Boolean.parseBoolean(dados[7].trim());
-
-                ArrayList<Integer> guardaPosicoes = new ArrayList<>();
-                String[] posicaoPlayers = dados[8].replace(" ","").replace("[","").replace("]","").replace("\"","").split(",");
-                for (int i=0 ;posicaoPlayers.length==0 ||  i < posicaoPlayers.length ; i++) {
-                    guardaPosicoes.add(Integer.valueOf(posicaoPlayers[i]));
-                }
-
-                players.add(new Programmer(id,nome,linguagensFavoritas,color,estado,posPlayer,playerFerramentas,presoNoCiclo,guardaPosicoes) );
 
             }
             reader.close();
@@ -790,6 +814,73 @@ public class GameManager {
 
             default -> {
                 return -1;
+            }
+        }
+    }
+
+    public int abismoOUFerramentaID(String ferramenta, int abismoOUferramenta){
+        //abismoOUferramenta==0 -> abismos / abismoOUferramenta==1 -> ferrramentas
+        if (abismoOUferramenta==0){
+            switch (ferramenta) {
+                case "Erro de sintaxe"-> {
+                    return 0;
+                }
+                case "Erro de lógica"-> {
+                    return 1;
+                }
+                case "Exception"-> {
+                    return 2;
+                }
+                case "File Not Found Exception"-> {
+                    return 3;
+                }
+                case "Crash (aka Rebentaço)"-> {
+                    return 4;
+                }
+                case "Duplicated Code"-> {
+                    return 5;
+                }
+                case "Efeitos secundários"-> {
+                    return 6;
+                }
+                case "Blue Screen of Death"-> {
+                    return 7;
+                }
+                case "Ciclo infinito"-> {
+                    return 8;
+                }
+                case "Segmentation Fault"-> {
+                    return 9;
+                }
+
+                default -> {
+                    return -1;
+                }
+            }
+        }else{
+            switch (ferramenta) {
+                case "Herança"-> {
+                    return 0;
+                }
+                case "Programação Funcional"-> {
+                    return 1;
+                }
+                case "Testes unitários"-> {
+                    return 2;
+                }
+                case "Tratamento de Excepções"-> {
+                    return 3;
+                }
+                case "IDE"-> {
+                    return 4;
+                }
+                case "Ajuda Do Professor"-> {
+                    return 5;
+                }
+
+                default -> {
+                    return -1;
+                }
             }
         }
     }

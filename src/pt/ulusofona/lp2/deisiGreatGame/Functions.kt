@@ -27,7 +27,7 @@ fun comando(manager: GameManager, args: List<String>): String?{
         "POLYGLOTS" -> return polyglots()
         "MOST_USED_POSITIONS" -> return mostUsedPositions()
         "MOST_USED_ABYSSES" -> return mostUsedAbysses()
-        "MOVE" -> return move()
+        "MOVE" -> return move(manager)
         "ABYSS" -> return abyss()
     }
     return null
@@ -43,6 +43,7 @@ fun getplayer(manager: GameManager,args: List<String>):String {
 }
 
 fun playersByLanguage():String{
+
     return ""
 }
 
@@ -58,7 +59,8 @@ fun mostUsedAbysses():String{
     return ""
 }
 
-fun move():String{
+fun move(gameManager: GameManager):String{
+    gameManager.players.get(gameManager.playerAJogar).andaParaAFrente(3)
     return ""
 }
 
