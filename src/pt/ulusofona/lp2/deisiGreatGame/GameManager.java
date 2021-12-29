@@ -662,6 +662,18 @@ public class GameManager {
                 }
             }
 
+            for (int i = 0; i <jogadoresNestaCasa.size() ; i++) {
+                write.println(jogadoresNestaCasa.get(i).getId());
+            }
+
+            for (int i = 0; i <jogadoresNoCoreDumped.size() ; i++) {
+                write.println(jogadoresNoCoreDumped.get(i).getId());
+            }
+
+            for (int i = 0; i <playersEmJogo.size() ; i++) {
+                write.println(playersEmJogo.get(i).getId());
+            }
+
             writer.close();
             return true;
         }catch (Exception e){
@@ -782,6 +794,25 @@ public class GameManager {
                     }
                 }
 
+                if (dados.length==1 && linhaFile>=7){
+                    switch (linhaFile) {
+                        case 7 -> {
+                            String leituraJogadoresNestaCasa = dados[0];
+                            jogadoresNestaCasa.add(new Programmer(Integer.parseInt(leituraJogadoresNestaCasa)));
+                            linhaFile++;
+                        }
+                        case 8 -> {
+                            String leituraJogadoresNoCoreDump = dados[0];
+                            jogadoresNoCoreDumped.add(new Programmer(Integer.parseInt(leituraJogadoresNoCoreDump)));
+                            linhaFile++;
+                        }
+                        case 9 -> {
+                            String leituraPlayersEmJogo = dados[0];
+                            playersEmJogo.add(new Programmer(Integer.parseInt(leituraPlayersEmJogo)));
+                            linhaFile++;
+                        }
+                    }
+                }
 
             }
             reader.close();

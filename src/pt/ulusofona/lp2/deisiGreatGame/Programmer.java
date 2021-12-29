@@ -43,6 +43,10 @@ public class Programmer {
         this.guardaPosicao = guardaPosicao;
     }
 
+    public Programmer(int id) {
+        this.id = id;
+    }
+
     public ArrayList<Integer> getArrayListGuardaPosicao() {
         return guardaPosicao;
     }
