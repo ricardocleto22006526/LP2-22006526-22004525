@@ -663,18 +663,6 @@ public class GameManager {
                 }
             }
 
-            for (int i = 0; i <jogadoresNestaCasa.size() ; i++) {
-                write.println(jogadoresNestaCasa.get(i).getId());
-            }
-
-            for (int i = 0; i <jogadoresNoCoreDumped.size() ; i++) {
-                write.println(jogadoresNoCoreDumped.get(i).getId());
-            }
-
-            for (int i = 0; i <playersEmJogo.size() ; i++) {
-                write.println(playersEmJogo.get(i).getId());
-            }
-
             writer.close();
             return true;
         }catch (Exception e){
@@ -782,7 +770,7 @@ public class GameManager {
                         guardaPosicoes.add(Integer.valueOf(posicaoPlayers[i]));
                     }
 
-                    players.add(new Programmer(id,nome,linguagensFavoritas,color,estado,posPlayer,playerFerramentas,presoNoCiclo,guardaPosicoes) );
+                    players.add( new Programmer(id,nome,linguagensFavoritas,color,estado,posPlayer,playerFerramentas,presoNoCiclo,guardaPosicoes) );
                 }
 
                 if (dados.length==2){
@@ -794,38 +782,7 @@ public class GameManager {
                     }else {
                         playersAbyssesAndTools.put( posicaoTabuleiro, new Abismo( abismoOUFerramentaID(nomesAbismosOUTools,0) ) );
                     }
-                }
 
-                if (dados.length==1 && linhaFile>=7){
-                    switch (linhaFile) {
-                        case 7 -> {
-                            String leituraJogadoresNestaCasa = dados[0];
-                            if (leituraJogadoresNestaCasa==null || leituraJogadoresNestaCasa.equals("") ){
-                                linhaFile++;
-                                continue;
-                            }
-                            jogadoresNestaCasa.add(new Programmer(Integer.parseInt(leituraJogadoresNestaCasa)));
-                            linhaFile++;
-                        }
-                        case 8 -> {
-                            String leituraJogadoresNoCoreDump = dados[0];
-                            if (leituraJogadoresNoCoreDump==null || leituraJogadoresNoCoreDump.equals("")){
-                                linhaFile++;
-                                continue;
-                            }
-                            jogadoresNoCoreDumped.add(new Programmer(Integer.parseInt(leituraJogadoresNoCoreDump)));
-                            linhaFile++;
-                        }
-                        case 9 -> {
-                            String leituraPlayersEmJogo = dados[0];
-                            if (leituraPlayersEmJogo==null || leituraPlayersEmJogo.equals("")){
-                                linhaFile++;
-                                continue;
-                            }
-                            playersEmJogo.add(new Programmer(Integer.parseInt(leituraPlayersEmJogo)));
-                            linhaFile++;
-                        }
-                    }
                 }
 
             }
