@@ -4,23 +4,28 @@ enum class CommandType { GET, POST }
 
 //Function1<CommandType, Function2<GameManager, List<String>, String>> = (CommandType) -> (GameManager, List<String>) -> String OU ((CommandType) -> (GameManager, List<String>))?
 
-fun router(): ((CommandType) -> (GameManager, List<String>) -> String)? {
-    //return comando(abc())
-    // return CommandType.valueOf(abc(CommandType))
-    return null
+fun router(): (CommandType?) -> ((CommandType) -> (GameManager, List<String>) -> String)? {
+    return ::comando
 }
 
-
+fun comando(tipo : CommandType?): ((CommandType) -> (GameManager, List<String>) -> String)?{
+    when(tipo){
+        CommandType.GET ->return null
+        CommandType.POST ->return null
+    }
+    return null
+}
+/*
 fun abc(tipo:CommandType,manager: GameManager, args: List<String>) : String {
     when(tipo){
         CommandType.GET ->return comando(manager,args).toString()
         CommandType.POST ->return  comando(manager,args).toString()
     }
 }
+ */
 
-
-
-fun comando(manager: GameManager, args: List<String>): String?{
+/*
+fun introduzido(manager: GameManager, args: List<String>): String?{
     when(args[0]){
         "PLAYER" -> return getplayer(manager,args)
         "PLAYERS_BY_LANGUAGE" -> return playersByLanguage()
@@ -32,6 +37,8 @@ fun comando(manager: GameManager, args: List<String>): String?{
     }
     return null
 }
+
+ */
 
 
 fun getplayer(manager: GameManager,args: List<String>):String {

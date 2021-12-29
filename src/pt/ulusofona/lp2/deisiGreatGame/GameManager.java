@@ -649,7 +649,6 @@ public class GameManager {
                 + players.get(i).estaPresoNoCicloInfinito() + "@" + players.get(i).getArrayListGuardaPosicao() );
             }
 
-
             for (int i = 0; i < tamanhoDoTabuleiro ; i++) {
                 if (playersAbyssesAndTools.containsKey(i)){
 
@@ -695,8 +694,6 @@ public class GameManager {
         jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
         jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
         playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
-
-
 
         try {
 
