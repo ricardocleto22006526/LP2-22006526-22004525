@@ -764,7 +764,7 @@ public class GameManager {
                     int posPlayer = Integer.parseInt(dados[5].trim());
 
                     ArrayList<Ferramenta> playerFerramentas = new ArrayList<>();
-                    String[] nomesFerramentas = dados[6].replace("[","").replace("]","").split(",");
+                    String[] nomesFerramentas = dados[6].replace("[","").replace("]","").replace(" ","").split(",");
 
                     if (!nomesFerramentas[0].equals("")){
                         for (int i=0 ; i < nomesFerramentas.length ; i++) {
@@ -798,16 +798,28 @@ public class GameManager {
                     switch (linhaFile) {
                         case 7 -> {
                             String leituraJogadoresNestaCasa = dados[0];
+                            if (leituraJogadoresNestaCasa==null || leituraJogadoresNestaCasa.equals("") ){
+                                linhaFile++;
+                                continue;
+                            }
                             jogadoresNestaCasa.add(new Programmer(Integer.parseInt(leituraJogadoresNestaCasa)));
                             linhaFile++;
                         }
                         case 8 -> {
                             String leituraJogadoresNoCoreDump = dados[0];
+                            if (leituraJogadoresNoCoreDump==null || leituraJogadoresNoCoreDump.equals("")){
+                                linhaFile++;
+                                continue;
+                            }
                             jogadoresNoCoreDumped.add(new Programmer(Integer.parseInt(leituraJogadoresNoCoreDump)));
                             linhaFile++;
                         }
                         case 9 -> {
                             String leituraPlayersEmJogo = dados[0];
+                            if (leituraPlayersEmJogo==null || leituraPlayersEmJogo.equals("")){
+                                linhaFile++;
+                                continue;
+                            }
                             playersEmJogo.add(new Programmer(Integer.parseInt(leituraPlayersEmJogo)));
                             linhaFile++;
                         }
@@ -815,6 +827,7 @@ public class GameManager {
                 }
 
             }
+
             reader.close();
             return true;
         }catch (Exception e){
@@ -827,19 +840,19 @@ public class GameManager {
             case "Herança"-> {
                 return 0;
             }
-            case "Programação Funcional"-> {
+            case "ProgramaçãoFuncional"-> {
                 return 1;
             }
-            case "Testes unitários"-> {
+            case "Testesunitários"-> {
                 return 2;
             }
-            case "Tratamento de Excepções"-> {
+            case "TratamentodeExcepções"-> {
                 return 3;
             }
             case "IDE"-> {
                 return 4;
             }
-            case "Ajuda Do Professor"-> {
+            case "AjudaDoProfessor"-> {
                 return 5;
             }
 
