@@ -136,6 +136,15 @@ public class Programmer {
         this.posPlayer = tamanhoDoTabuleiro - (posicaoInicial-tamanhoDoTabuleiro);
     }
 
+    public boolean temAlinguagem(String linguagem){
+        for (int i = 0; i <linguagensFavoritasKotlin.size() ; i++) {
+            if (linguagensFavoritasKotlin.get(i).equals(linguagem)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void alteraEstado() {
         this.estado="Derrotado";
     }

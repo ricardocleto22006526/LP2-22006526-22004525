@@ -9,7 +9,7 @@ public class Main {
         GameManager manager = new GameManager();
 
         List<String> a=new ArrayList<>();
-        a.add("a");
+        a.add("C");
 
          /*
         String a = "Joao";
@@ -17,9 +17,9 @@ public class Main {
           */
         try{
             manager.createInitialBoard(creat4Players(),50,abyssesAndTools());
-            System.out.println(FunctionsKt.player(manager,a));
+            System.out.println(FunctionsKt.playersByLanguage(manager,a));
         }catch (Exception e){
-
+            System.out.println(e.getMessage());
         }
 
     }

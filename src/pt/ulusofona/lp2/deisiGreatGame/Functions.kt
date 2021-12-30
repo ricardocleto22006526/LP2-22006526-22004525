@@ -45,14 +45,6 @@ fun commandTypeGETfuncao(game: GameManager, lista: List<String>) : String? {
 
 
 fun player(manager: GameManager, inputNomeDoJogador: List<String>): String? {
-    /*
-    if (manager.players.filter { it.nome == inputNomeDoJogador[1].toString() }.joinToString{ it.toString() }.isEmpty()){
-       return "Inexistent player"
-    }
-    else{
-       return manager.players.filter { it.nome == inputNomeDoJogador[1].toString() }.joinToString{ it.toString() }
-    }
-     */
 
     return if (manager.players.filter { it.name == inputNomeDoJogador[1] }.joinToString { it.toString() }.isEmpty()) { "Inexistent player"
     } else { manager.players.filter { it.name == inputNomeDoJogador[1] }.joinToString { it.toString() } }
@@ -61,7 +53,7 @@ fun player(manager: GameManager, inputNomeDoJogador: List<String>): String? {
 
 fun playersByLanguage(manager: GameManager, inputLinguagem: List<String>): String? {
 
-    return ""
+    return manager.players.filter { it.temAlinguagem(inputLinguagem[0]) }.joinToString(","){ it.name }
 }
 
 fun polyglots(manager: GameManager): String? {
