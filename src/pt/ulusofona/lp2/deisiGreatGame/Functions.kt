@@ -58,10 +58,10 @@ fun playersByLanguage(manager: GameManager, inputLinguagem: List<String>): Strin
 
 fun polyglots(manager: GameManager): String? {
 
-    return manager.players.joinToString("\n") { it.name + ":" + it.linguagensFavoritasKotlin.distinct().count()}
-
+    return manager.players.filter { it.linguagensFavoritasKotlin.size > 1 }.sortedByDescending { it.linguagensFavoritasKotlin.size }
+        .joinToString("\n") { it.name + ":" + it.linguagensFavoritasKotlin.distinct().count()}
 }
-
+//manager.players.joinToString("\n") { it.name + ":" + it.linguagensFavoritasKotlin.distinct().count()}
 fun mostUsedPositions(manager: GameManager, posicoesMaisPisadas: List<String>): String? {
     return ""
 }

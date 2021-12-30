@@ -18,7 +18,7 @@ public class Main {
           */
         try{
             manager.createInitialBoard(creat4Players(),50,abyssesAndTools());
-            System.out.println(FunctionsKt.playersByLanguage(manager,a));
+            System.out.println(FunctionsKt.polyglots(manager));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -57,7 +57,7 @@ public class Main {
 
         jogadores[1][0] = "10";
         jogadores[1][1] = "Ana";
-        jogadores[1][2] = "C;Java";
+        jogadores[1][2] = "C;Java;C++";
         jogadores[1][3] = "Green";
 
         jogadores[2][0] = "2";
