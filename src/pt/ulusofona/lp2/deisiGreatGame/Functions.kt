@@ -78,7 +78,9 @@ fun mostUsedAbysses(manager: GameManager, abismosMaisUsados: List<String>): Stri
 
 fun move(manager: GameManager, posicao: List<String>): String? {
     manager.moveCurrentPlayer(Integer.parseInt(posicao[1]))
+
     //manager.getTitle(manager.players.get(manager.playerAJogar).getPosPlayer())
+
     return if (manager.reactToAbyssOrTool()==null){ "OK" } else {
         manager.playersAbyssesAndTools[manager.playerAJogar].toString()
     }
