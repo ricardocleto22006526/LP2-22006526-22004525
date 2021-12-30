@@ -676,21 +676,21 @@ public class GameManager {
 
     public boolean loadGame(File file){
 
-        players.clear(); // Serve para Limpar os players
-        nrDeTurnos=0; // Serve para Limpar os turnos
-        playerAJogar=0; // Serve para dar Reset do player a jogar
-        winner=""; // Serve para Limpar o nome do vencedor
-        playersAbyssesAndTools.clear(); // Serve para dar Reset ao hashmap de ferramentas de cada player
-        posicaoAnterior=1; // Serve para dar Reset da variavel que guarda a posicao anterior
-        posicaoAntesDaAnterior=1; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
-        jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
-        jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
-        playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
-
         try {
 
             FileReader fr = new FileReader(file);
             BufferedReader reader = new BufferedReader(fr);
+
+            players.clear(); // Serve para Limpar os players
+            nrDeTurnos=0; // Serve para Limpar os turnos
+            playerAJogar=0; // Serve para dar Reset do player a jogar
+            winner=""; // Serve para Limpar o nome do vencedor
+            playersAbyssesAndTools.clear(); // Serve para dar Reset ao hashmap de ferramentas de cada player
+            posicaoAnterior=1; // Serve para dar Reset da variavel que guarda a posicao anterior
+            posicaoAntesDaAnterior=1; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
+            jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
+            jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
+            playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
 
             String linha = null;
 
