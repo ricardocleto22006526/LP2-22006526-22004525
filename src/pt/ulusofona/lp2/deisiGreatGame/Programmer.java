@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.deisiGreatGame;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Programmer {
     int id;
@@ -14,6 +15,7 @@ public class Programmer {
     ArrayList<Ferramenta> ferramentas = new ArrayList<>();
     boolean presoNoCicloInfinito=false;
     ArrayList<Integer> guardaPosicao = new ArrayList<>();
+    ArrayList<String> linguagensFavoritasKotlin = new ArrayList<>();
 
     public Programmer(String nome, int id, ProgrammerColor cor, ArrayList<String> linguagensFavoritas,int posPlayer) {
         this.id = id;
@@ -28,6 +30,9 @@ public class Programmer {
         this.nome = nome;
         this.linguagensFavoritas = linguagensFavoritas;
         this.cor = cor;
+        String[] abc = linguagensFavoritas.get(0).split(";");
+        this.linguagensFavoritasKotlin = new ArrayList<>(List.of(abc)) ;
+
     }
 
     public Programmer(int id, String nome, ArrayList<String> linguagensFavoritas, ProgrammerColor cor, String estado, int posPlayer, ArrayList<Ferramenta> ferramentas,
@@ -85,6 +90,10 @@ public class Programmer {
                 ferramentas.remove(ferramentas.get(i));
             }
         }
+    }
+
+    public ArrayList<String> getLinguagensFavoritasKotlin() {
+        return linguagensFavoritasKotlin;
     }
 
     public Programmer() {

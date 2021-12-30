@@ -13,134 +13,78 @@ fun router():  (CommandType) -> (GameManager,List<String>) -> String?{
     return { commandType -> qualComando(commandType) }
 }
 
-
 //Function2<GameManager, List<String>, String?>
 fun qualComando(tipoDeComando : CommandType): (GameManager,List<String>) -> String? {
 
     when(tipoDeComando) {
         CommandType.GET -> return { game, valores -> commandTypeGETfuncao(game, valores) }
-        CommandType.POST -> return { game, valores -> commandTypeGETfuncao(game, valores) }
+        CommandType.POST -> return { game, valores -> commandTypePOSTfuncao(game, valores) }
     }
 
 }
 
 fun commandTypePOSTfuncao(game: GameManager, lista: List<String>) : String? {
-    when(lista.get(0)){
-        "MOVE" -> return move(game, lista.get(1))
-        "ABYSS" -> return abyss(game, lista.get(1), lista.get(2))
+    when(lista[0]){
+        "MOVE" -> return move(game, lista)
+        "ABYSS" -> return abyss(game, lista)
     }
 
     return null
 }
 
 fun commandTypeGETfuncao(game: GameManager, lista: List<String>) : String? {
-    when(lista.get(0)){
-        "PLAYER" -> return player(game, lista.get(1))
-        "PLAYERS_BY_LANGUAGE" -> return playersByLanguage(game, lista.get(1))
+    when(lista[0]){
+        "PLAYER" -> return player(game, lista)
+        "PLAYERS_BY_LANGUAGE" -> return playersByLanguage(game, lista)
         "POLYGLOTS" -> return polyglots(game)
-        "MOST_USED_POSITIONS" -> return mostUsedPositions(game, lista.get(1))
-        "MOST_USED_ABYSSES" -> return mostUsedAbysses(game, lista.get(1))
+        "MOST_USED_POSITIONS" -> return mostUsedPositions(game, lista)
+        "MOST_USED_ABYSSES" -> return mostUsedAbysses(game, lista)
     }
     return null
 }
 
 
-fun player(manager: GameManager, inputNomeDoJogador: String): String? {
+fun player(manager: GameManager, inputNomeDoJogador: List<String>): String? {
+    /*
+    if (manager.players.filter { it.nome == inputNomeDoJogador[1].toString() }.joinToString{ it.toString() }.isEmpty()){
+       return "Inexistent player"
+    }
+    else{
+       return manager.players.filter { it.nome == inputNomeDoJogador[1].toString() }.joinToString{ it.toString() }
+    }
+     */
 
-    return ""
+    return if (manager.players.filter { it.name == inputNomeDoJogador[1] }.joinToString { it.toString() }.isEmpty()) { "Inexistent player"
+    } else { manager.players.filter { it.name == inputNomeDoJogador[1] }.joinToString { it.toString() } }
 }
 
-fun playersByLanguage(manager: GameManager, inputLinguagem: String): String? {
+
+fun playersByLanguage(manager: GameManager, inputLinguagem: List<String>): String? {
 
     return ""
 }
 
 fun polyglots(manager: GameManager): String? {
+    return manager.players.joinToString("\n") { it.name + ":" + it.linguagensFavoritasKotlin.distinct().count()}
+}
 
+fun mostUsedPositions(manager: GameManager, posicoesMaisPisadas: List<String>): String? {
     return ""
 }
 
-fun mostUsedPositions(manager: GameManager, posicoesMaisPisadas: String): String? {
-
+fun mostUsedAbysses(manager: GameManager, abismosMaisUsados: List<String>): String? {
     return ""
 }
 
-fun mostUsedAbysses(manager: GameManager, abismosMaisUsados: String): String? {
-
-    return ""
-}
-
-fun move(manager: GameManager, posicao: String): String? {
-
-    return ""
-}
-
-fun abyss(manager: GameManager, tipoAbismo: String, posicao: String): String? {
-
-    return ""
-}
-
-
-
-/*
-fun abc(tipo:CommandType,manager: GameManager, args: List<String>) : String {
-    when(tipo){
-        CommandType.GET ->return comando(manager,args).toString()
-        CommandType.POST ->return  comando(manager,args).toString()
+fun move(manager: GameManager, posicao: List<String>): String? {
+    manager.moveCurrentPlayer(Integer.parseInt(posicao[1]))
+    //manager.getTitle(manager.players.get(manager.playerAJogar).getPosPlayer())
+    return if (manager.reactToAbyssOrTool()==null){ "OK" } else {
+        manager.playersAbyssesAndTools[manager.playerAJogar].toString()
     }
 }
 
-fun introduzido(manager: GameManager, args: List<String>): String?{
-    when(args[0]){
-        "PLAYER" -> return getplayer(manager,args)
-        "PLAYERS_BY_LANGUAGE" -> return playersByLanguage()
-        "POLYGLOTS" -> return polyglots()
-        "MOST_USED_POSITIONS" -> return mostUsedPositions()
-        "MOST_USED_ABYSSES" -> return mostUsedAbysses()
-        "MOVE" -> return move(manager)
-        "ABYSS" -> return abyss()
-    }
-    return null
-}
-
-
-
-
-fun getplayer(manager: GameManager, args: String):String? {
-
-    //NAO SEI SE FUNCIONA
-    if (manager.players.equals(args[1])){
-        return manager.players.toString()
-    }
-    return "Inexistent player"
-
-}
-
-
-
-
-fun playersByLanguage():String{
+fun abyss(manager: GameManager, tipoAbismo: List<String>): String? {
     return ""
 }
 
-fun polyglots():String{
-    return ""
-}
-
-fun mostUsedPositions():String{
-    return ""
-}
-
-fun mostUsedAbysses():String{
-    return ""
-}
-
-fun move(gameManager: GameManager):String{
-    gameManager.players.get(gameManager.playerAJogar).andaParaAFrente(3)
-    return ""
-}
-
-fun abyss():String{
-    return ""
-}
- */

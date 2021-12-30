@@ -139,6 +139,7 @@ public class GameManager {
                 coresRepetidas.add(playerInfo[i][3].toUpperCase());
 
                 //Adiciona o novo Player ao arraylist de Players
+
                 players.add( new Programmer(id, nome, linguagensFavoritas, corDoPlayer) );
 
             }

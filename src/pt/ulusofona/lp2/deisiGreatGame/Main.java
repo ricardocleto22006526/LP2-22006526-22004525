@@ -1,40 +1,26 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
-import java.io.File;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         GameManager manager = new GameManager();
-        /*
-        try {
+
+        List<String> a=new ArrayList<>();
+        a.add("a");
+
+         /*
+        String a = "Joao";
+
+          */
+        try{
             manager.createInitialBoard(creat4Players(),50,abyssesAndTools());
-            File fp = new File("filename.txt");
-            manager.saveGame(fp);
-            manager.createInitialBoard(creat4PlayersExtra(),30,abyssesAndTools());
-            File fp1 = new File("filename.txt");
-            manager.loadGame(fp1);
-            manager.createInitialBoard(creat4Players(),30,abyssesAndTools());
-            manager.saveGame(fp1);
-            manager.moveCurrentPlayer(1);
-            manager.moveCurrentPlayer(2);
-            manager.moveCurrentPlayer(3);
-            manager.moveCurrentPlayer(5);
-            manager.moveCurrentPlayer(4);
-            manager.saveGame(fp1);
-        } catch (InvalidInitialBoardException e) {
-            e.printStackTrace();
+            System.out.println(FunctionsKt.player(manager,a));
+        }catch (Exception e){
+
         }
-
-
-         */
-
-
-
-        File fp = new File("filename.txt");
-        manager.loadGame(fp);
-        int ola=0;
-
-
 
     }
     public static String[][] creat4PlayersExtra() {
@@ -64,7 +50,7 @@ public class Main {
     public static String[][] creat4Players() {
         String[][] jogadores = new String[4][4];
         jogadores[0][0] = "19";
-        jogadores[0][1] = "João";
+        jogadores[0][1] = "Joao";
         jogadores[0][2] = "Java;Python";
         jogadores[0][3] = "Purple";
 
