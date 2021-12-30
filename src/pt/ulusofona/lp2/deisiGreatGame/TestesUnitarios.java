@@ -499,7 +499,7 @@ public class TestesUnitarios {
         try{
             String[][] abismoOUferramenta = createAbismosOUTools(null,"7","5");
             game.createInitialBoard(players,10,abismoOUferramenta);
-           fail("Deveria ter dado exception");
+
         }catch (Exception e){
             assertEquals("Cannot invoke \"String.equals(Object)\" because \"abyssesAndTools[i][0]\" is null",e.getMessage());
         }
