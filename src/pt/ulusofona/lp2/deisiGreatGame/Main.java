@@ -9,7 +9,8 @@ public class Main {
         GameManager manager = new GameManager();
 
         List<String> a=new ArrayList<>();
-        a.add("C");
+        a.add("a");
+        a.add("Python");
 
          /*
         String a = "Joao";

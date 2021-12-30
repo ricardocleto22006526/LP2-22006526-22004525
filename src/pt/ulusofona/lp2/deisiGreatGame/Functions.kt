@@ -53,11 +53,13 @@ fun player(manager: GameManager, inputNomeDoJogador: List<String>): String? {
 
 fun playersByLanguage(manager: GameManager, inputLinguagem: List<String>): String? {
 
-    return manager.players.filter { it.temAlinguagem(inputLinguagem[0]) }.joinToString(","){ it.name }
+    return manager.players.filter { it.temAlinguagem(inputLinguagem[1]) }.joinToString(","){ it.name }
 }
 
 fun polyglots(manager: GameManager): String? {
+
     return manager.players.joinToString("\n") { it.name + ":" + it.linguagensFavoritasKotlin.distinct().count()}
+
 }
 
 fun mostUsedPositions(manager: GameManager, posicoesMaisPisadas: List<String>): String? {
