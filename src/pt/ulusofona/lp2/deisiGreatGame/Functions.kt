@@ -61,6 +61,14 @@ fun move(manager: GameManager, posicao: List<String>): String? {
     }
 }
 
+fun abyss(manager: GameManager, tipoAbismo: List<String>): String? {
+    return if ( manager.adicionarAbismoOuFerramentaNaCollection( Integer.parseInt(tipoAbismo[1]), Integer.parseInt(tipoAbismo[2]) ) ) { "OK" }
+    else { "Position is occupied" }
+}
+
+
+
+
 fun mostUsedPositions(manager: GameManager, posicoesMaisPisadas: List<String>): String? {
     return ""
 }
@@ -69,7 +77,5 @@ fun mostUsedAbysses(manager: GameManager, abismosMaisUsados: List<String>): Stri
     return ""
 }
 
-fun abyss(manager: GameManager, tipoAbismo: List<String>): String? {
-    return if ( manager.adicionarAbismoOuFerramentaNaCollection( Integer.parseInt(tipoAbismo[1]), Integer.parseInt(tipoAbismo[2]) ) ) { "OK" } else { "Position is occupied" }
-}
+
 
