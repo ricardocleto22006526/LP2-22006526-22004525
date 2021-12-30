@@ -894,11 +894,8 @@ public class GameManager {
     }
 
     public boolean adicionarAbismoOuFerramentaNaCollection(int id, int position){
-
-        for (int i = 0; i < tamanhoDoTabuleiro ; i++) {
-            if (playersAbyssesAndTools.containsKey(i)){
-                return false;
-            }
+        if (playersAbyssesAndTools.containsKey(position)){
+            return false;
         }
         playersAbyssesAndTools.put(position, new Abismo(id));
         return true;
