@@ -2,6 +2,8 @@ package pt.ulusofona.lp2.deisiGreatGame;
 
 import org.junit.Test;
 
+import java.io.File;
+
 import static org.junit.Assert.*;
 
 public class TestesUnitarios {
@@ -1381,6 +1383,35 @@ public class TestesUnitarios {
 
             }
             game.gameIsOver();
+        }catch (Exception e){
+            assertEquals("Nao deveria lancar exception",e.getMessage());
+        }
+
+    }
+
+    @Test
+    public void testsaveGame(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+        String[][] abismoOUferramenta = createAbismosOUTools("1","2","5");
+
+        try{
+           game.createInitialBoard(players,10,abismoOUferramenta);
+           game.saveGame(new File("Gravar.txt"));
+        }catch (Exception e){
+            assertEquals("Nao deveria lancar exception",e.getMessage());
+        }
+
+    }
+
+    @Test
+    public void testLoadGame(){
+        GameManager game = new GameManager();
+        String[][] players = createPlayers();
+
+        try{
+            game.loadGame(new File("JogoGravado.txt"));
+            game.adicionarAbismoOuFerramentaNaCollection(2,2);
         }catch (Exception e){
             assertEquals("Nao deveria lancar exception",e.getMessage());
         }
