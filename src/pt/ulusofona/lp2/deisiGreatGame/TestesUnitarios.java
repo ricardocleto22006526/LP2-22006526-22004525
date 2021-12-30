@@ -2,8 +2,6 @@ package pt.ulusofona.lp2.deisiGreatGame;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.*;
 
 public class TestesUnitarios {
@@ -497,11 +495,12 @@ public class TestesUnitarios {
         String[][] players = createPlayers();
 
         try{
-            String[][] abismoOUferramenta = createAbismosOUTools(null,"7","5");
-            game.createInitialBoard(players,10,abismoOUferramenta);
+            String[][] abismoOUferramenta = createAbismosOUTools("1","7","5");
+            game.createInitialBoard(null,10,abismoOUferramenta);
 
         }catch (Exception e){
-            assertEquals("Cannot invoke \"String.equals(Object)\" because \"abyssesAndTools[i][0]\" is null",e.getMessage());
+            assertEquals("Informacao dos jogadores incorreta",e.getMessage());
+
         }
 
     }
