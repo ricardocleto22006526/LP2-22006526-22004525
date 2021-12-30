@@ -70,6 +70,6 @@ fun mostUsedAbysses(manager: GameManager, abismosMaisUsados: List<String>): Stri
 }
 
 fun abyss(manager: GameManager, tipoAbismo: List<String>): String? {
-    return ""
+    return if ( manager.adicionarAbismoOuFerramentaNaCollection( Integer.parseInt(tipoAbismo[1]), Integer.parseInt(tipoAbismo[2]) ) ) { "OK" } else { "Position is occupied" }
 }
 

@@ -797,6 +797,8 @@ public class GameManager {
         }
     }
 
+
+    //REALIZADAS POR MIM PARA COMPLEMENTAR O CODIGO
     public int nomeFerramentaFuncao(String ferramenta){
         switch (ferramenta) {
             case "Herança"-> {
@@ -889,6 +891,17 @@ public class GameManager {
                 }
             }
         }
+    }
+
+    public boolean adicionarAbismoOuFerramentaNaCollection(int id, int position){
+
+        for (int i = 0; i < tamanhoDoTabuleiro ; i++) {
+            if (playersAbyssesAndTools.containsKey(i)){
+                return false;
+            }
+        }
+        playersAbyssesAndTools.put(position, new Abismo(id));
+        return true;
     }
 
 }
