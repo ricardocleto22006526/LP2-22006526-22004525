@@ -24,6 +24,7 @@ public class Main {
         }
 
     }
+
     public static String[][] creat4PlayersExtra() {
         String[][] jogadores = new String[4][4];
         jogadores[0][0] = "19";
