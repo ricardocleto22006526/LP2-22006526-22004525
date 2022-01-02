@@ -1,0 +1,30 @@
+79
+0
+18
+4
+26
+22
+1@Joshua Bloch@[Java;C;Python;C#]@PURPLE@Em Jogo@39@[Programação Funcional, Testes unitários, IDE]@false@[1, 7, 9, 15, 17, 23, 24, 30, 36]
+2@Guido van Rossum@[Python;Common Lisp;C]@BLUE@Em Jogo@30@[Testes unitários]@false@[1, 5, 10, 11, 12, 16, 19, 22, 26]
+6@Ajuda Do Professor
+7@Programação Funcional
+8@Programação Funcional
+13@Herança
+17@Testes unitários
+20@Herança
+23@IDE
+24@IDE
+26@Testes unitários
+28@Ajuda Do Professor
+31@Tratamento de Excepções
+34@Tratamento de Excepções
+42@Segmentation Fault
+48@File Not Found Exception
+51@Crash (aka Rebentaço)
+57@Erro de sintaxe
+58@Efeitos secundários
+63@Erro de lógica
+65@Ciclo infinito
+69@Duplicated Code
+74@Blue Screen of Death
+76@Exception

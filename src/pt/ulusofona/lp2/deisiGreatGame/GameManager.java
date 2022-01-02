@@ -19,6 +19,9 @@ public class GameManager {
     ArrayList<Programmer> jogadoresNoCoreDumped = new ArrayList<>();
     ArrayList<Programmer> playersEmJogo = new ArrayList<>();
 
+    HashMap<Integer,Integer> casasMaisPisadasNoJogo = new HashMap<>();
+    HashMap<String,Integer> abyssesMaisPisadasNoJogo = new HashMap<>();
+
     public GameManager() {
     }
 
@@ -77,9 +80,11 @@ public class GameManager {
 
                     if ( abyssesAndTools[i][0].equals("0") ){
                         playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Abismo( Integer.parseInt(abyssesAndTools[i][1]) ) );
+                        abyssesMaisPisadasNoJogo.put(abismoNome(Integer.parseInt(abyssesAndTools[i][1])), 0);
                     }else {
                         playersAbyssesAndTools.put( Integer.parseInt(abyssesAndTools[i][2]), new Ferramenta( Integer.parseInt(abyssesAndTools[i][1]) ) );
                     }
+
 
                 }
 
@@ -338,6 +343,20 @@ public class GameManager {
 
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro,nrPositions);
         }
+
+        if( casasMaisPisadasNoJogo.containsKey(players.get(playerAJogar).getPosPlayer()) ){
+            casasMaisPisadasNoJogo.put( players.get(playerAJogar).getPosPlayer(), casasMaisPisadasNoJogo.get(players.get(playerAJogar).getPosPlayer()+1) );
+        }else{
+            casasMaisPisadasNoJogo.put(players.get(playerAJogar).getPosPlayer(),1);
+        }
+
+
+        if ( playersAbyssesAndTools.containsKey(players.get(playerAJogar).getPosPlayer())
+                &&  abyssesMaisPisadasNoJogo.containsKey( playersAbyssesAndTools.get(players.get(playerAJogar).getPosPlayer()).getTitulo()) ){
+            abyssesMaisPisadasNoJogo.put( playersAbyssesAndTools.get(players.get(playerAJogar).getPosPlayer()).getTitulo() , abyssesMaisPisadasNoJogo.get(players.get(playerAJogar).getPosPlayer()+1) );
+        }
+
+
         return true;
     }
 
@@ -900,5 +919,45 @@ public class GameManager {
         playersAbyssesAndTools.put(position, new Abismo(id));
         return true;
     }
+
+    public String abismoNome(int id){
+        switch (id) {
+            case 0 -> {
+                return "Erro de sintaxe";
+            }
+            case 1 -> {
+                return "Erro de lógica";
+            }
+            case 2 -> {
+                return "Exception";
+            }
+            case 3 -> {
+                return "File Not Found Exception";
+            }
+            case 4 -> {
+                return "Crash (aka Rebentaço)";
+            }
+            case 5 -> {
+                return "Duplicated Code";
+            }
+            case 6 -> {
+                return "Efeitos secundários";
+            }
+            case 7 -> {
+                return "Blue Screen of Death";
+            }
+            case 8 -> {
+                return "Ciclo infinito";
+            }
+            case 9 -> {
+                return "Segmentation Fault";
+            }
+
+            default -> {
+                return "";
+            }
+        }
+    }
+
 
 }

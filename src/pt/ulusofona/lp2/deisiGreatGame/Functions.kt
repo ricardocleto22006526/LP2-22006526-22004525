@@ -66,15 +66,12 @@ fun abyss(manager: GameManager, tipoAbismo: List<String>): String? {
     else { "Position is occupied" }
 }
 
-
-
-
 fun mostUsedPositions(manager: GameManager, posicoesMaisPisadas: List<String>): String? {
-    return ""
+    return manager.casasMaisPisadasNoJogo.map { it.key to it.value }.sortedByDescending { it.second }.take(Integer.parseInt(posicoesMaisPisadas[1])).joinToString("\n"){""+ it.first + ":" + it.second }
 }
 
 fun mostUsedAbysses(manager: GameManager, abismosMaisUsados: List<String>): String? {
-    return ""
+    return manager.abyssesMaisPisadasNoJogo.map { it.key to it.value }.sortedByDescending { it.second }.take(Integer.parseInt(abismosMaisUsados[1])).joinToString("\n"){""+ it.first + ":" + it.second }
 }
 
 

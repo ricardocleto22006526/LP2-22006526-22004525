@@ -1,0 +1,11 @@
+10
+0
+0
+0
+1
+1
+1@Jogador1@[Java]@PURPLE@Em Jogo@1@[]@false@[1]
+2@Jogador2@[C]@BLUE@Em Jogo@1@[]@false@[1]
+3@Jogador3@[C++]@GREEN@Em Jogo@1@[]@false@[1]
+4@Jogador4@[Kotlin]@BROWN@Em Jogo@1@[]@false@[1]
+5@Testes unitários
