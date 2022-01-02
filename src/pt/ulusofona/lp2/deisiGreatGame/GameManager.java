@@ -344,16 +344,18 @@ public class GameManager {
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro, nrPositions);
         }
 
-        if (casasMaisPisadasNoJogo.containsKey(players.get(playerAJogar).getPosPlayer())) {
-            casasMaisPisadasNoJogo.put(players.get(playerAJogar).getPosPlayer(), casasMaisPisadasNoJogo.get(players.get(playerAJogar).getPosPlayer() + 1));
+        if ( casasMaisPisadasNoJogo.containsKey( players.get(playerAJogar).getPosPlayer() ) ) {
+            casasMaisPisadasNoJogo.put( players.get(playerAJogar).getPosPlayer(), casasMaisPisadasNoJogo.get(players.get(playerAJogar).getPosPlayer()) + 1 );
         } else {
-            casasMaisPisadasNoJogo.put(players.get(playerAJogar).getPosPlayer(), 1);
+            casasMaisPisadasNoJogo.put( players.get(playerAJogar).getPosPlayer() , 1 );
         }
 
 
-        if (playersAbyssesAndTools.containsKey(players.get(playerAJogar).getPosPlayer())
-                && abyssesMaisPisadasNoJogo.containsKey(playersAbyssesAndTools.get(players.get(playerAJogar).getPosPlayer()).getTitulo())) {
-            abyssesMaisPisadasNoJogo.put(playersAbyssesAndTools.get(players.get(playerAJogar).getPosPlayer()).getTitulo(), abyssesMaisPisadasNoJogo.get( playersAbyssesAndTools.get(players.get(playerAJogar).getPosPlayer()).getTitulo())+1);
+        if (playersAbyssesAndTools.containsKey(players.get(playerAJogar).getPosPlayer()) &&
+            abyssesMaisPisadasNoJogo.containsKey(playersAbyssesAndTools.get(players.get(playerAJogar).getPosPlayer()).getTitulo())) {
+
+            abyssesMaisPisadasNoJogo.put(playersAbyssesAndTools.get(players.get(playerAJogar).getPosPlayer()).getTitulo(),
+                    abyssesMaisPisadasNoJogo.get( playersAbyssesAndTools.get(players.get(playerAJogar).getPosPlayer()).getTitulo())+1);
         }
 
 
