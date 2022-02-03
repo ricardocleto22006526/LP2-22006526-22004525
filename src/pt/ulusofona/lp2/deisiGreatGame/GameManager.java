@@ -4,6 +4,13 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
+//abyssesAndTools[i][0] -> abismos
+//abyssesAndTools[i][1] -> ferramentas
+
+/*public int abismoOUFerramentaID(String ferramenta, int abismoOUferramenta) {
+//abismoOUferramenta==0 -> abismos / abismoOUferramenta==1 -> ferrramentas
+ */
+
 public class GameManager {
     String winner;
     ArrayList<Programmer> players = new ArrayList<>();
@@ -14,6 +21,8 @@ public class GameManager {
     int nrPosicoesMovida = 0;
     int posicaoAnterior = 1;
     int posicaoAntesDaAnterior = 1;
+    int posicaoAntesDaAnteriorDaAnterior = 1;
+
 
     ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
     ArrayList<Programmer> jogadoresNoCoreDumped = new ArrayList<>();
@@ -58,9 +67,9 @@ public class GameManager {
 
                     if (abyssesAndTools[i][0].equals("0")) {
                         //Valida os ids dos abismos
-                        if (!(Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 9)) {
+                        if (!(Integer.parseInt(abyssesAndTools[i][1]) >= 0 && Integer.parseInt(abyssesAndTools[i][1]) <= 10)) {
                             //return false;
-                            throw new InvalidInitialBoardException("ID do abismo nao esta no range correto (0 - 9)", 1, Integer.parseInt(abyssesAndTools[i][1]));
+                            throw new InvalidInitialBoardException("ID do abismo nao esta no range correto (0 - 10)", 1, Integer.parseInt(abyssesAndTools[i][1]));
                         }
 
                     } else {
@@ -294,7 +303,7 @@ public class GameManager {
 
     public int getCurrentPlayerID() {
 
-        if (players.get(playerAJogar).getEstado().equals("Derrotado")) {
+        if (players.get(playerAJogar).getEstado().equals("Ausente")) {
 
             for (int i = playerAJogar; i < players.size(); ) {
                 if (players.get(i).getEstado().equals("Em Jogo")) {
@@ -332,6 +341,10 @@ public class GameManager {
                 posicaoAntesDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size() - 2);
             }
 
+            if (players.get(playerAJogar).getArrayListGuardaPosicao().size() > 2) {
+                posicaoAntesDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size() - 3);
+            }
+
             players.get(playerAJogar).andaParaAFrente(nrPositions);
         } else {
 
@@ -339,6 +352,10 @@ public class GameManager {
 
             if (players.get(playerAJogar).getArrayListGuardaPosicao().size() > 1) {
                 posicaoAntesDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size() - 2);
+            }
+
+            if (players.get(playerAJogar).getArrayListGuardaPosicao().size() > 2) {
+                posicaoAntesDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size() - 3);
             }
 
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro, nrPositions);
@@ -487,6 +504,22 @@ public class GameManager {
                 }
             }
 
+            if (getImagePng(posPlayer).equals("Vamos Fazer Contas")) {
+                int posicoes = players.get(playerAJogar).getArrayListGuardaPosicao().size();
+                if (players.get(playerAJogar).getArrayListGuardaPosicao().size() != 0){
+                    switch (posicoes) {
+                        case 1 -> posicoes = posicaoAnterior;
+                        case 2 -> posicoes = (int) Math.ceil((double) (posicaoAnterior + posicaoAntesDaAnterior) / 2);
+                        case 3 -> posicoes = (int) Math.ceil((double) (posicaoAnterior + posicaoAntesDaAnterior + posicaoAntesDaAnteriorDaAnterior) / 3);
+                    }
+                    players.get(playerAJogar).andaParaAFrente(posicoes);
+                } else {
+                    players.get(playerAJogar).andaParaAFrente(0);
+                }
+
+
+            }
+
             //MOVIMENTOS QUANDO O PLAYER CAI EM FERRAMENTAS
 
             if (getImagePng(posPlayer).equals("inheritance.png")) {
@@ -528,14 +561,14 @@ public class GameManager {
 
             textOutput = playersAbyssesAndTools.get(posPlayer).tituloDoAbismoOUFerramenta();
 
-            if (!gameIsOver()) {
+            if (!gameIsOver() || !gameIsOverWithDraw()) {
                 mudancaDeTurno();
             }
 
             return textOutput;
         }
 
-        if (!gameIsOver()) {
+        if (!gameIsOver() || !gameIsOverWithDraw()) {
             mudancaDeTurno();
         }
         return null;
@@ -570,7 +603,7 @@ public class GameManager {
         }
 
         for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getEstado().equals("Derrotado") && !playersEmJogo.contains(players.get(i))) {
+            if (players.get(i).getEstado().equals("Ausente") && !playersEmJogo.contains(players.get(i))) {
                 playersEmJogo.add(players.get(i));
             }
         }
@@ -579,38 +612,89 @@ public class GameManager {
 
     }
 
-    public List<String> getGameResults() {
-
-        List<String> results = new ArrayList<>();
-
-        Collections.sort(players, (p1, p2) -> {
-            if (p1.getPosPlayer() < p2.getPosPlayer()) {
-                return -1;
-            } else if (p1.getPosPlayer() > p2.getPosPlayer()) {
-                return 1;
-            } else {
-                return p1.getName().compareTo(p2.getName());
-            }
-        });
-
-        players.sort(Comparator.comparingInt((Programmer posicao) -> posicao.posPlayer).reversed());
-
-        results.add("O GRANDE JOGO DO DEISI");
-        results.add("");
-        results.add("NR. DE TURNOS");
-        results.add(String.valueOf(nrDeTurnos));
-        results.add("");
-        results.add("VENCEDOR");
-        results.add(winner);
-        results.add("");
-        results.add("RESTANTES");
+    public boolean gameIsOverWithDraw() {
+        int validacao = 0;
 
         for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getName().equals(winner)) {
-                continue;
+            if (players.get(i).getEstado().equals("Ausente")){
+                validacao += 1;
+            } else {
+                return false;
             }
-            results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer());
+            if(players.size() == validacao){
+                return true;
+            }
+
+
         }
+        return false;
+    }
+
+    public List<String> getGameResults() {
+        List<String> results = new ArrayList<>();
+            // s/ empate
+            if (gameIsOver() && !gameIsOverWithDraw()) {
+
+                Collections.sort(players, (p1, p2) -> {
+                    if (p1.getPosPlayer() < p2.getPosPlayer()) {
+                        return -1;
+                    } else if (p1.getPosPlayer() > p2.getPosPlayer()) {
+                        return 1;
+                    } else {
+                        return p1.getName().compareTo(p2.getName());
+                    }
+                });
+
+                players.sort(Comparator.comparingInt((Programmer posicao) -> posicao.posPlayer).reversed());
+
+                results.add("O GRANDE JOGO DO DEISI");
+                results.add("");
+                results.add("NR. DE TURNOS");
+                results.add(String.valueOf(nrDeTurnos));
+                results.add("");
+                results.add("VENCEDOR");
+                results.add(winner);
+                results.add("");
+                results.add("RESTANTES");
+
+                for (int i = 0; i < players.size(); i++) {
+                    if (players.get(i).getName().equals(winner)) {
+                        continue;
+                    }
+                    results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer());
+                }
+
+            }
+            // c/ empate
+            if (!gameIsOver() && gameIsOverWithDraw()) {
+            Collections.sort(players, (p1, p2) -> {
+                if (p1.getPosPlayer() < p2.getPosPlayer()) {
+                    return -1;
+                } else if (p1.getPosPlayer() > p2.getPosPlayer()) {
+                    return 1;
+                } else {
+                    return p1.getName().compareTo(p2.getName());
+                }
+            });
+
+            players.sort(Comparator.comparingInt((Programmer posicao) -> posicao.posPlayer).reversed());
+
+            results.add("O GRANDE JOGO DO DEISI");
+            results.add("");
+            results.add("NR. DE TURNOS");
+            results.add(String.valueOf(nrDeTurnos));
+            results.add("");
+            results.add("O jogo terminou empatado.");
+            results.add("");
+            results.add("Participantes:");
+
+            for (int i = 0; i < players.size(); i++) {
+                if (players.get(i).getName().equals(winner)) {
+                    continue;
+                }
+                results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer() + " " + players.get(i).abismo.titulo);
+            }
+            }
 
         return results;
     }
@@ -664,6 +748,7 @@ public class GameManager {
             write.println(nrPosicoesMovida);
             write.println(posicaoAnterior);
             write.println(posicaoAntesDaAnterior);
+            write.println(posicaoAntesDaAnteriorDaAnterior);
 
             for (int i = 0; i < players.size(); i++) {
                 if (players.get(i).getArrayListGuardaPosicao() == null || players.get(i).getArrayListGuardaPosicao().size() == 0) {
@@ -847,10 +932,53 @@ public class GameManager {
         }
     }
 
-    public int abismoOUFerramentaID(String ferramenta, int abismoOUferramenta) {
+    //REALIZADAS POR MIM PARA COMPLEMENTAR O CODIGO
+    public int nomeAbismoFuncao(String abismo) {
+        switch (abismo) {
+            case "Erro de sintaxe" -> {
+                return 0;
+            }
+            case "Erro de lógica" -> {
+                return 1;
+            }
+            case "Exception" -> {
+                return 2;
+            }
+            case "File Not Found Exception" -> {
+                return 3;
+            }
+            case "Crash (aka Rebentaço)" -> {
+                return 4;
+            }
+            case "Duplicated Code" -> {
+                return 5;
+            }
+            case "Efeitos secundários" -> {
+                return 6;
+            }
+            case "Blue Screen of Death" -> {
+                return 7;
+            }
+            case "Ciclo infinito" -> {
+                return 8;
+            }
+            case "Segmentation Fault" -> {
+                return 9;
+            }
+            case "Vamos Fazer Contas" -> {
+                return 10;
+            }
+
+            default -> {
+                return -1;
+            }
+        }
+    }
+
+    public int abismoOUFerramentaID(String idDaFerramentaOuDoAbismo, int abismoOUferramenta) {
         //abismoOUferramenta==0 -> abismos / abismoOUferramenta==1 -> ferrramentas
         if (abismoOUferramenta == 0) {
-            switch (ferramenta) {
+            switch (idDaFerramentaOuDoAbismo) {
                 case "Erro de sintaxe" -> {
                     return 0;
                 }
@@ -881,13 +1009,16 @@ public class GameManager {
                 case "Segmentation Fault" -> {
                     return 9;
                 }
+                case "Vamos Fazer Contas" -> {
+                    return 10;
+                }
 
                 default -> {
                     return -1;
                 }
             }
         } else {
-            switch (ferramenta) {
+            switch (idDaFerramentaOuDoAbismo) {
                 case "Herança" -> {
                     return 0;
                 }
@@ -953,6 +1084,36 @@ public class GameManager {
             }
             case 9 -> {
                 return "Segmentation Fault";
+            }
+            case 10 -> {
+                return "Vamos Fazer Contas";
+            }
+
+            default -> {
+                return "";
+            }
+        }
+    }
+
+    public String ferramentaNome(int id) {
+        switch (id) {
+            case 0 -> {
+                return "Herança";
+            }
+            case 1 -> {
+                return "ProgramaçãoFuncional";
+            }
+            case 2 -> {
+                return "Testesunitários";
+            }
+            case 3 -> {
+                return "TratamentodeExcepções";
+            }
+            case 4 -> {
+                return "IDE";
+            }
+            case 5 -> {
+                return "AjudaDoProfessor";
             }
 
             default -> {

@@ -46,6 +46,10 @@ public class Abismo extends AbismoEFerramenta {
             return "core-dumped";
         }
 
+        if (titulo.equals("Vamos Fazer Contas")){
+            return "contas";
+        }
+
         return null;
     }
 
@@ -63,6 +67,7 @@ public class Abismo extends AbismoEFerramenta {
             case "Blue Screen of Death" ->"Abismo: bsod";
             case "Ciclo infinito" ->"Abismo: infinite-loop";
             case "Segmentation Fault" ->"Abismo: core-dumped";
+            case "Vamos Fazer Contas" ->"Abismo: contas";
             default -> "";
         };
     }
@@ -101,6 +106,9 @@ public class Abismo extends AbismoEFerramenta {
         }
         if (id==9){
             this.titulo = "Segmentation Fault";
+        }
+        if (id==10){
+            this.titulo = "Vamos Fazer Contas";
         }
     }
 

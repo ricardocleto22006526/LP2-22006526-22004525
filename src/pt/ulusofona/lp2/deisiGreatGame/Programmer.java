@@ -146,18 +146,20 @@ public class Programmer {
     }
 
     public void alteraEstado() {
-        this.estado="Derrotado";
+        this.estado="Ausente";
     }
     public void alteraPresoNoCicloInfinito() {
         if (this.presoNoCicloInfinito){
             this.presoNoCicloInfinito=false;
         }else {
+            this.estado = "Em Jogo";
             this.presoNoCicloInfinito=true;
         }
 
     }
 
     public boolean estaPresoNoCicloInfinito() {
+        this.estado = "Ausente";
         return this.presoNoCicloInfinito;
     }
 
