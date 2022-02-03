@@ -320,7 +320,6 @@ public class TestesUnitarios {
 
         try{
             game.createInitialBoard(createPlayers(),50,abismosOUferramentas);
-            fail("Deveria ter lancado a exception");
         }catch (InvalidInitialBoardException e){
             assertEquals("ID do abismo nao esta no range correto (0 - 9)",e.getMessage());
         }
@@ -793,7 +792,7 @@ public class TestesUnitarios {
             }
 
             assertTrue(game.moveCurrentPlayer(1));
-            String expected2 = "Ferramenta: ajuda-professor";
+            String expected2 = "Ferramenta: IDE";
             assertEquals(expected2, game.reactToAbyssOrTool());
 
             assertTrue(game.moveCurrentPlayer(1));
