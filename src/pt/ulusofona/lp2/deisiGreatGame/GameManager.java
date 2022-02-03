@@ -509,23 +509,20 @@ public class GameManager {
 
                 int posicoes = 0;
 
-                if (players.get(playerAJogar).getArrayListGuardaPosicao().size() != 0){
+                if (players.get(playerAJogar).getArrayListGuardaPosicao().size() != 0) {
                     if (posicaoAntesDaAnterior == 0 &&
-                            posicaoAntesDaAnteriorDaAnterior == 0){
+                            posicaoAntesDaAnteriorDaAnterior == 0) {
                         posicoes = posicaoAnterior;
                     }
-                    if (posicaoAntesDaAnteriorDaAnterior == 0){
-                        posicoes = ((int) Math.ceil((double) (posicaoAnterior+posicaoAntesDaAnterior)/2));
+                    if (posicaoAntesDaAnteriorDaAnterior == 0) {
+                        posicoes = ((int) Math.ceil((double) (posicaoAnterior + posicaoAntesDaAnterior) / 2));
                     }
-                    if (posicaoAnterior != 0 && posicaoAntesDaAnterior != 0 && posicaoAntesDaAnteriorDaAnterior != 0){
-                        posicoes = ((int) Math.ceil((double) (posicaoAnterior+posicaoAntesDaAnterior+posicaoAntesDaAnteriorDaAnterior)/3));
+                    if (posicaoAnterior != 0 && posicaoAntesDaAnterior != 0 && posicaoAntesDaAnteriorDaAnterior != 0) {
+                        posicoes = ((int) Math.ceil((double) (posicaoAnterior + posicaoAntesDaAnterior + posicaoAntesDaAnteriorDaAnterior) / 3));
                     }
 
-                    players.get(playerAJogar).andaParaAFrente(posicoes);
-                } else {
-                    players.get(playerAJogar).andaParaAFrente(0);
+                    players.get(playerAJogar).getPosPlayerReset(posicoes);
                 }
-
 
             }
 
@@ -600,6 +597,7 @@ public class GameManager {
     public boolean gameIsOver() {
 
         if (gameIsOverWithDraw()){
+            nrDeTurnos++;
             return true;
         }
 

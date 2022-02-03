@@ -153,14 +153,14 @@ public class Programmer {
         if (this.presoNoCicloInfinito){
             this.presoNoCicloInfinito=false;
         }else {
-            this.estado = "Em Jogo";
+            this.estado = "Derrotado";
             this.presoNoCicloInfinito=true;
         }
 
     }
 
     public boolean estaPresoNoCicloInfinito() {
-        this.estado = "Derrotado";
+        this.estado = "Em Jogo";
         return this.presoNoCicloInfinito;
     }
 
