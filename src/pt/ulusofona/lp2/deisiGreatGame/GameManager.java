@@ -505,13 +505,22 @@ public class GameManager {
             }
 
             if (getImagePng(posPlayer).equals("Vamos Fazer Contas")) {
-                int posicoes = players.get(playerAJogar).getArrayListGuardaPosicao().size();
+
+
+                int posicoes = 0;
+
                 if (players.get(playerAJogar).getArrayListGuardaPosicao().size() != 0){
-                    switch (posicoes) {
-                        case 1 -> posicoes = posicaoAnterior;
-                        case 2 -> posicoes = (int) Math.ceil((double) (posicaoAnterior + posicaoAntesDaAnterior) / 2);
-                        case 3 -> posicoes = (int) Math.ceil((double) (posicaoAnterior + posicaoAntesDaAnterior + posicaoAntesDaAnteriorDaAnterior) / 3);
+                    if (posicaoAntesDaAnterior == 0 &&
+                            posicaoAntesDaAnteriorDaAnterior == 0){
+                        posicoes = posicaoAnterior;
                     }
+                    if (posicaoAntesDaAnteriorDaAnterior == 0){
+                        posicoes = ((int) Math.ceil((double) (posicaoAnterior+posicaoAntesDaAnterior)/2));
+                    }
+                    if (posicaoAnterior != 0 && posicaoAntesDaAnterior != 0 && posicaoAntesDaAnteriorDaAnterior != 0){
+                        posicoes = ((int) Math.ceil((double) (posicaoAnterior+posicaoAntesDaAnterior+posicaoAntesDaAnteriorDaAnterior)/3));
+                    }
+
                     players.get(playerAJogar).andaParaAFrente(posicoes);
                 } else {
                     players.get(playerAJogar).andaParaAFrente(0);
