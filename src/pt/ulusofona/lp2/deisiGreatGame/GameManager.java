@@ -506,24 +506,19 @@ public class GameManager {
 
             if (getImagePng(posPlayer).equals("Vamos Fazer Contas")) {
 
+                    int posicoes = 0;
 
-                int posicoes = 0;
+                    if (getImagePng(posPlayer).equals("contas.png")) {
 
-                if (players.get(playerAJogar).getArrayListGuardaPosicao().size() != 0) {
-                    if (posicaoAntesDaAnterior == 0 &&
-                            posicaoAntesDaAnteriorDaAnterior == 0) {
-                        posicoes = posicaoAnterior;
-                    }
-                    if (posicaoAntesDaAnteriorDaAnterior == 0) {
-                        posicoes = ((int) Math.ceil((double) (posicaoAnterior + posicaoAntesDaAnterior) / 2));
-                    }
-                    if (posicaoAnterior != 0 && posicaoAntesDaAnterior != 0 && posicaoAntesDaAnteriorDaAnterior != 0) {
-                        posicoes = ((int) Math.ceil((double) (posicaoAnterior + posicaoAntesDaAnterior + posicaoAntesDaAnteriorDaAnterior) / 3));
-                    }
 
-                    players.get(playerAJogar).getPosPlayerReset(posicoes);
+
+                    switch (players.get(playerAJogar).guardaPosicao.size() - 1) {
+                        case 1 -> posicoes = posicaoAnterior;
+                        case 2 -> posicoes = ((int) Math.ceil((double) (posicaoAnterior + posicaoAntesDaAnterior) / 2));
+                        default -> posicoes = ((int) Math.ceil((double) (posicaoAnterior + posicaoAntesDaAnterior + posicaoAntesDaAnteriorDaAnterior) / 3));
+                    }
+                players.get(playerAJogar).getPosPlayerReset(posicoes);
                 }
-
             }
 
             //MOVIMENTOS QUANDO O PLAYER CAI EM FERRAMENTAS
@@ -596,6 +591,9 @@ public class GameManager {
 
     public boolean gameIsOver() {
 
+        int matchDraw = 0;
+
+
 
         if (players.size() - playersEmJogo.size() == 1) {
             winner = players.get(playerAJogar).getName();
@@ -634,10 +632,63 @@ public class GameManager {
     }
 
     public List<String> getGameResults() {
-        List<String> results = new ArrayList<>();
-        // s/ empate
-        if (!gameIsOverWithDraw()) {
+        int matchDraw = 0;
 
+        for (int i = 0; i < players.size(); i++) {
+            if(players.get(i).isPresoNoCicloInfinito()){
+                matchDraw++;
+            }
+        }
+        if (matchDraw == playersEmJogo.size()){
+            return getGameResultsSemDraw();
+        }
+
+        return getGameResultsComDraw();
+    }
+
+    // s/ empate
+    public List<String> getGameResultsSemDraw() {
+        List<String> results = new ArrayList<>();
+            // s/ empate
+            if (gameIsOver()) {
+
+                Collections.sort(players, (p1, p2) -> {
+                    if (p1.getPosPlayer() < p2.getPosPlayer()) {
+                        return -1;
+                    } else if (p1.getPosPlayer() > p2.getPosPlayer()) {
+                        return 1;
+                    } else {
+                        return p1.getName().compareTo(p2.getName());
+                    }
+                });
+
+                players.sort(Comparator.comparingInt((Programmer posicao) -> posicao.posPlayer).reversed());
+
+                results.add("O GRANDE JOGO DO DEISI");
+                results.add("");
+                results.add("NR. DE TURNOS");
+                results.add(String.valueOf(nrDeTurnos));
+                results.add("");
+                results.add("VENCEDOR");
+                results.add(winner);
+                results.add("");
+                results.add("RESTANTES");
+
+                for (int i = 0; i < players.size(); i++) {
+                    if (players.get(i).getName().equals(winner)) {
+                        continue;
+                    }
+                    results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer());
+                }
+
+            }
+            return results;
+    }
+
+    // c/ empate
+    public List<String> getGameResultsComDraw() {
+        List<String> results = new ArrayList<>();
+        if (!gameIsOver()) {
             Collections.sort(players, (p1, p2) -> {
                 if (p1.getPosPlayer() < p2.getPosPlayer()) {
                     return -1;
@@ -655,40 +706,6 @@ public class GameManager {
             results.add("NR. DE TURNOS");
             results.add(String.valueOf(nrDeTurnos));
             results.add("");
-            results.add("VENCEDOR");
-            results.add(winner);
-            results.add("");
-            results.add("RESTANTES");
-
-            for (int i = 0; i < players.size(); i++) {
-                if (players.get(i).getName().equals(winner)) {
-                    continue;
-                }
-                results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer());
-            }
-
-        }
-        // c/ empate
-        if (gameIsOverWithDraw()) {
-            Collections.sort(players, (p1, p2) -> {
-                if (p1.getPosPlayer() < p2.getPosPlayer()) {
-                    return -1;
-                } else if (p1.getPosPlayer() > p2.getPosPlayer()) {
-                    return 1;
-                } else {
-                    return p1.getName().compareTo(p2.getName());
-                }
-            });
-
-            players.sort(Comparator.comparingInt((Programmer posicao) -> posicao.posPlayer).reversed());
-
-
-
-            results.add("O GRANDE JOGO DO DEISI");
-            results.add("");
-            results.add("NR. DE TURNOS");
-            results.add(String.valueOf(nrDeTurnos+1));
-            results.add("");
             results.add("O jogo terminou empatado.");
             results.add("");
             results.add("Participantes:");
@@ -702,7 +719,10 @@ public class GameManager {
         }
 
         return results;
+
     }
+
+
 
     public JPanel getAuthorsPanel() {
         JPanel creditos = new JPanel();

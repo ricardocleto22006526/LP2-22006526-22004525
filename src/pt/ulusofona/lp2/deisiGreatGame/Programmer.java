@@ -16,7 +16,6 @@ public class Programmer {
     boolean presoNoCicloInfinito=false;
     ArrayList<Integer> guardaPosicao = new ArrayList<>();
     ArrayList<String> linguagensFavoritasKotlin = new ArrayList<>();
-    boolean estaPreso = false;
 
     public Programmer(String nome, int id, ProgrammerColor cor, ArrayList<String> linguagensFavoritas,int posPlayer) {
         this.id = id;
@@ -72,6 +71,11 @@ public class Programmer {
     public ArrayList<Ferramenta> getFerramentas() {
         return ferramentas;
     }
+
+    public boolean isPresoNoCicloInfinito() {
+        return presoNoCicloInfinito;
+    }
+
     public boolean getFerramentas(int idAEntrar) {
         for (int i = 0; i < ferramentas.size() ; i++) {
             if (ferramentas.get(i).id == idAEntrar){
@@ -98,10 +102,6 @@ public class Programmer {
     }
 
     public Programmer() {
-    }
-
-    public boolean isPresoNoCicloInfinito() {
-        return presoNoCicloInfinito;
     }
 
     public int getId(){
