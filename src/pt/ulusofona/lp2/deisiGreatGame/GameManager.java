@@ -303,7 +303,7 @@ public class GameManager {
 
     public int getCurrentPlayerID() {
 
-        if (players.get(playerAJogar).getEstado().equals("Ausente")) {
+        if (players.get(playerAJogar).getEstado().equals("Derrotado")) {
 
             for (int i = playerAJogar; i < players.size(); ) {
                 if (players.get(i).getEstado().equals("Em Jogo")) {
@@ -561,14 +561,14 @@ public class GameManager {
 
             textOutput = playersAbyssesAndTools.get(posPlayer).tituloDoAbismoOUFerramenta();
 
-            if (!gameIsOver() || !gameIsOverWithDraw()) {
+            if (!gameIsOver()) {
                 mudancaDeTurno();
             }
 
             return textOutput;
         }
 
-        if (!gameIsOver() || !gameIsOverWithDraw()) {
+        if (!gameIsOver()) {
             mudancaDeTurno();
         }
         return null;
@@ -590,6 +590,10 @@ public class GameManager {
 
     public boolean gameIsOver() {
 
+        if (gameIsOverWithDraw()){
+            return true;
+        }
+
         if (players.size() - playersEmJogo.size() == 1) {
             winner = players.get(playerAJogar).getName();
             nrDeTurnos++;
@@ -603,10 +607,12 @@ public class GameManager {
         }
 
         for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getEstado().equals("Ausente") && !playersEmJogo.contains(players.get(i))) {
+            if (players.get(i).getEstado().equals("Derrotado") && !playersEmJogo.contains(players.get(i))) {
                 playersEmJogo.add(players.get(i));
             }
         }
+
+
 
         return false;
 
@@ -616,7 +622,7 @@ public class GameManager {
         int validacao = 0;
 
         for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getEstado().equals("Ausente")){
+            if (players.get(i).getEstado().equals("Derrotado")){
                 validacao += 1;
             } else {
                 return false;

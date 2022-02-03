@@ -146,8 +146,9 @@ public class Programmer {
     }
 
     public void alteraEstado() {
-        this.estado="Ausente";
+        this.estado="Derrotado";
     }
+
     public void alteraPresoNoCicloInfinito() {
         if (this.presoNoCicloInfinito){
             this.presoNoCicloInfinito=false;
@@ -159,7 +160,7 @@ public class Programmer {
     }
 
     public boolean estaPresoNoCicloInfinito() {
-        this.estado = "Ausente";
+        this.estado = "Derrotado";
         return this.presoNoCicloInfinito;
     }
 
