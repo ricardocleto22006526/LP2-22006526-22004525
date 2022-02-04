@@ -1,3 +1,17 @@
+/*
+        players[0][0] = "1"; //ID
+        players[0][1] = "Jogador 1"; //NOME
+        players[0][2] = "Java"; //Linguagens Favoritas
+        players[0][3] = "Purple"; //Cor do player
+
+        players[1][0] = "2";
+        players[1][1] = "Jogador2";
+        players[1][2] = "C";
+        players[1][3] = "Blue";
+
+ */
+
+
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import java.util.ArrayList;

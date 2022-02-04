@@ -342,7 +342,7 @@ public class GameManager {
             }
 
             if (players.get(playerAJogar).getArrayListGuardaPosicao().size() > 2) {
-                posicaoAntesDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size() - 3);
+                posicaoAntesDaAnteriorDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size() - 3);
             }
 
             players.get(playerAJogar).andaParaAFrente(nrPositions);
@@ -355,7 +355,7 @@ public class GameManager {
             }
 
             if (players.get(playerAJogar).getArrayListGuardaPosicao().size() > 2) {
-                posicaoAntesDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size() - 3);
+                posicaoAntesDaAnteriorDaAnterior = players.get(playerAJogar).getArrayListGuardaPosicao().get(players.get(playerAJogar).getArrayListGuardaPosicao().size() - 3);
             }
 
             players.get(playerAJogar).andaParaTras(tamanhoDoTabuleiro, nrPositions);
@@ -641,7 +641,7 @@ public class GameManager {
     // s/ empate
     public List<String> getGameResultsSemDraw() {
         List<String> results = new ArrayList<>();
-        // s/ empate
+
         if (gameIsOver()) {
 
             Collections.sort(players, (p1, p2) -> {
@@ -703,9 +703,6 @@ public class GameManager {
             results.add("Participantes:");
 
             for (int i = 0; i < players.size(); i++) {
-                if (players.get(i).getName().equals(winner)) {
-                    continue;
-                }
                 results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer() + " " + players.get(i).abismo.titulo);
             }
         }
