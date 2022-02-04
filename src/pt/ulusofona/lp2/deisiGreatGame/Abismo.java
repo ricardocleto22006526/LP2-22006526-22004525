@@ -38,7 +38,7 @@ public class Abismo extends AbismoEFerramenta {
             return "bsod";
         }
 
-        if (titulo.equals("Ciclo infinito")){
+        if (titulo.equals("Ciclo Infinito")){
             return "infinite-loop";
         }
 
@@ -65,7 +65,7 @@ public class Abismo extends AbismoEFerramenta {
             case "Duplicated Code" ->"Abismo: duplicated-code";
             case "Efeitos secundários" ->"Abismo: secondary-effects";
             case "Blue Screen of Death" ->"Abismo: bsod";
-            case "Ciclo infinito" ->"Abismo: infinite-loop";
+            case "Ciclo Infinito" ->"Abismo: infinite-loop";
             case "Segmentation Fault" ->"Abismo: core-dumped";
             case "Vamos Fazer Contas" ->"Abismo: contas";
             default -> "";

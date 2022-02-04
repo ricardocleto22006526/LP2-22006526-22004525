@@ -472,12 +472,13 @@ public class GameManager {
             }
 
             if (getImagePng(posPlayer).equals("infinite-loop.png")) {
-                players.get(playerAJogar).setAbismo(new Abismo(8));
 
 
                 if (players.get(playerAJogar).getFerramentas(1)) {
                     players.get(playerAJogar).removeFerramenta(1);
                 } else {
+                    players.get(playerAJogar).setAbismo(new Abismo(8));
+
                     if (!players.get(playerAJogar).estaPresoNoCicloInfinito()) {
                         players.get(playerAJogar).alteraPresoNoCicloInfinito();
                         jogadoresNestaCasa.add(players.get(playerAJogar));
