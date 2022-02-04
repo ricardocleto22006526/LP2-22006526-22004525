@@ -625,6 +625,7 @@ public class GameManager {
 
     public List<String> getGameResults() {
         int matchDraw = 0;
+        nrDeTurnos++;
 
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isPresoNoCicloInfinito()) {
