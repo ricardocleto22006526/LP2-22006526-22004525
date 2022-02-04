@@ -678,7 +678,7 @@ public class GameManager {
 
     // c/ empate
     public List<String> getGameResultsComDraw() {
-        nrDeTurnos++;
+        nrDeTurnos += 2;
         List<String> results = new ArrayList<>();
         if (gameIsOver()) {
             Collections.sort(players, (p1, p2) -> {
@@ -704,7 +704,7 @@ public class GameManager {
             results.add("Participantes:");
 
             for (int i = 0; i < players.size(); i++) {
-                results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer() + " " + players.get(i).abismo.titulo);
+                results.add(players.get(i).getName() + " : " + players.get(i).getPosPlayer() + " : " + players.get(i).abismo.titulo);
             }
         }
 
