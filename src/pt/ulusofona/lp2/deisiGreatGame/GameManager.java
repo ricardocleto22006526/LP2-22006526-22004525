@@ -389,6 +389,7 @@ public class GameManager {
             //MOVIMENTOS QUANDO O PLAYER CAI EM ABISMOS
 
             if (getImagePng(posPlayer).equals("syntax.png")) { //FUNCIONA
+                players.get(playerAJogar).setAbismo(new Abismo(0));
 
                 if (players.get(playerAJogar).getFerramentas(5)) {
                     players.get(playerAJogar).removeFerramenta(5);
@@ -396,11 +397,11 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(4);
                 } else {
                     players.get(playerAJogar).andaParaAFrente(-1);
-                    players.get(playerAJogar).setAbismo(new Abismo(0));
                 }
             }
 
             if (getImagePng(posPlayer).equals("logic.png")) {//FUNCIONA
+                players.get(playerAJogar).setAbismo(new Abismo(1));
 
                 if (players.get(playerAJogar).getFerramentas(5)) {
                     players.get(playerAJogar).removeFerramenta(5);
@@ -408,11 +409,11 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(2);
                 } else {
                     players.get(playerAJogar).andaParaAFrente(-(nrPosicoesMovida / 2));
-                    players.get(playerAJogar).setAbismo(new Abismo(1));
                 }
             }
 
             if (getImagePng(posPlayer).equals("exception.png")) {//FUNCIONA
+                players.get(playerAJogar).setAbismo(new Abismo(2));
 
                 if (players.get(playerAJogar).getFerramentas(5)) {
                     players.get(playerAJogar).removeFerramenta(5);
@@ -420,11 +421,11 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(3);
                 } else {
                     players.get(playerAJogar).andaParaAFrente(-2);
-                    players.get(playerAJogar).setAbismo(new Abismo(2));
                 }
             }
 
             if (getImagePng(posPlayer).equals("file-not-found-exception.png")) {//FUNCIONA
+                players.get(playerAJogar).setAbismo(new Abismo(3));
 
                 if (players.get(playerAJogar).getFerramentas(5)) {
                     players.get(playerAJogar).removeFerramenta(5);
@@ -432,7 +433,6 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(3);
                 } else {
                     players.get(playerAJogar).andaParaAFrente(-3);
-                    players.get(playerAJogar).setAbismo(new Abismo(3));
                 }
             }
 
@@ -442,38 +442,42 @@ public class GameManager {
             }
 
             if (getImagePng(posPlayer).equals("duplicated-code.png")) {//FUNCIONA
+                players.get(playerAJogar).setAbismo(new Abismo(5));
+
                 if (players.get(playerAJogar).getFerramentas(0)) {
                     players.get(playerAJogar).removeFerramenta(0);
                 } else {
                     players.get(playerAJogar).getPosPlayerReset(posicaoAnterior);
-                    players.get(playerAJogar).setAbismo(new Abismo(5));
                 }
 
             }
 
             if (getImagePng(posPlayer).equals("secondary-effects.png")) {
+                players.get(playerAJogar).setAbismo(new Abismo(6));
+
                 if (players.get(playerAJogar).getFerramentas(1)) {
                     players.get(playerAJogar).removeFerramenta(1);
                 } else {
                     players.get(playerAJogar).getPosPlayerReset(posicaoAntesDaAnterior);
-                    players.get(playerAJogar).setAbismo(new Abismo(6));
                 }
 
             }
 
             if (getImagePng(posPlayer).equals("bsod.png")) {
+                players.get(playerAJogar).setAbismo(new Abismo(7));
+
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
                     players.get(playerAJogar).alteraEstado();
-                    players.get(playerAJogar).setAbismo(new Abismo(7));
                 }
             }
 
             if (getImagePng(posPlayer).equals("infinite-loop.png")) {
+                players.get(playerAJogar).setAbismo(new Abismo(8));
+
 
                 if (players.get(playerAJogar).getFerramentas(1)) {
                     players.get(playerAJogar).removeFerramenta(1);
                 } else {
-                    players.get(playerAJogar).setAbismo(new Abismo(8));
                     if (!players.get(playerAJogar).estaPresoNoCicloInfinito()) {
                         players.get(playerAJogar).alteraPresoNoCicloInfinito();
                         jogadoresNestaCasa.add(players.get(playerAJogar));
