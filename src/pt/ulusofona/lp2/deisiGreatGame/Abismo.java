@@ -102,7 +102,7 @@ public class Abismo extends AbismoEFerramenta {
             this.titulo = "Blue Screen of Death";
         }
         if (id==8){
-            this.titulo = "Ciclo infinito";
+            this.titulo = "Ciclo Infinito";
         }
         if (id==9){
             this.titulo = "Segmentation Fault";
