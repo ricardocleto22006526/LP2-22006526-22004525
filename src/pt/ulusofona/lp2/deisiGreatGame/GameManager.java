@@ -396,6 +396,7 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(4);
                 } else {
                     players.get(playerAJogar).andaParaAFrente(-1);
+                    players.get(playerAJogar).setAbismo(new Abismo(0));
                 }
             }
 
@@ -407,6 +408,7 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(2);
                 } else {
                     players.get(playerAJogar).andaParaAFrente(-(nrPosicoesMovida / 2));
+                    players.get(playerAJogar).setAbismo(new Abismo(1));
                 }
             }
 
@@ -418,6 +420,7 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(3);
                 } else {
                     players.get(playerAJogar).andaParaAFrente(-2);
+                    players.get(playerAJogar).setAbismo(new Abismo(2));
                 }
             }
 
@@ -429,11 +432,13 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(3);
                 } else {
                     players.get(playerAJogar).andaParaAFrente(-3);
+                    players.get(playerAJogar).setAbismo(new Abismo(3));
                 }
             }
 
             if (getImagePng(posPlayer).equals("crash.png")) {//FUNCIONA
                 players.get(playerAJogar).getPosPlayerReset(1);
+                players.get(playerAJogar).setAbismo(new Abismo(4));
             }
 
             if (getImagePng(posPlayer).equals("duplicated-code.png")) {//FUNCIONA
@@ -441,6 +446,7 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(0);
                 } else {
                     players.get(playerAJogar).getPosPlayerReset(posicaoAnterior);
+                    players.get(playerAJogar).setAbismo(new Abismo(5));
                 }
 
             }
@@ -450,6 +456,7 @@ public class GameManager {
                     players.get(playerAJogar).removeFerramenta(1);
                 } else {
                     players.get(playerAJogar).getPosPlayerReset(posicaoAntesDaAnterior);
+                    players.get(playerAJogar).setAbismo(new Abismo(6));
                 }
 
             }
@@ -494,6 +501,7 @@ public class GameManager {
             if (getImagePng(posPlayer).equals("core-dumped.png")) {
 
                 jogadoresNoCoreDumped.add(players.get(playerAJogar));
+                players.get(playerAJogar).setAbismo(new Abismo(9));
 
                 if (jogadoresNoCoreDumped.size() >= 2) {
                     for (int i = 0; i < players.size(); i++) {
@@ -509,6 +517,7 @@ public class GameManager {
             if (getImagePng(posPlayer).equals("contas.png")) {
 
                 int posicoes = 0;
+                players.get(playerAJogar).setAbismo(new Abismo(10));
 
 
                 switch (players.get(playerAJogar).guardaPosicao.size() - 1) {
@@ -638,7 +647,7 @@ public class GameManager {
 
     // s/ empate
     public List<String> getGameResultsSemDraw() {
-        nrDeTurnos++;
+        nrDeTurnos+=2;
         List<String> results = new ArrayList<>();
 
         if (gameIsOver()) {
