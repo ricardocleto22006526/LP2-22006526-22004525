@@ -647,7 +647,7 @@ public class GameManager {
 
     // s/ empate
     public List<String> getGameResultsSemDraw() {
-        nrDeTurnos+=2;
+        nrDeTurnos++;
         List<String> results = new ArrayList<>();
 
         if (gameIsOver()) {
