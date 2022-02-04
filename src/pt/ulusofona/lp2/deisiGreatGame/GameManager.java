@@ -26,7 +26,7 @@ public class GameManager {
 
     ArrayList<Programmer> jogadoresNestaCasa = new ArrayList<>();
     ArrayList<Programmer> jogadoresNoCoreDumped = new ArrayList<>();
-    ArrayList<Programmer> playersEmJogo = new ArrayList<>();
+    ArrayList<Programmer> playersDerrotados = new ArrayList<>();
 
     HashMap<Integer, Integer> casasMaisPisadasNoJogo = new HashMap<>();
     HashMap<String, Integer> abyssesMaisPisadasNoJogo = new HashMap<>();
@@ -45,7 +45,7 @@ public class GameManager {
         posicaoAntesDaAnterior = 1; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
         jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
         jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
-        playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
+        playersDerrotados.clear(); // Serve para dar Reset ao arraylist de players em jogo
 
         if (playerInfo == null) {
             //return false;
@@ -593,7 +593,7 @@ public class GameManager {
         int matchDraw = 0;
 
 
-        if (players.size() - playersEmJogo.size() == 1) {
+        if (players.size() - playersDerrotados.size() == 1) {
             winner = players.get(playerAJogar).getName();
             nrDeTurnos++;
             return true;
@@ -606,8 +606,8 @@ public class GameManager {
         }
 
         for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getEstado().equals("Derrotado") && !playersEmJogo.contains(players.get(i))) {
-                playersEmJogo.add(players.get(i));
+            if (players.get(i).getEstado().equals("Derrotado") && !playersDerrotados.contains(players.get(i))) {
+                playersDerrotados.add(players.get(i));
             }
         }
 
@@ -620,7 +620,7 @@ public class GameManager {
 
         }
 
-        return matchDraw == players.size()-playersEmJogo.size();
+        return matchDraw == players.size()- playersDerrotados.size();
 
     }
 
@@ -633,7 +633,7 @@ public class GameManager {
                 matchDraw++;
             }
         }
-        if (matchDraw == players.size()-playersEmJogo.size()) {
+        if (matchDraw == players.size()- playersDerrotados.size()) {
             return getGameResultsComDraw();
         }
 
@@ -812,7 +812,7 @@ public class GameManager {
             posicaoAntesDaAnterior = 1; // Serve para dar Reset da variavel que guarda a posicao antes da anterior
             jogadoresNestaCasa.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
             jogadoresNoCoreDumped.clear(); // Serve para dar Reset ao arraylist de players presos nesta casa
-            playersEmJogo.clear(); // Serve para dar Reset ao arraylist de players em jogo
+            playersDerrotados.clear(); // Serve para dar Reset ao arraylist de players em jogo
 
             String linha = null;
 
