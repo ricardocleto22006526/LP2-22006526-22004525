@@ -1418,28 +1418,45 @@ public class TestesUnitarios {
         }
 
     }
-/*
+
     @Test
     public void testNrDeTurnos() {
         String[][] players = createPlayers();
         GameManager game = new GameManager();
-        String[][] abismo = new String[1][3];
+        String[][] abismo = new String[3][3];
 
         abismo[0][0] = "0";
         abismo[0][1] = "7";
         abismo[0][2] = "3";
 
+        abismo[1][0] = "0";
+        abismo[1][1] = "8";
+        abismo[1][2] = "4";
+
+        abismo[2][0] = "0";
+        abismo[2][1] = "8";
+        abismo[2][2] = "5";
+
+
+
         try {
             game.createInitialBoard(players, 20, abismo);
-            game.moveCurrentPlayer(2);
-            game.reactToAbyssOrTool();
 
             game.moveCurrentPlayer(2);
             game.reactToAbyssOrTool();
+            //1player em bsod
+
             game.moveCurrentPlayer(2);
             game.reactToAbyssOrTool();
-            game.moveCurrentPlayer(2);
+            //2player em bsod
+
+            game.moveCurrentPlayer(3);
             game.reactToAbyssOrTool();
+            //1p ciclo infinito em pos=3
+
+            game.moveCurrentPlayer(4);
+            game.reactToAbyssOrTool();
+            //2p ciclo infinito em pos=6
 
             List<String> strings = game.getGameResults();
             StringBuilder resultado = new StringBuilder();
@@ -1450,11 +1467,15 @@ public class TestesUnitarios {
                 assertEquals("O GRANDE JOGO DO DEISI, , NR. DE TURNOS, 16, , VENCEDOR, Goiaba, , RESTANTES, Bruninho 9, Pato Donald 8", resultado.toString());
             }
 
+            if(!game.gameIsOver()){
+                System.out.println("chupa");
+            }
+
 
         }catch (Exception e) {
             System.out.println("ofdskl");
         }
     }
 
- */
+
 }

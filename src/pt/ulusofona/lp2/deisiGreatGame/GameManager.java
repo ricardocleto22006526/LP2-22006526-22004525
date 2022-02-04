@@ -466,7 +466,7 @@ public class GameManager {
                 if (players.get(playerAJogar).getFerramentas(1)) {
                     players.get(playerAJogar).removeFerramenta(1);
                 } else {
-
+                    players.get(playerAJogar).setAbismo(new Abismo(8));
                     if (!players.get(playerAJogar).estaPresoNoCicloInfinito()) {
                         players.get(playerAJogar).alteraPresoNoCicloInfinito();
                         jogadoresNestaCasa.add(players.get(playerAJogar));
@@ -480,9 +480,10 @@ public class GameManager {
                                 continue;
                             }
 
-                            players.get(playerAJogar).alteraPresoNoCicloInfinito();
-                            jogadoresNestaCasa.remove(0);
-
+                            if (players.get(playerAJogar).getPosPlayer() == jogadoresNestaCasa.get(i).getPosPlayer()) {
+                                players.get(playerAJogar).alteraPresoNoCicloInfinito();
+                                jogadoresNestaCasa.remove(0);
+                            }
                             playerAJogar++;
                             break;
                         }
@@ -590,18 +591,17 @@ public class GameManager {
 
     public boolean gameIsOver() {
 
+
         int matchDraw = 0;
 
 
         if (players.size() - playersDerrotados.size() == 1) {
             winner = players.get(playerAJogar).getName();
-            nrDeTurnos++;
             return true;
         }
 
         if (players.get(playerAJogar).getPosPlayer() == tamanhoDoTabuleiro) {
             winner = players.get(playerAJogar).getName();
-            nrDeTurnos++;
             return true;
         }
 
@@ -614,19 +614,15 @@ public class GameManager {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isPresoNoCicloInfinito()) {
                 matchDraw++;
-            } else {
-                return false;
             }
-
         }
 
-        return matchDraw == players.size()- playersDerrotados.size();
+        return matchDraw == players.size()-playersDerrotados.size();
 
     }
 
     public List<String> getGameResults() {
         int matchDraw = 0;
-
 
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isPresoNoCicloInfinito()) {
@@ -642,6 +638,7 @@ public class GameManager {
 
     // s/ empate
     public List<String> getGameResultsSemDraw() {
+        nrDeTurnos++;
         List<String> results = new ArrayList<>();
 
         if (gameIsOver()) {
@@ -681,6 +678,7 @@ public class GameManager {
 
     // c/ empate
     public List<String> getGameResultsComDraw() {
+        nrDeTurnos++;
         List<String> results = new ArrayList<>();
         if (gameIsOver()) {
             Collections.sort(players, (p1, p2) -> {
@@ -692,6 +690,7 @@ public class GameManager {
                     return p1.getName().compareTo(p2.getName());
                 }
             });
+
 
             players.sort(Comparator.comparingInt((Programmer posicao) -> posicao.posPlayer).reversed());
 
@@ -705,8 +704,7 @@ public class GameManager {
             results.add("Participantes:");
 
             for (int i = 0; i < players.size(); i++) {
-                results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer() + " ");
-                results.add(players.get(i).abismo.titulo);
+                results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer() + " " + players.get(i).abismo.titulo);
             }
         }
 
