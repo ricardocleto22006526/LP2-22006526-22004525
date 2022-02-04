@@ -625,7 +625,7 @@ public class GameManager {
 
     public List<String> getGameResults() {
         int matchDraw = 0;
-        nrDeTurnos++;
+
 
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isPresoNoCicloInfinito()) {
@@ -681,7 +681,7 @@ public class GameManager {
     // c/ empate
     public List<String> getGameResultsComDraw() {
         List<String> results = new ArrayList<>();
-        if (!gameIsOver()) {
+        if (gameIsOver()) {
             Collections.sort(players, (p1, p2) -> {
                 if (p1.getPosPlayer() < p2.getPosPlayer()) {
                     return -1;
