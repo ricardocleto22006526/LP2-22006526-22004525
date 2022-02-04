@@ -1464,7 +1464,7 @@ public class TestesUnitarios {
                 resultado.append(strings.get(i));
             }
             if(game.gameIsOver()){
-                assertEquals("O GRANDE JOGO DO DEISINR. DE TURNOS5VENCEDORJogador1RESTANTESJogador2 3Jogador4 3Jogador3 1", resultado.toString());
+                assertEquals("O GRANDE JOGO DO DEISINR. DE TURNOS4VENCEDORJogador1RESTANTESJogador2 3Jogador4 3Jogador3 1", resultado.toString());
             }
 
             if(!game.gameIsOver()){
@@ -1522,7 +1522,7 @@ public class TestesUnitarios {
                 resultado.append(strings.get(i));
             }
             if(game.gameIsOver()){
-                assertEquals("O GRANDE JOGO DO DEISINR. DE TURNOS5O jogo terminou empatado.Participantes:Jogador4 : 5 : Ciclo InfinitoJogador3 : 4 : Ciclo InfinitoJogador1 : 3 : Blue Screen of DeathJogador2 : 3 : Blue Screen of Death", resultado.toString());
+                assertEquals("O GRANDE JOGO DO DEISINR. DE TURNOS4O jogo terminou empatado.Participantes:Jogador4 : 5 : Ciclo InfinitoJogador3 : 4 : Ciclo InfinitoJogador1 : 3 : Blue Screen of DeathJogador2 : 3 : Blue Screen of Death", resultado.toString());
             }
 
             if(!game.gameIsOver()){

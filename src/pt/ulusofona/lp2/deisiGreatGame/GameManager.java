@@ -637,6 +637,7 @@ public class GameManager {
 
     public List<String> getGameResults() {
         int matchDraw = 0;
+        nrDeTurnos++;
 
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isPresoNoCicloInfinito()) {
@@ -652,7 +653,7 @@ public class GameManager {
 
     // s/ empate
     public List<String> getGameResultsSemDraw() {
-        nrDeTurnos++;
+        --nrDeTurnos;
         List<String> results = new ArrayList<>();
 
         if (gameIsOver()) {
@@ -672,7 +673,7 @@ public class GameManager {
             results.add("O GRANDE JOGO DO DEISI");
             results.add("");
             results.add("NR. DE TURNOS");
-            results.add(String.valueOf(nrDeTurnos));
+            results.add(""+nrDeTurnos);
             results.add("");
             results.add("VENCEDOR");
             results.add(winner);
@@ -692,7 +693,7 @@ public class GameManager {
 
     // c/ empate
     public List<String> getGameResultsComDraw() {
-        nrDeTurnos += 2;
+
         List<String> results = new ArrayList<>();
         if (gameIsOver()) {
             Collections.sort(players, (p1, p2) -> {
@@ -711,7 +712,7 @@ public class GameManager {
             results.add("O GRANDE JOGO DO DEISI");
             results.add("");
             results.add("NR. DE TURNOS");
-            results.add(String.valueOf(nrDeTurnos));
+            results.add(""+ (nrDeTurnos++));
             results.add("");
             results.add("O jogo terminou empatado.");
             results.add("");
