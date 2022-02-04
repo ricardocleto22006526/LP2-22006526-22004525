@@ -1,0 +1,33 @@
+79
+2
+14
+3
+7
+5
+3
+1@Joshua Bloch@[Java;C;Python;C#]@PURPLE@Em Jogo@16@[IDE, Programação Funcional]@false@[1, 5, 11, 15]
+2@Guido van Rossum@[Python;Common Lisp;C]@BLUE@Em Jogo@10@[Ajuda Do Professor, IDE]@false@[1, 3, 5, 7]
+3@Ada Lovelace@[Ada;C,C#]@GREEN@Em Jogo@8@[Ajuda Do Professor, IDE]@false@[1, 3, 5]
+4@John McCarthy@[Lisp;C,C#]@BROWN@Em Jogo@7@[Ajuda Do Professor, Testes unitários]@false@[1, 3, 6]
+3@Ajuda Do Professor
+5@IDE
+6@Testes unitários
+12@Herança
+14@Tratamento de Excepções
+15@Programação Funcional
+20@Ajuda Do Professor
+26@Herança
+27@Testes unitários
+30@Tratamento de Excepções
+31@Programação Funcional
+33@IDE
+48@Exception
+51@Erro de sintaxe
+52@Efeitos secundários
+54@Crash (aka Rebentaço)
+55@Segmentation Fault
+58@Duplicated Code
+60@File Not Found Exception
+63@Blue Screen of Death
+66@Ciclo infinito
+77@Erro de lógica
