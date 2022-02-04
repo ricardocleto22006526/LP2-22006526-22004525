@@ -49,6 +49,8 @@ public class Programmer {
 
     }
 
+    public void setAbismo(Abismo abismo) {this.abismo = abismo;}
+
     public Programmer(int id, String nome, ArrayList<String> linguagensFavoritas, ProgrammerColor cor, String estado, int posPlayer, ArrayList<Ferramenta> ferramentas,
                       boolean presoNoCicloInfinito, ArrayList<Integer> guardaPosicao) {
         this.id = id;

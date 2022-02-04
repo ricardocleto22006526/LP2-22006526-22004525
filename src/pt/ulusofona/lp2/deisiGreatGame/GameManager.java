@@ -457,6 +457,7 @@ public class GameManager {
             if (getImagePng(posPlayer).equals("bsod.png")) {
                 if (players.get(playerAJogar).getEstado().equals("Em Jogo")) {
                     players.get(playerAJogar).alteraEstado();
+                    players.get(playerAJogar).setAbismo(new Abismo(7));
                 }
             }
 
@@ -633,10 +634,10 @@ public class GameManager {
             }
         }
         if (matchDraw == playersEmJogo.size()) {
-            return getGameResultsSemDraw();
+            return getGameResultsComDraw();
         }
 
-        return getGameResultsComDraw();
+        return getGameResultsSemDraw();
     }
 
     // s/ empate
@@ -704,7 +705,8 @@ public class GameManager {
             results.add("Participantes:");
 
             for (int i = 0; i < players.size(); i++) {
-                results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer() + " " + players.get(i).abismo.titulo);
+                results.add(players.get(i).getName() + " " + players.get(i).getPosPlayer() + " ");
+                results.add(players.get(i).abismo.titulo);
             }
         }
 
