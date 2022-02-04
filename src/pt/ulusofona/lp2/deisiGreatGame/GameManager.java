@@ -620,7 +620,7 @@ public class GameManager {
 
         }
 
-        return matchDraw == playersEmJogo.size();
+        return matchDraw == players.size()-playersEmJogo.size();
 
     }
 
@@ -633,7 +633,7 @@ public class GameManager {
                 matchDraw++;
             }
         }
-        if (matchDraw == playersEmJogo.size()) {
+        if (matchDraw == players.size()-playersEmJogo.size()) {
             return getGameResultsComDraw();
         }
 
