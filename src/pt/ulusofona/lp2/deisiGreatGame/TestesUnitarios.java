@@ -1418,9 +1418,67 @@ public class TestesUnitarios {
         }
 
     }
-/*
+
     @Test
     public void testNrDeTurnos() {
+        String[][] players = createPlayers();
+        GameManager game = new GameManager();
+        String[][] abismo = new String[3][3];
+
+        abismo[0][0] = "0";
+        abismo[0][1] = "7";
+        abismo[0][2] = "3";
+
+        abismo[1][0] = "0";
+        abismo[1][1] = "8";
+        abismo[1][2] = "4";
+
+        abismo[2][0] = "0";
+        abismo[2][1] = "8";
+        abismo[2][2] = "5";
+
+
+
+        try {
+            game.createInitialBoard(players, 20, abismo);
+
+            game.moveCurrentPlayer(2);
+            game.reactToAbyssOrTool();
+            //1player em bsod
+
+            game.moveCurrentPlayer(2);
+            game.reactToAbyssOrTool();
+            //2player em bsod
+
+            game.moveCurrentPlayer(20);
+            game.reactToAbyssOrTool();
+            //1p ciclo infinito em pos=3
+
+            game.moveCurrentPlayer(2);
+            game.reactToAbyssOrTool();
+            //2p ciclo infinito em pos=6
+
+            List<String> strings = game.getGameResults();
+            StringBuilder resultado = new StringBuilder();
+            for (int i = 0; i < strings.size(); i++) {
+                resultado.append(strings.get(i));
+            }
+            if(game.gameIsOver()){
+                assertEquals("O GRANDE JOGO DO DEISINR. DE TURNOS5VENCEDORJogador1RESTANTESJogador2 3Jogador4 3Jogador3 1", resultado.toString());
+            }
+
+            if(!game.gameIsOver()){
+                System.out.println("-----");
+            }
+
+
+        }catch (Exception e) {
+            System.out.println("ofdskl");
+        }
+    }
+
+    @Test
+    public void testNrDeFimDraw() {
         String[][] players = createPlayers();
         GameManager game = new GameManager();
         String[][] abismo = new String[3][3];
@@ -1464,7 +1522,7 @@ public class TestesUnitarios {
                 resultado.append(strings.get(i));
             }
             if(game.gameIsOver()){
-                assertEquals("O GRANDE JOGO DO DEISINR. DE TURNOS5O jogo terminou empatado.Participantes:Jogador4 : 5 : Ciclo infinitoJogador3 : 4 : Ciclo infinitoJogador1 : 3 : Blue Screen of DeathJogador2 : 3 : Blue Screen of Death", resultado.toString());
+                assertEquals("O GRANDE JOGO DO DEISINR. DE TURNOS5O jogo terminou empatado.Participantes:Jogador4 : 5 : Ciclo InfinitoJogador3 : 4 : Ciclo InfinitoJogador1 : 3 : Blue Screen of DeathJogador2 : 3 : Blue Screen of Death", resultado.toString());
             }
 
             if(!game.gameIsOver()){
@@ -1477,7 +1535,78 @@ public class TestesUnitarios {
         }
     }
 
+    @Test
+    public void testCalculaVamosFazerContas() {
+        String[][] players = new String[3][4];
+        GameManager game = new GameManager();
+        String[][] abismo = new String[1][3];
 
- */
+        abismo[0][0] = "0";
+        abismo[0][1] = "10";
+        abismo[0][2] = "10";
+
+        //Informacoes jogadores
+        players[0][0] = "1"; //ID
+        players[0][1] = "Jogador1"; //NOME
+        players[0][2] = "Java"; //Linguagens Favoritas
+        players[0][3] = "Purple"; //Cor do player
+
+        players[1][0] = "2";
+        players[1][1] = "Jogador2";
+        players[1][2] = "Java, forex";
+        players[1][3] = "Blue";
+
+        players[2][0] = "3";
+        players[2][1] = "Jogador3";
+        players[2][2] = "C++";
+        players[2][3] = "Green";
+
+
+        try {
+            game.createInitialBoard(players, 20, abismo);
+
+            game.moveCurrentPlayer(4);
+            game.moveCurrentPlayer(5);
+            game.reactToAbyssOrTool();
+
+            int posFinal1 = game.players.get(0).getPosPlayer();
+
+            //(5)
+
+            assertEquals(5, posFinal1);
+
+
+            game.moveCurrentPlayer(1);
+            game.moveCurrentPlayer(4);
+            game.moveCurrentPlayer(4);
+            game.reactToAbyssOrTool();
+
+            int posFinal2 = game.players.get(1).getPosPlayer();
+
+            //(2+6)/2 = 4
+
+            assertEquals(4, posFinal2);
+
+
+            game.moveCurrentPlayer(1);
+            game.moveCurrentPlayer(4);
+            game.moveCurrentPlayer(1);
+            game.moveCurrentPlayer(1);
+            game.moveCurrentPlayer(2);
+            game.reactToAbyssOrTool();
+
+            int posFinal3 = game.players.get(2).getPosPlayer();
+
+            //(6+7+8)/3 = 7
+
+            assertEquals(7, posFinal3);
+
+
+        } catch (Exception e) {
+            assertEquals("Nao deveria lancar exception", e.getMessage());
+        }
+
+
+    }
 //Teste de cima irrelevante para nota, só o fiz para teste de multiplas funções.
 }
